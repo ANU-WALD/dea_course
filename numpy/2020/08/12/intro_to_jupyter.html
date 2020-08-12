@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Introduction to Jupyter notebooks | DEA for Geospatial Analysts</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Introduction to Jupyter notebooks" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This tutorial introduces Jupyter notebooks." />
+<meta property="og:description" content="This tutorial introduces Jupyter notebooks." />
+<link rel="canonical" href="https://anu-wald.github.io/dea_course/numpy/2020/08/12/intro_to_jupyter.html" />
+<meta property="og:url" content="https://anu-wald.github.io/dea_course/numpy/2020/08/12/intro_to_jupyter.html" />
+<meta property="og:site_name" content="DEA for Geospatial Analysts" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-12T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"Introduction to Jupyter notebooks","description":"This tutorial introduces Jupyter notebooks.","datePublished":"2020-08-12T00:00:00-05:00","dateModified":"2020-08-12T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://anu-wald.github.io/dea_course/numpy/2020/08/12/intro_to_jupyter.html"},"url":"https://anu-wald.github.io/dea_course/numpy/2020/08/12/intro_to_jupyter.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/dea_course/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anu-wald.github.io/dea_course/feed.xml" title="DEA for Geospatial Analysts" /><link rel="shortcut icon" type="image/x-icon" href="/dea_course/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Introduction to Jupyter notebooks | DEA for Geospatial Analysts</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Introduction to Jupyter notebooks" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This tutorial introduces Jupyter notebooks." />
+<meta property="og:description" content="This tutorial introduces Jupyter notebooks." />
+<link rel="canonical" href="https://anu-wald.github.io/dea_course/numpy/2020/08/12/intro_to_jupyter.html" />
+<meta property="og:url" content="https://anu-wald.github.io/dea_course/numpy/2020/08/12/intro_to_jupyter.html" />
+<meta property="og:site_name" content="DEA for Geospatial Analysts" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-12T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"Introduction to Jupyter notebooks","description":"This tutorial introduces Jupyter notebooks.","datePublished":"2020-08-12T00:00:00-05:00","dateModified":"2020-08-12T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://anu-wald.github.io/dea_course/numpy/2020/08/12/intro_to_jupyter.html"},"url":"https://anu-wald.github.io/dea_course/numpy/2020/08/12/intro_to_jupyter.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://anu-wald.github.io/dea_course/feed.xml" title="DEA for Geospatial Analysts" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/dea_course/">DEA for Geospatial Analysts</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/dea_course/about/">About Me</a><a class="page-link" href="/dea_course/search/">Search</a><a class="page-link" href="/dea_course/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Introduction to Jupyter notebooks</h1><p class="page-description">This tutorial introduces Jupyter notebooks.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-08-12T00:00:00-05:00" itemprop="datePublished">
+        Aug 12, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      3 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/dea_course/categories/#numpy">numpy</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ANU-WALD/dea_course/tree/master/_notebooks/2020-08-12-intro_to_jupyter.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/dea_course/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ANU-WALD/dea_course/master?filepath=_notebooks%2F2020-08-12-intro_to_jupyter.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/dea_course/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ANU-WALD/dea_course/blob/master/_notebooks/2020-08-12-intro_to_jupyter.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/dea_course/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-08-12-intro_to_jupyter.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Welcome-to-the-Jupyter-notebook-environment.-This-is-an-interactive-way-to-run-Python-code-in-your-browser.-The-gray-cell-below-contains-Python-code-that-you-can-run-placing-the-cursor-on-the-cell-and-clicking-on-the-triangle-icon-on-the-top-menu.">Welcome to the Jupyter notebook environment. This is an interactive way to run Python code in your browser. The gray cell below contains Python code that you can run placing the cursor on the cell and clicking on the triangle icon on the top menu.<a class="anchor-link" href="#Welcome-to-the-Jupyter-notebook-environment.-This-is-an-interactive-way-to-run-Python-code-in-your-browser.-The-gray-cell-below-contains-Python-code-that-you-can-run-placing-the-cursor-on-the-cell-and-clicking-on-the-triangle-icon-on-the-top-menu."> </a></h4><h4 id="Tip:-Use-the-shortcut-Shift-Enter-for-running-the-selected-cell,-it's-much-more-convenient-than-clicking-the-icon-each-time.">Tip: <em>Use the shortcut <code>Shift-Enter</code> for running the selected cell, it's much more convenient than clicking the icon each time.</em><a class="anchor-link" href="#Tip:-Use-the-shortcut-Shift-Enter-for-running-the-selected-cell,-it's-much-more-convenient-than-clicking-the-icon-each-time."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Welcome to the DEA Sandbox!&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="You'll-see-that,-once-the-code-has-executed,-any-output-generated-by-your-code-will-show-up-just-below-the-cell">You'll see that, once the code has executed, any output generated by your code will show up just below the cell<a class="anchor-link" href="#You'll-see-that,-once-the-code-has-executed,-any-output-generated-by-your-code-will-show-up-just-below-the-cell"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3,2,1&quot;</span><span class="p">)</span>
+
+<span class="c1"># Use hash for commenting your code</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;this is fun!&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-code-that-you-execute-using-the-Sandbox-does-not-run-on-your-local-laptop.-It-runs-in-a-remote-server-and-you-just-receive-the-output-of-the-code.">The code that you execute using the Sandbox does not run on your local laptop. It runs in a remote server and you just receive the output of the code.<a class="anchor-link" href="#The-code-that-you-execute-using-the-Sandbox-does-not-run-on-your-local-laptop.-It-runs-in-a-remote-server-and-you-just-receive-the-output-of-the-code."> </a></h4><h4 id="Tip:-The-last-line-of-code-in-a-cell-is-printed-by-default,-so-there-is-no-need-to-type-print()">Tip: <em>The last line of code in a cell is printed by default, so there is no need to type <code>print()</code></em><a class="anchor-link" href="#Tip:-The-last-line-of-code-in-a-cell-is-printed-by-default,-so-there-is-no-need-to-type-print()"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Sending a complicated operation to the server</span>
+<span class="n">result</span> <span class="o">=</span> <span class="mi">999</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="c1"># This operation goes to the server and we just display its output in our screens once is completed</span>
+<span class="n">result</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Sometimes-the-code-that-you-run-takes-a-while-to-compute-because-it-requires-to-perform-complex-computations.-You'll-notice-the-number-that-appears-next-to-the-cell.-Before-the-cell-is-run-you'll-see-the-symbol-[-],-while-the-cell-is-being-run-it-shows-as-[*]-and-once-it-has-completed-running-you'll-see-a-number-representing-the-number-of-cells-being-run,-for-example-[4].">Sometimes the code that you run takes a while to compute because it requires to perform complex computations. You'll notice the number that appears next to the cell. Before the cell is run you'll see the symbol <code>[ ]</code>, while the cell is being run it shows as <code>[*]</code> and once it has completed running you'll see a number representing the number of cells being run, for example <code>[4]</code>.<a class="anchor-link" href="#Sometimes-the-code-that-you-run-takes-a-while-to-compute-because-it-requires-to-perform-complex-computations.-You'll-notice-the-number-that-appears-next-to-the-cell.-Before-the-cell-is-run-you'll-see-the-symbol-[-],-while-the-cell-is-being-run-it-shows-as-[*]-and-once-it-has-completed-running-you'll-see-a-number-representing-the-number-of-cells-being-run,-for-example-[4]."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># This is how a library is imported in Python but don&#39;t worry about this for the moment:</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># Very complicated and long operation computed on the server</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done!&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Jupyter-notebooks-are-an-easy-way-to-write-Python-code,-although-they-work-a-little-bit-different-to-traditional-programs.-For-example,-consider-this-program:">Jupyter notebooks are an easy way to write Python code, although they work a little bit different to traditional programs. For example, consider this program:<a class="anchor-link" href="#Jupyter-notebooks-are-an-easy-way-to-write-Python-code,-although-they-work-a-little-bit-different-to-traditional-programs.-For-example,-consider-this-program:"> </a></h4><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+<h4 id="If-we-write-each-line-of-this-program-using-separate-cells:">If we write each line of this program using separate cells:<a class="anchor-link" href="#If-we-write-each-line-of-this-program-using-separate-cells:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="If-you-run-the-first-print-cell-again-you'll-see-that-the-variable-contains-the-updated-value.-This-is-called-global-state-and-means-that-your-variables-are-updated-and-accessible-anywhere-in-the-notebook.-This-is-different-to-traditional-programs-which-execute-sequentially-line-by-line-from-the-top-of-the-code.">If you run the first <code>print</code> cell again you'll see that the variable contains the updated value. This is called global state and means that your variables are updated and accessible anywhere in the notebook. This is different to traditional programs which execute sequentially line by line from the top of the code.<a class="anchor-link" href="#If-you-run-the-first-print-cell-again-you'll-see-that-the-variable-contains-the-updated-value.-This-is-called-global-state-and-means-that-your-variables-are-updated-and-accessible-anywhere-in-the-notebook.-This-is-different-to-traditional-programs-which-execute-sequentially-line-by-line-from-the-top-of-the-code."> </a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="You-can-modify-the-code-in-the-cells-and-run-it-as-many-times-as-you-want.">You can modify the code in the cells and run it as many times as you want.<a class="anchor-link" href="#You-can-modify-the-code-in-the-cells-and-run-it-as-many-times-as-you-want."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;My name is ******&quot;</span>
+
+<span class="n">message</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="You-can-also-add-new-cells-to-insert-new-code-at-any-point-in-a-notebook.-Click-on-the-+-icon-in-the-top-menu-to-add-a-new-cell-below-the-current-one.">You can also add new cells to insert new code at any point in a notebook. Click on the <code>+</code> icon in the top menu to add a new cell below the current one.<a class="anchor-link" href="#You-can-also-add-new-cells-to-insert-new-code-at-any-point-in-a-notebook.-Click-on-the-+-icon-in-the-top-menu-to-add-a-new-cell-below-the-current-one."> </a></h4><h4 id="Hint:-There-is-a-shortcut-to-add-new-cells-by-pressing-Esc-+-a-to-add-a-cell-just-above-and-Esc-+-b-to-add-a-cell-below.">Hint: <em>There is a shortcut to add new cells by pressing <code>Esc + a</code> to add a cell just above and <code>Esc + b</code> to add a cell below.</em><a class="anchor-link" href="#Hint:-There-is-a-shortcut-to-add-new-cells-by-pressing-Esc-+-a-to-add-a-cell-just-above-and-Esc-+-b-to-add-a-cell-below."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">365</span><span class="o">*</span><span class="mi">24</span>
+
+<span class="c1"># Add a new cell just below this one to print the value of variable `a`</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="One-last-thing,-you-can-use-code-cells-to-run-commands-as-if-you-were-using-a-terminal-using-the-!-character-before-the-command.-This-is-a-Linux-system-and-to-list-the-contents-of-the-current-directory-you'll-need-to-use-ls">One last thing, you can use code cells to run commands as if you were using a terminal using the <code>!</code> character before the command. This is a Linux system and to list the contents of the current directory you'll need to use <code>ls</code><a class="anchor-link" href="#One-last-thing,-you-can-use-code-cells-to-run-commands-as-if-you-were-using-a-terminal-using-the-!-character-before-the-command.-This-is-a-Linux-system-and-to-list-the-contents-of-the-current-directory-you'll-need-to-use-ls"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>ls
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="You-are-now-ready-to-start-learning-Numpy!">You are now ready to start learning Numpy!<a class="anchor-link" href="#You-are-now-ready-to-start-learning-Numpy!"> </a></h4>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ANU-WALD/dea_course"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/dea_course/numpy/2020/08/12/intro_to_jupyter.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/dea_course/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/dea_course/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/dea_course/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Course training materials.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/dea_course/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/dea_course/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
