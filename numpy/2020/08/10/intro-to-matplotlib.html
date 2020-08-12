@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Introduction to Matplotlib | DEA for Geospatial Analysts</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Introduction to Matplotlib" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This second part introduces matplotlib, a Python library for plotting numpy arrays as images." />
+<meta property="og:description" content="This second part introduces matplotlib, a Python library for plotting numpy arrays as images." />
+<link rel="canonical" href="https://anu-wald.github.io/dea_course/numpy/2020/08/10/intro-to-matplotlib.html" />
+<meta property="og:url" content="https://anu-wald.github.io/dea_course/numpy/2020/08/10/intro-to-matplotlib.html" />
+<meta property="og:site_name" content="DEA for Geospatial Analysts" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-10T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"Introduction to Matplotlib","description":"This second part introduces matplotlib, a Python library for plotting numpy arrays as images.","datePublished":"2020-08-10T00:00:00-05:00","dateModified":"2020-08-10T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://anu-wald.github.io/dea_course/numpy/2020/08/10/intro-to-matplotlib.html"},"url":"https://anu-wald.github.io/dea_course/numpy/2020/08/10/intro-to-matplotlib.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/dea_course/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anu-wald.github.io/dea_course/feed.xml" title="DEA for Geospatial Analysts" /><link rel="shortcut icon" type="image/x-icon" href="/dea_course/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Introduction to Matplotlib | DEA for Geospatial Analysts</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Introduction to Matplotlib" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This second part introduces matplotlib, a Python library for plotting numpy arrays as images." />
+<meta property="og:description" content="This second part introduces matplotlib, a Python library for plotting numpy arrays as images." />
+<link rel="canonical" href="https://anu-wald.github.io/dea_course/numpy/2020/08/10/intro-to-matplotlib.html" />
+<meta property="og:url" content="https://anu-wald.github.io/dea_course/numpy/2020/08/10/intro-to-matplotlib.html" />
+<meta property="og:site_name" content="DEA for Geospatial Analysts" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-10T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"Introduction to Matplotlib","description":"This second part introduces matplotlib, a Python library for plotting numpy arrays as images.","datePublished":"2020-08-10T00:00:00-05:00","dateModified":"2020-08-10T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://anu-wald.github.io/dea_course/numpy/2020/08/10/intro-to-matplotlib.html"},"url":"https://anu-wald.github.io/dea_course/numpy/2020/08/10/intro-to-matplotlib.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://anu-wald.github.io/dea_course/feed.xml" title="DEA for Geospatial Analysts" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/dea_course/">DEA for Geospatial Analysts</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/dea_course/about/">About Me</a><a class="page-link" href="/dea_course/search/">Search</a><a class="page-link" href="/dea_course/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Introduction to Matplotlib</h1><p class="page-description">This second part introduces matplotlib, a Python library for plotting numpy arrays as images.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-08-10T00:00:00-05:00" itemprop="datePublished">
+        Aug 10, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      2 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/dea_course/categories/#numpy">numpy</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ANU-WALD/dea_course/tree/master/_notebooks/2020-08-10-intro-to-matplotlib.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/dea_course/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ANU-WALD/dea_course/master?filepath=_notebooks%2F2020-08-10-intro-to-matplotlib.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/dea_course/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ANU-WALD/dea_course/blob/master/_notebooks/2020-08-10-intro-to-matplotlib.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/dea_course/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-08-10-intro-to-matplotlib.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="For-the-purposes-of-this-tutorial-we-are-going-to-use-a-part-of-matplotlib-called-pyplot.-We-import-it-by-doing:">For the purposes of this tutorial we are going to use a part of matplotlib called pyplot. We import it by doing:<a class="anchor-link" href="#For-the-purposes-of-this-tutorial-we-are-going-to-use-a-part-of-matplotlib-called-pyplot.-We-import-it-by-doing:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="An-image-can-be-seen-as-a-2-dimensional-array.-To-visualise-the-contents-of-a-numpy-array:">An image can be seen as a 2-dimensional array. To visualise the contents of a numpy array:<a class="anchor-link" href="#An-image-can-be-seen-as-a-2-dimensional-array.-To-visualise-the-contents-of-a-numpy-array:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Can-you-create-a-similar-image-with-an-array-with-shape-(50,50)?">Can you create a similar image with an array with shape (50,50)?<a class="anchor-link" href="#Can-you-create-a-similar-image-with-an-array-with-shape-(50,50)?"> </a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="We-can-use-the-Pyplot-library-to-load-an-image-using-the-function-imread">We can use the Pyplot library to load an image using the function <code>imread</code><a class="anchor-link" href="#We-can-use-the-Pyplot-library-to-load-an-image-using-the-function-imread"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;data/black_mountain_fire.jpg&#39;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="This-image-is-a-3-dimensional-numpy-array.-By-convention-the-first-dimension-corresponds-to-the-vertical-axis,-the-second-to-the-horizontal-axis-and-the-third-are-the-Red,-Green-and-Blue-channels-of-the-image.-What-are-the-dimensions-of-the-im-array?-__Hint:-Use-the-.shape-property-of-the-im-variable.">This image is a 3-dimensional numpy array. By convention the first dimension corresponds to the vertical axis, the second to the horizontal axis and the third are the Red, Green and Blue channels of the image. What are the dimensions of the <code>im</code> array? __Hint: Use the <code>.shape</code> property of the im variable.<a class="anchor-link" href="#This-image-is-a-3-dimensional-numpy-array.-By-convention-the-first-dimension-corresponds-to-the-vertical-axis,-the-second-to-the-horizontal-axis-and-the-third-are-the-Red,-Green-and-Blue-channels-of-the-image.-What-are-the-dimensions-of-the-im-array?-__Hint:-Use-the-.shape-property-of-the-im-variable."> </a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Let's-display-this-image-using-the-imshow-function.">Let's display this image using the <code>imshow</code> function.<a class="anchor-link" href="#Let's-display-this-image-using-the-imshow-function."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="This-is-a-photo-of-Black-Mountain-taken-during-prescribed-burns-in-2014.-A-colour-image-is-normally-composed-of-three-layers-containing-the-values-of-the-red,-green-and-blue-pixels.-When-we-display-an-image-we-see-all-three-colours-combined.">This is a photo of Black Mountain taken during prescribed burns in 2014. A colour image is normally composed of three layers containing the values of the red, green and blue pixels. When we display an image we see all three colours combined.<a class="anchor-link" href="#This-is-a-photo-of-Black-Mountain-taken-during-prescribed-burns-in-2014.-A-colour-image-is-normally-composed-of-three-layers-containing-the-values-of-the-red,-green-and-blue-pixels.-When-we-display-an-image-we-see-all-three-colours-combined."> </a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Knowing-the-extents-of-the-image-given-by-its-shape,-can-you-display-the-values-of-one-of-the-pixels-in-the-sky?-You-need-to-provide-one-index-for-each-x-and-y-dimensions-and-get-all-three-channels.-Make-sure-the-values-represent-a-mostly-blue-pixel.">Knowing the extents of the image given by its shape, can you display the values of one of the pixels in the sky? You need to provide one index for each x and y dimensions and get all three channels. Make sure the values represent a mostly blue pixel.<a class="anchor-link" href="#Knowing-the-extents-of-the-image-given-by-its-shape,-can-you-display-the-values-of-one-of-the-pixels-in-the-sky?-You-need-to-provide-one-index-for-each-x-and-y-dimensions-and-get-all-three-channels.-Make-sure-the-values-represent-a-mostly-blue-pixel."> </a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Let's-use-the-indexing-functionality-of-numpy-to-select-a-slice-of-this-image.-For-example-to-select-the-top-right-corner:">Let's use the indexing functionality of numpy to select a slice of this image. For example to select the top right corner:<a class="anchor-link" href="#Let's-use-the-indexing-functionality-of-numpy-to-select-a-slice-of-this-image.-For-example-to-select-the-top-right-corner:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">[:</span><span class="mi">800</span><span class="p">,</span><span class="o">-</span><span class="mi">800</span><span class="p">:,:])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Let's-practice-your-indexing-skills!-Can-you-create-a-cropped-image-around-Black-Mountain's-tower?-Remember:-first-dimension-is-the-vertical-coordinates,-second-dimension-is-the-horizontal-coordinates-and-the-third-are-the-RGB-channels-of-the-image.">Let's practice your indexing skills! Can you create a cropped image around Black Mountain's tower? Remember: first dimension is the vertical coordinates, second dimension is the horizontal coordinates and the third are the RGB channels of the image.<a class="anchor-link" href="#Let's-practice-your-indexing-skills!-Can-you-create-a-cropped-image-around-Black-Mountain's-tower?-Remember:-first-dimension-is-the-vertical-coordinates,-second-dimension-is-the-horizontal-coordinates-and-the-third-are-the-RGB-channels-of-the-image."> </a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Let's-play-around-with-this-a-little-bit.-For-example,-let's-replace-all-the-values-in-the-'red'-layer-with-the-value-255,-this-is-the-highest-red-value-possible-and-it-will-make-your-whole-image-redish.-The-following-command-will-replace-all-the-values-in-the-red-channel-(axis-3)-with-the-value-255,-and-see-what-happens">Let's play around with this a little bit. For example, let's replace all the values in the 'red' layer with the value 255, this is the highest red value possible and it will make your whole image redish. The following command will replace all the values in the red channel (axis 3) with the value 255, and see what happens<a class="anchor-link" href="#Let's-play-around-with-this-a-little-bit.-For-example,-let's-replace-all-the-values-in-the-'red'-layer-with-the-value-255,-this-is-the-highest-red-value-possible-and-it-will-make-your-whole-image-redish.-The-following-command-will-replace-all-the-values-in-the-red-channel-(axis-3)-with-the-value-255,-and-see-what-happens"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">im</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ANU-WALD/dea_course"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/dea_course/numpy/2020/08/10/intro-to-matplotlib.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/dea_course/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/dea_course/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/dea_course/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Course training materials.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/dea_course/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/dea_course/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
