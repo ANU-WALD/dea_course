@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Introduction to Numpy | DEA for Geospatial Analysts</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Introduction to Numpy" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This tutorial introduces numpy, a Python library for performing numerical computations in Python." />
+<meta property="og:description" content="This tutorial introduces numpy, a Python library for performing numerical computations in Python." />
+<link rel="canonical" href="https://anu-wald.github.io/dea_course/numpy/2020/08/11/intro-to-numpy.html" />
+<meta property="og:url" content="https://anu-wald.github.io/dea_course/numpy/2020/08/11/intro-to-numpy.html" />
+<meta property="og:site_name" content="DEA for Geospatial Analysts" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-11T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"Introduction to Numpy","description":"This tutorial introduces numpy, a Python library for performing numerical computations in Python.","datePublished":"2020-08-11T00:00:00-05:00","dateModified":"2020-08-11T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://anu-wald.github.io/dea_course/numpy/2020/08/11/intro-to-numpy.html"},"url":"https://anu-wald.github.io/dea_course/numpy/2020/08/11/intro-to-numpy.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/dea_course/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anu-wald.github.io/dea_course/feed.xml" title="DEA for Geospatial Analysts" /><link rel="shortcut icon" type="image/x-icon" href="/dea_course/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Introduction to Numpy | DEA for Geospatial Analysts</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Introduction to Numpy" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This tutorial introduces numpy, a Python library for performing numerical computations in Python." />
+<meta property="og:description" content="This tutorial introduces numpy, a Python library for performing numerical computations in Python." />
+<link rel="canonical" href="https://anu-wald.github.io/dea_course/numpy/2020/08/11/intro-to-numpy.html" />
+<meta property="og:url" content="https://anu-wald.github.io/dea_course/numpy/2020/08/11/intro-to-numpy.html" />
+<meta property="og:site_name" content="DEA for Geospatial Analysts" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-11T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"Introduction to Numpy","description":"This tutorial introduces numpy, a Python library for performing numerical computations in Python.","datePublished":"2020-08-11T00:00:00-05:00","dateModified":"2020-08-11T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://anu-wald.github.io/dea_course/numpy/2020/08/11/intro-to-numpy.html"},"url":"https://anu-wald.github.io/dea_course/numpy/2020/08/11/intro-to-numpy.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://anu-wald.github.io/dea_course/feed.xml" title="DEA for Geospatial Analysts" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper">
+<a class="site-title" rel="author" href="/dea_course/">DEA for Geospatial Analysts</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger">
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewbox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+<a class="page-link" href="/dea_course/about/">About Me</a><a class="page-link" href="/dea_course/search/">Search</a><a class="page-link" href="/dea_course/categories/">Tags</a>
+</div>
+      </nav>
+</div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Introduction to Numpy</h1>
+<p class="page-description">This tutorial introduces numpy, a Python library for performing numerical computations in Python.</p>
+<p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-08-11T00:00:00-05:00" itemprop="datePublished">
+        Aug 11, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      6 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i> 
+      
+        <a class="category-tags-link" href="/dea_course/categories/#numpy">numpy</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ANU-WALD/dea_course/tree/master/_notebooks/2020-08-11-intro-to-numpy.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/dea_course/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ANU-WALD/dea_course/master?filepath=_notebooks%2F2020-08-11-intro-to-numpy.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/dea_course/assets/badges/binder.svg" alt="Open In Binder">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ANU-WALD/dea_course/blob/master/_notebooks/2020-08-11-intro-to-numpy.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/dea_course/assets/badges/colab.svg" alt="Open In Colab">
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h4"><a href="#In-order-to-be-able-to-use-numpy-we-need-to-import-the-library-using-the-special-word-import.-Also,-to-avoid-typing-numpy-every-time-we-want-to-use-one-if-its-functions-we-can-provide-an-alias-using-the-special-word-as:">In order to be able to use numpy we need to import the library using the special word import. Also, to avoid typing numpy every time we want to use one if its functions we can provide an alias using the special word as: </a></li>
+<li class="toc-entry toc-h4"><a href="#Now,-we-have-access-to-all-the-functions-available-in-numpy-by-typing-np.name_of_function.-For-example,-the-equivalent-of-1-+-1-in-Python-can-be-done-in-numpy:">Now, we have access to all the functions available in numpy by typing np.name_of_function. For example, the equivalent of 1 + 1 in Python can be done in numpy: </a></li>
+<li class="toc-entry toc-h4"><a href="#Although-this-might-not-seem-very-useful,-however,-even-simple-operations-like-this-one,-can-be-much-quicker-in-numpy-than-in-standard-Python-when-using-lots-of-numbers.">Although this might not seem very useful, however, even simple operations like this one, can be much quicker in numpy than in standard Python when using lots of numbers. </a></li>
+<li class="toc-entry toc-h4"><a href="#To-access-the-documentation-explaining-how-a-function-is-used,-its-input-parameters-and-output-format-we-can-press-Shift+Tab-after-the-function-name">To access the documentation explaining how a function is used, its input parameters and output format we can press Shift+Tab after the function name" </a></li>
+<li class="toc-entry toc-h4"><a href="#By-default-the-result-of-a-function-or-operation-is-shown-underneath-the-cell-containing-the-code.-If-we-want-to-reuse-this-result-for-a-later-operation-we-can-assign-it-to-a-variable:">By default the result of a function or operation is shown underneath the cell containing the code. If we want to reuse this result for a later operation we can assign it to a variable: </a></li>
+<li class="toc-entry toc-h4"><a href="#The-contents-of-this-variable-can-be-displayed-at-any-moment-by-typing-the-variable-name-in-a-new-cell:">The contents of this variable can be displayed at any moment by typing the variable name in a new cell: </a></li>
+<li class="toc-entry toc-h4"><a href="#The-core-concept-in-numpy-is-the-array-which-is-equivalent-to-lists-of-numbers-but-can-be-multidimensional.-To-declare-a-numpy-array-we-do:">The core concept in numpy is the array which is equivalent to lists of numbers but can be multidimensional. To declare a numpy array we do: </a></li>
+<li class="toc-entry toc-h4"><a href="#Most-of-the-functions-and-operations-defined-in-numpy-can-be-applied-to-arrays.-For-example,-with-the-previous-operation:">Most of the functions and operations defined in numpy can be applied to arrays. For example, with the previous operation: </a></li>
+<li class="toc-entry toc-h4"><a href="#But-a-more-simple-and-convenient-notation-can-also-be-used:">But a more simple and convenient notation can also be used: </a></li>
+<li class="toc-entry toc-h4"><a href="#Arrays-can-be-sliced-and-diced.-We-can-get-subsets-of-the-arrays-using-the-indexing-notation-which-is-%5Bstart:end:stride%5D.-Let's-see-what-this-means:">Arrays can be sliced and diced. We can get subsets of the arrays using the indexing notation which is [start<img class="emoji" title=":end:" alt=":end:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f51a.png" height="20" width="20">stride]. Let's see what this means: </a></li>
+<li class="toc-entry toc-h4"><a href="#Experiment-playing-with-the-indexes-to-understand-the-meaning-of-start,-end-and-stride.-What-happend-if-you-don't-specify-a-start?-What-value-numpy-uses-instead?-Note-that-numpy-indexes-start-on-0,-the-same-convention-used-in-Python-lists.">Experiment playing with the indexes to understand the meaning of start, end and stride. What happend if you don't specify a start? What value numpy uses instead? Note that numpy indexes start on 0, the same convention used in Python lists. </a></li>
+<li class="toc-entry toc-h4"><a href="#Indexes-can-also-be-negative,-meaning-that-you-start-counting-by-the-end.-For-example,-to-select-the-last-2-elements-in-an-array-we-can-do:">Indexes can also be negative, meaning that you start counting by the end. For example, to select the last 2 elements in an array we can do: </a></li>
+<li class="toc-entry toc-h4"><a href="#Can-you-figure-out-how-to-select-all-the-elements-in-the-previous-array-excluding-the-last-one,-%5B15%5D?">Can you figure out how to select all the elements in the previous array excluding the last one, [15]? </a></li>
+<li class="toc-entry toc-h4"><a href="#What-about-doing-the-same-but-now-every-3rd-element?">What about doing the same but now every 3rd element? </a></li>
+<li class="toc-entry toc-h4"><a href="#Numpy-arrays-can-have-multiple-dimensions.-For-example,-we-define-a-2-dimensional-(1,9)-array-using-nested-square-bracket:">Numpy arrays can have multiple dimensions. For example, we define a 2-dimensional (1,9) array using nested square bracket: </a></li>
+<li class="toc-entry toc-h4"><a href="#To-visualise-the-shape-or-dimensions-of-a-numpy-array-we-can-add-the-suffix-.shape">To visualise the shape or dimensions of a numpy array we can add the suffix .shape </a></li>
+<li class="toc-entry toc-h4"><a href="#Any-array-can-be-reshaped-into-different-shapes-using-the-function-reshape:">Any array can be reshaped into different shapes using the function reshape: </a></li>
+<li class="toc-entry toc-h4"><a href="#If-you-are-concerned-about-having-to-type-so-many-squared-brackets,-there-are-more-simple-and-convenient-ways-of-doing-the-same:">If you are concerned about having to type so many squared brackets, there are more simple and convenient ways of doing the same: </a></li>
+<li class="toc-entry toc-h4"><a href="#Also-there-are-shortcuts-for-declaring-common-arrays-without-having-to-type-all-their-elements:">Also there are shortcuts for declaring common arrays without having to type all their elements: </a></li>
+<li class="toc-entry toc-h4"><a href="#Can-you-try-to-declare-a-3-dimensional-array-of-shape-(5,3,3)?-Assign-it-to-a-variable">Can you try to declare a 3-dimensional array of shape (5,3,3)? Assign it to a variable </a></li>
+<li class="toc-entry toc-h4"><a href="#Create-another-one-with-the-same-shape-and-use-the-numpy-function-to-add-both-arrays:">Create another one with the same shape and use the numpy function to add both arrays: </a></li>
+<li class="toc-entry toc-h4"><a href="#Some-useful-functions-in-Numpy-for-calculating-the-mean,-standard-deviation-and-sum-of-the-elements-of-an-array.-These-operation-can-be-performed-only-in-certain-axis.">Some useful functions in Numpy for calculating the mean, standard deviation and sum of the elements of an array. These operation can be performed only in certain axis. </a></li>
+<li class="toc-entry toc-h3">
+<a href="#Numpy-data-types">Numpy data types </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#Numpy-arrays-can-contain-numerical-values-of-different-types.-These-types-can-be-divided-in-these-groups:">Numpy arrays can contain numerical values of different types. These types can be divided in these groups: </a></li>
+<li class="toc-entry toc-h4"><a href="#We-can-specify-the-type-of-an-array-when-we-declare-it-or-change-the-type-of-an-existing-one-with-the-following-expressions:">We can specify the type of an array when we declare it or change the type of an existing one with the following expressions: </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3">
+<a href="#Broadcasting">Broadcasting </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#Numpy-is-set-up-internally-in-a-way-that-arrays-involved-in-operations-are-replicated-or-promoted-to-match-shapes">Numpy is set up internally in a way that arrays involved in operations are replicated or promoted to match shapes </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3">
+<a href="#Booleans">Booleans </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#There-is-a-binary-type-in-numpy-called-boolean-which-encodes-True-and-False-values.-For-example:">There is a binary type in numpy called boolean which encodes True and False values. For example: </a></li>
+<li class="toc-entry toc-h4"><a href="#Boolean-types-are-quite-handy-for-indexing-and-selecting-parts-of-images-as-we-will-see-later.-Many-numpy-functions-also-work-with-Boolean-types.">Boolean types are quite handy for indexing and selecting parts of images as we will see later. Many numpy functions also work with Boolean types. </a></li>
+<li class="toc-entry toc-h4"><a href="#Depending-of-the-language-that-you-have-used-before-this-behaviour-in-Python-might-strike-you:">Depending of the language that you have used before this behaviour in Python might strike you: </a></li>
+<li class="toc-entry toc-h4"><a href="#Both-arrays-have-been-modified.-This-is-in-fact-because-a-and-b-are-references-to-the-same-array.-If-you-want-to-have-variables-with-independent-arrays-you'll-have-to-use-the-b-=-np.copy(a)-function.">Both arrays have been modified. This is in fact because a and b are references to the same array. If you want to have variables with independent arrays you'll have to use the b = np.copy(a) function. </a></li>
+</ul>
+</li>
+</ul>
+<!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-08-11-intro-to-numpy.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="In-order-to-be-able-to-use-numpy-we-need-to-import-the-library-using-the-special-word-import.-Also,-to-avoid-typing-numpy-every-time-we-want-to-use-one-if-its-functions-we-can-provide-an-alias-using-the-special-word-as:">
+<a class="anchor" href="#In-order-to-be-able-to-use-numpy-we-need-to-import-the-library-using-the-special-word-import.-Also,-to-avoid-typing-numpy-every-time-we-want-to-use-one-if-its-functions-we-can-provide-an-alias-using-the-special-word-as:" aria-hidden="true"><span class="octicon octicon-link"></span></a>In order to be able to use numpy we need to import the library using the special word <code>import</code>. Also, to avoid typing <code>numpy</code> every time we want to use one if its functions we can provide an alias using the special word <code>as</code>:<a class="anchor-link" href="#In-order-to-be-able-to-use-numpy-we-need-to-import-the-library-using-the-special-word-import.-Also,-to-avoid-typing-numpy-every-time-we-want-to-use-one-if-its-functions-we-can-provide-an-alias-using-the-special-word-as:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Now,-we-have-access-to-all-the-functions-available-in-numpy-by-typing-np.name_of_function.-For-example,-the-equivalent-of-1-+-1-in-Python-can-be-done-in-numpy:">
+<a class="anchor" href="#Now,-we-have-access-to-all-the-functions-available-in-numpy-by-typing-np.name_of_function.-For-example,-the-equivalent-of-1-+-1-in-Python-can-be-done-in-numpy:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Now, we have access to all the functions available in <code>numpy</code> by typing <code>np.name_of_function</code>. For example, the equivalent of <code>1 + 1</code> in Python can be done in <code>numpy</code>:<a class="anchor-link" href="#Now,-we-have-access-to-all-the-functions-available-in-numpy-by-typing-np.name_of_function.-For-example,-the-equivalent-of-1-+-1-in-Python-can-be-done-in-numpy:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>2</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Although-this-might-not-seem-very-useful,-however,-even-simple-operations-like-this-one,-can-be-much-quicker-in-numpy-than-in-standard-Python-when-using-lots-of-numbers.">
+<a class="anchor" href="#Although-this-might-not-seem-very-useful,-however,-even-simple-operations-like-this-one,-can-be-much-quicker-in-numpy-than-in-standard-Python-when-using-lots-of-numbers." aria-hidden="true"><span class="octicon octicon-link"></span></a>Although this might not seem very useful, however, even simple operations like this one, can be much quicker in <code>numpy</code> than in standard Python when using lots of numbers.<a class="anchor-link" href="#Although-this-might-not-seem-very-useful,-however,-even-simple-operations-like-this-one,-can-be-much-quicker-in-numpy-than-in-standard-Python-when-using-lots-of-numbers."> </a>
+</h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id='To-access-the-documentation-explaining-how-a-function-is-used,-its-input-parameters-and-output-format-we-can-press-Shift+Tab-after-the-function-name"'>
+<a class="anchor" href="#To-access-the-documentation-explaining-how-a-function-is-used,-its-input-parameters-and-output-format-we-can-press-Shift+Tab-after-the-function-name" aria-hidden="true"><span class="octicon octicon-link"></span></a>To access the documentation explaining how a function is used, its input parameters and output format we can press <code>Shift+Tab</code> after the function name"<a class="anchor-link" href="#To-access-the-documentation-explaining-how-a-function-is-used,-its-input-parameters-and-output-format-we-can-press-Shift+Tab-after-the-function-name%22"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">add</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;ufunc 'add'&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="By-default-the-result-of-a-function-or-operation-is-shown-underneath-the-cell-containing-the-code.-If-we-want-to-reuse-this-result-for-a-later-operation-we-can-assign-it-to-a-variable:">
+<a class="anchor" href="#By-default-the-result-of-a-function-or-operation-is-shown-underneath-the-cell-containing-the-code.-If-we-want-to-reuse-this-result-for-a-later-operation-we-can-assign-it-to-a-variable:" aria-hidden="true"><span class="octicon octicon-link"></span></a>By default the result of a function or operation is shown underneath the cell containing the code. If we want to reuse this result for a later operation we can assign it to a variable:<a class="anchor-link" href="#By-default-the-result-of-a-function-or-operation-is-shown-underneath-the-cell-containing-the-code.-If-we-want-to-reuse-this-result-for-a-later-operation-we-can-assign-it-to-a-variable:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-contents-of-this-variable-can-be-displayed-at-any-moment-by-typing-the-variable-name-in-a-new-cell:">
+<a class="anchor" href="#The-contents-of-this-variable-can-be-displayed-at-any-moment-by-typing-the-variable-name-in-a-new-cell:" aria-hidden="true"><span class="octicon octicon-link"></span></a>The contents of this variable can be displayed at any moment by typing the variable name in a new cell:<a class="anchor-link" href="#The-contents-of-this-variable-can-be-displayed-at-any-moment-by-typing-the-variable-name-in-a-new-cell:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>5</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-core-concept-in-numpy-is-the-array-which-is-equivalent-to-lists-of-numbers-but-can-be-multidimensional.-To-declare-a-numpy-array-we-do:">
+<a class="anchor" href="#The-core-concept-in-numpy-is-the-array-which-is-equivalent-to-lists-of-numbers-but-can-be-multidimensional.-To-declare-a-numpy-array-we-do:" aria-hidden="true"><span class="octicon octicon-link"></span></a>The core concept in numpy is the <code>array</code> which is equivalent to lists of numbers but can be multidimensional. To declare a numpy array we do:<a class="anchor-link" href="#The-core-concept-in-numpy-is-the-array-which-is-equivalent-to-lists-of-numbers-but-can-be-multidimensional.-To-declare-a-numpy-array-we-do:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([1, 2, 3, 4, 5, 6, 7, 8, 9])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Most-of-the-functions-and-operations-defined-in-numpy-can-be-applied-to-arrays.-For-example,-with-the-previous-operation:">
+<a class="anchor" href="#Most-of-the-functions-and-operations-defined-in-numpy-can-be-applied-to-arrays.-For-example,-with-the-previous-operation:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Most of the functions and operations defined in numpy can be applied to arrays. For example, with the previous operation:<a class="anchor-link" href="#Most-of-the-functions-and-operations-defined-in-numpy-can-be-applied-to-arrays.-For-example,-with-the-previous-operation:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([ 4,  6,  8, 10])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="But-a-more-simple-and-convenient-notation-can-also-be-used:">
+<a class="anchor" href="#But-a-more-simple-and-convenient-notation-can-also-be-used:" aria-hidden="true"><span class="octicon octicon-link"></span></a>But a more simple and convenient notation can also be used:<a class="anchor-link" href="#But-a-more-simple-and-convenient-notation-can-also-be-used:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr1</span> <span class="o">+</span> <span class="n">arr2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([ 4,  6,  8, 10])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Arrays-can-be-sliced-and-diced.-We-can-get-subsets-of-the-arrays-using-the-indexing-notation-which-is-[start:end:stride].-Let's-see-what-this-means:">
+<a class="anchor" href="#Arrays-can-be-sliced-and-diced.-We-can-get-subsets-of-the-arrays-using-the-indexing-notation-which-is-%5Bstart:end:stride%5D.-Let's-see-what-this-means:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Arrays can be sliced and diced. We can get subsets of the arrays using the indexing notation which is <code>[start:end:stride]</code>. Let's see what this means:<a class="anchor-link" href="#Arrays-can-be-sliced-and-diced.-We-can-get-subsets-of-the-arrays-using-the-indexing-notation-which-is-%5Bstart:end:stride%5D.-Let's-see-what-this-means:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">15</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">5</span><span class="p">:])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>5
+[ 5  6  7  8  9 10 11 12 13 14 15]
+[0 1 2 3 4]
+[ 0  2  4  6  8 10 12 14]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Experiment-playing-with-the-indexes-to-understand-the-meaning-of-start,-end-and-stride.-What-happend-if-you-don't-specify-a-start?-What-value-numpy-uses-instead?-Note-that-numpy-indexes-start-on-0,-the-same-convention-used-in-Python-lists.">
+<a class="anchor" href="#Experiment-playing-with-the-indexes-to-understand-the-meaning-of-start,-end-and-stride.-What-happend-if-you-don't-specify-a-start?-What-value-numpy-uses-instead?-Note-that-numpy-indexes-start-on-0,-the-same-convention-used-in-Python-lists." aria-hidden="true"><span class="octicon octicon-link"></span></a>Experiment playing with the indexes to understand the meaning of start, end and stride. What happend if you don't specify a start? What value numpy uses instead? Note that numpy indexes start on <code>0</code>, the same convention used in Python lists.<a class="anchor-link" href="#Experiment-playing-with-the-indexes-to-understand-the-meaning-of-start,-end-and-stride.-What-happend-if-you-don't-specify-a-start?-What-value-numpy-uses-instead?-Note-that-numpy-indexes-start-on-0,-the-same-convention-used-in-Python-lists."> </a>
+</h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Indexes-can-also-be-negative,-meaning-that-you-start-counting-by-the-end.-For-example,-to-select-the-last-2-elements-in-an-array-we-can-do:">
+<a class="anchor" href="#Indexes-can-also-be-negative,-meaning-that-you-start-counting-by-the-end.-For-example,-to-select-the-last-2-elements-in-an-array-we-can-do:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Indexes can also be negative, meaning that you start counting by the end. For example, to select the last 2 elements in an array we can do:<a class="anchor-link" href="#Indexes-can-also-be-negative,-meaning-that-you-start-counting-by-the-end.-For-example,-to-select-the-last-2-elements-in-an-array-we-can-do:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([14, 15])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Can-you-figure-out-how-to-select-all-the-elements-in-the-previous-array-excluding-the-last-one,-[15]?">
+<a class="anchor" href="#Can-you-figure-out-how-to-select-all-the-elements-in-the-previous-array-excluding-the-last-one,-%5B15%5D?" aria-hidden="true"><span class="octicon octicon-link"></span></a>Can you figure out how to select all the elements in the previous array excluding the last one, [15]?<a class="anchor-link" href="#Can-you-figure-out-how-to-select-all-the-elements-in-the-previous-array-excluding-the-last-one,-%5B15%5D?"> </a>
+</h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="What-about-doing-the-same-but-now-every-3rd-element?">
+<a class="anchor" href="#What-about-doing-the-same-but-now-every-3rd-element?" aria-hidden="true"><span class="octicon octicon-link"></span></a>What about doing the same but now every 3rd element?<a class="anchor-link" href="#What-about-doing-the-same-but-now-every-3rd-element?"> </a>
+</h4>
+<p>Hint: Result should be ?<code>[0,3,6,9,12]</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Numpy-arrays-can-have-multiple-dimensions.-For-example,-we-define-a-2-dimensional-(1,9)-array-using-nested-square-bracket:">
+<a class="anchor" href="#Numpy-arrays-can-have-multiple-dimensions.-For-example,-we-define-a-2-dimensional-(1,9)-array-using-nested-square-bracket:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Numpy arrays can have multiple dimensions. For example, we define a 2-dimensional <code>(1,9)</code> array using nested square bracket:<a class="anchor-link" href="#Numpy-arrays-can-have-multiple-dimensions.-For-example,-we-define-a-2-dimensional-(1,9)-array-using-nested-square-bracket:"> </a>
+</h4>
+<p><figure>
+  
+    <img class="docimage" src="/dea_course/images/copied_from_nb/data/numpy_array_t.png" alt="drawing" style="max-width: 600px">
+    
+    
+</figure>
+</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[1, 2, 3, 4, 5, 6, 7, 8, 9]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="To-visualise-the-shape-or-dimensions-of-a-numpy-array-we-can-add-the-suffix-.shape">
+<a class="anchor" href="#To-visualise-the-shape-or-dimensions-of-a-numpy-array-we-can-add-the-suffix-.shape" aria-hidden="true"><span class="octicon octicon-link"></span></a>To visualise the shape or dimensions of a numpy array we can add the suffix <code>.shape</code><a class="anchor-link" href="#To-visualise-the-shape-or-dimensions-of-a-numpy-array-we-can-add-the-suffix-.shape"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">],[</span><span class="mi">5</span><span class="p">],[</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">],[</span><span class="mi">8</span><span class="p">],[</span><span class="mi">9</span><span class="p">]])</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(9,)
+(1, 9)
+(9, 1)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Any-array-can-be-reshaped-into-different-shapes-using-the-function-reshape:">
+<a class="anchor" href="#Any-array-can-be-reshaped-into-different-shapes-using-the-function-reshape:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Any array can be reshaped into different shapes using the function <code>reshape</code>:<a class="anchor-link" href="#Any-array-can-be-reshaped-into-different-shapes-using-the-function-reshape:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[1, 2, 3, 4],
+       [5, 6, 7, 8]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="If-you-are-concerned-about-having-to-type-so-many-squared-brackets,-there-are-more-simple-and-convenient-ways-of-doing-the-same:">
+<a class="anchor" href="#If-you-are-concerned-about-having-to-type-so-many-squared-brackets,-there-are-more-simple-and-convenient-ways-of-doing-the-same:" aria-hidden="true"><span class="octicon octicon-link"></span></a>If you are concerned about having to type so many squared brackets, there are more simple and convenient ways of doing the same:<a class="anchor-link" href="#If-you-are-concerned-about-having-to-type-so-many-squared-brackets,-there-are-more-simple-and-convenient-ways-of-doing-the-same:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(1, 9)
+(9, 1)
+(3, 3)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Also-there-are-shortcuts-for-declaring-common-arrays-without-having-to-type-all-their-elements:">
+<a class="anchor" href="#Also-there-are-shortcuts-for-declaring-common-arrays-without-having-to-type-all-their-elements:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Also there are shortcuts for declaring common arrays without having to type all their elements:<a class="anchor-link" href="#Also-there-are-shortcuts-for-declaring-common-arrays-without-having-to-type-all-their-elements:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[0 1 2 3 4 5 6 7 8]
+[[1. 1. 1.]
+ [1. 1. 1.]
+ [1. 1. 1.]]
+[[[0. 0.]
+  [0. 0.]]
+
+ [[0. 0.]
+  [0. 0.]]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Can-you-try-to-declare-a-3-dimensional-array-of-shape-(5,3,3)?-Assign-it-to-a-variable">
+<a class="anchor" href="#Can-you-try-to-declare-a-3-dimensional-array-of-shape-(5,3,3)?-Assign-it-to-a-variable" aria-hidden="true"><span class="octicon octicon-link"></span></a>Can you try to declare a 3-dimensional array of shape (5,3,3)? Assign it to a variable<a class="anchor-link" href="#Can-you-try-to-declare-a-3-dimensional-array-of-shape-(5,3,3)?-Assign-it-to-a-variable"> </a>
+</h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Create-another-one-with-the-same-shape-and-use-the-numpy-function-to-add-both-arrays:">
+<a class="anchor" href="#Create-another-one-with-the-same-shape-and-use-the-numpy-function-to-add-both-arrays:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create another one with the same shape and use the numpy function to add both arrays:<a class="anchor-link" href="#Create-another-one-with-the-same-shape-and-use-the-numpy-function-to-add-both-arrays:"> </a>
+</h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Some-useful-functions-in-Numpy-for-calculating-the-mean,-standard-deviation-and-sum-of-the-elements-of-an-array.-These-operation-can-be-performed-only-in-certain-axis.">
+<a class="anchor" href="#Some-useful-functions-in-Numpy-for-calculating-the-mean,-standard-deviation-and-sum-of-the-elements-of-an-array.-These-operation-can-be-performed-only-in-certain-axis." aria-hidden="true"><span class="octicon octicon-link"></span></a>Some useful functions in Numpy for calculating the mean, standard deviation and sum of the elements of an array. These operation can be performed only in certain axis.<a class="anchor-link" href="#Some-useful-functions-in-Numpy-for-calculating-the-mean,-standard-deviation-and-sum-of-the-elements-of-an-array.-These-operation-can-be-performed-only-in-certain-axis."> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[0 1 2]
+ [3 4 5]
+ [6 7 8]]
+4.0
+2.581988897471611
+[3. 4. 5.]
+[1. 4. 7.]
+36
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Numpy-data-types">
+<a class="anchor" href="#Numpy-data-types" aria-hidden="true"><span class="octicon octicon-link"></span></a>Numpy data types<a class="anchor-link" href="#Numpy-data-types"> </a>
+</h3>
+<h4 id="Numpy-arrays-can-contain-numerical-values-of-different-types.-These-types-can-be-divided-in-these-groups:">
+<a class="anchor" href="#Numpy-arrays-can-contain-numerical-values-of-different-types.-These-types-can-be-divided-in-these-groups:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Numpy arrays can contain numerical values of different types. These types can be divided in these groups:<a class="anchor-link" href="#Numpy-arrays-can-contain-numerical-values-of-different-types.-These-types-can-be-divided-in-these-groups:"> </a>
+</h4>
+<ul>
+<li>Integers<ul>
+<li>Unsigned<ul>
+<li>8 bits: <code>uint8</code>
+</li>
+<li>16 bits: <code>uint16</code>
+</li>
+<li>32 bits: <code>uint32</code>
+</li>
+<li>64 bits: <code>uint64</code>
+</li>
+</ul>
+</li>
+<li>Signed<ul>
+<li>8 bits: <code>int8</code>
+</li>
+<li>16 bits: <code>int16</code>
+</li>
+<li>32 bits: <code>int32</code>
+</li>
+<li>64 bits: <code>int64</code>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Floats<ul>
+<li>32 bits: <code>float32</code>
+</li>
+<li>64 bits: <code>float64</code>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="We-can-specify-the-type-of-an-array-when-we-declare-it-or-change-the-type-of-an-existing-one-with-the-following-expressions:">
+<a class="anchor" href="#We-can-specify-the-type-of-an-array-when-we-declare-it-or-change-the-type-of-an-existing-one-with-the-following-expressions:" aria-hidden="true"><span class="octicon octicon-link"></span></a>We can specify the type of an array when we declare it or change the type of an existing one with the following expressions:<a class="anchor-link" href="#We-can-specify-the-type-of-an-array-when-we-declare-it-or-change-the-type-of-an-existing-one-with-the-following-expressions:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+<span class="n">arr</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+
+<span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+
+<span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>255
+-1
+-1.0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Broadcasting">
+<a class="anchor" href="#Broadcasting" aria-hidden="true"><span class="octicon octicon-link"></span></a>Broadcasting<a class="anchor-link" href="#Broadcasting"> </a>
+</h3>
+<h4 id="Numpy-is-set-up-internally-in-a-way-that-arrays-involved-in-operations-are-replicated-or-promoted-to-match-shapes">
+<a class="anchor" href="#Numpy-is-set-up-internally-in-a-way-that-arrays-involved-in-operations-are-replicated-or-promoted-to-match-shapes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Numpy is set up internally in a way that arrays involved in operations are replicated or promoted to match shapes<a class="anchor-link" href="#Numpy-is-set-up-internally-in-a-way-that-arrays-involved-in-operations-are-replicated-or-promoted-to-match-shapes"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="n">a</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">a</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[1., 1., 1., 1., 1., 1., 1., 1., 1., 1.],
+       [1., 1., 1., 1., 1., 1., 1., 1., 1., 1.],
+       [1., 1., 1., 1., 1., 1., 1., 1., 1., 1.],
+       [1., 1., 1., 1., 1., 1., 1., 1., 1., 1.],
+       [1., 1., 1., 1., 1., 1., 1., 1., 1., 1.],
+       [1., 1., 1., 1., 1., 1., 1., 1., 1., 1.],
+       [1., 1., 1., 1., 1., 1., 1., 1., 1., 1.],
+       [1., 1., 1., 1., 1., 1., 1., 1., 1., 1.],
+       [1., 1., 1., 1., 1., 1., 1., 1., 1., 1.],
+       [1., 1., 1., 1., 1., 1., 1., 1., 1., 1.]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[ 0,  2,  4],
+       [ 3,  5,  7],
+       [ 6,  8, 10]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Booleans">
+<a class="anchor" href="#Booleans" aria-hidden="true"><span class="octicon octicon-link"></span></a>Booleans<a class="anchor-link" href="#Booleans"> </a>
+</h3>
+<h4 id="There-is-a-binary-type-in-numpy-called-boolean-which-encodes-True-and-False-values.-For-example:">
+<a class="anchor" href="#There-is-a-binary-type-in-numpy-called-boolean-which-encodes-True-and-False-values.-For-example:" aria-hidden="true"><span class="octicon octicon-link"></span></a>There is a binary type in numpy called boolean which encodes <code>True</code> and <code>False</code> values. For example:<a class="anchor-link" href="#There-is-a-binary-type-in-numpy-called-boolean-which-encodes-True-and-False-values.-For-example:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">[:,:,</span><span class="mi">4</span><span class="p">])</span>
+
+<span class="n">arr</span><span class="o">.</span><span class="n">dtype</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[ True  True  True  True  True  True  True  True  True  True]
+ [ True  True  True  True  True  True  True  True  True  True]
+ [ True  True  True  True  True  True  True  True  True  True]
+ [ True  True  True  True  True  True  True  True  True  True]
+ [ True  True  True  True False  True  True  True  True  True]
+ [ True  True  True  True  True  True  True  True  True  True]
+ [ True  True  True  True  True  True  True  True  True  True]
+ [ True  True  True  True  True  True  True  True  True  True]
+ [ True  True  True  True  True  True  True  True  True  True]
+ [ True  True  True  True  True  True  True  True  True  True]]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>dtype('bool')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Boolean-types-are-quite-handy-for-indexing-and-selecting-parts-of-images-as-we-will-see-later.-Many-numpy-functions-also-work-with-Boolean-types.">
+<a class="anchor" href="#Boolean-types-are-quite-handy-for-indexing-and-selecting-parts-of-images-as-we-will-see-later.-Many-numpy-functions-also-work-with-Boolean-types." aria-hidden="true"><span class="octicon octicon-link"></span></a>Boolean types are quite handy for indexing and selecting parts of images as we will see later. Many numpy functions also work with Boolean types.<a class="anchor-link" href="#Boolean-types-are-quite-handy-for-indexing-and-selecting-parts-of-images-as-we-will-see-later.-Many-numpy-functions-also-work-with-Boolean-types."> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">arr</span><span class="p">[:,:,</span><span class="mi">4</span><span class="p">]))</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>99
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([ True, False, False, False])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Depending-of-the-language-that-you-have-used-before-this-behaviour-in-Python-might-strike-you:">
+<a class="anchor" href="#Depending-of-the-language-that-you-have-used-before-this-behaviour-in-Python-might-strike-you:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Depending of the language that you have used before this behaviour in Python might strike you:<a class="anchor-link" href="#Depending-of-the-language-that-you-have-used-before-this-behaviour-in-Python-might-strike-you:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># We make a copy of array a with name b</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
+
+<span class="c1"># We modify the first element of b</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1 0 0]
+[1 0 0]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Both-arrays-have-been-modified.-This-is-in-fact-because-a-and-b-are-references-to-the-same-array.-If-you-want-to-have-variables-with-independent-arrays-you'll-have-to-use-the-b-=-np.copy(a)-function.">
+<a class="anchor" href="#Both-arrays-have-been-modified.-This-is-in-fact-because-a-and-b-are-references-to-the-same-array.-If-you-want-to-have-variables-with-independent-arrays-you'll-have-to-use-the-b-=-np.copy(a)-function." aria-hidden="true"><span class="octicon octicon-link"></span></a>Both arrays have been modified. This is in fact because a and b are references to the same array. If you want to have variables with independent arrays you'll have to use the <code>b = np.copy(a)</code> function.<a class="anchor-link" href="#Both-arrays-have-been-modified.-This-is-in-fact-because-a-and-b-are-references-to-the-same-array.-If-you-want-to-have-variables-with-independent-arrays-you'll-have-to-use-the-b-=-np.copy(a)-function."> </a>
+</h4>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div>
+<!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js" repo="ANU-WALD/dea_course" issue-term="title" label="blogpost-comment" theme="github-light" crossorigin="anonymous" async>
+</script><a class="u-url" href="/dea_course/numpy/2020/08/11/intro-to-numpy.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/dea_course/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/dea_course/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/dea_course/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Course training materials.</p>
+      </div>
+    </div>
+
+    <div class="social-links">
+<ul class="social-media-list">
+<li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/dea_course/assets/minima-social-icons.svg#github"></use></svg></a></li>
+<li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/dea_course/assets/minima-social-icons.svg#twitter"></use></svg></a></li>
+</ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
