@@ -502,7 +502,7 @@ window.onload = wrap_img;
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Substitute the ? symbols by the correct expressions and values</span>
-<span class="n">answ</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">answ</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="err">?</span><span class="p">]</span>
 
 <span class="n">check_answer</span><span class="p">(</span><span class="s2">"1.3"</span><span class="p">,</span> <span class="n">answ</span><span class="p">)</span>
 </pre></div>
@@ -533,11 +533,7 @@ window.onload = wrap_img;
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answ</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="err">?</span><span class="p">:</span><span class="err">?</span><span class="p">:</span><span class="err">?</span><span class="p">]</span>
 
-<span class="c1">#check_answer("1.4", answ)</span>
-
-<span class="c1">#TODO </span>
-
-<span class="n">answ</span>
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">"1.4"</span><span class="p">,</span> <span class="n">answ</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -694,7 +690,6 @@ window.onload = wrap_img;
 <span class="n">answ</span> <span class="o">=</span> <span class="o">?</span>
 
 <span class="n">check_answer</span><span class="p">(</span><span class="s2">"1.5"</span><span class="p">,</span> <span class="n">answ</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="c1">#TODO [2,3]</span>
 </pre></div>
 
     </div>
@@ -756,7 +751,6 @@ window.onload = wrap_img;
 <span class="n">answ</span> <span class="o">=</span> <span class="o">?</span>
 
 <span class="n">check_answer</span><span class="p">(</span><span class="s2">"1.6"</span><span class="p">,</span> <span class="n">answ</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="c1">#TODO [5,3,3]</span>
 </pre></div>
 
     </div>
@@ -852,7 +846,7 @@ window.onload = wrap_img;
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># variable answ should contain your 3-dimensional array with shape (5,3,3)</span>
-<span class="n">answ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">answ</span> <span class="o">=</span> <span class="o">?</span>
 
 <span class="n">check_answer</span><span class="p">(</span><span class="s2">"1.8"</span><span class="p">,</span> <span class="n">answ</span><span class="p">)</span>
 </pre></div>
@@ -1232,30 +1226,9 @@ window.onload = wrap_img;
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 
-<span class="n">answ</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">arr</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">answ</span> <span class="o">=</span> <span class="o">?</span>
 
 <span class="n">check_answer</span><span class="p">(</span><span class="s2">"1.11"</span><span class="p">,</span> <span class="n">answ</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    
-
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">[:,:,</span><span class="mi">4</span><span class="p">])</span>
-
-<span class="n">arr</span><span class="o">.</span><span class="n">dtype</span>
 </pre></div>
 
     </div>
@@ -1310,7 +1283,7 @@ window.onload = wrap_img;
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 
-<span class="n">answ</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[(</span><span class="n">arr</span><span class="o">&gt;</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">arr</span><span class="o">&lt;</span><span class="mi">7</span><span class="p">)]</span>
+<span class="n">answ</span> <span class="o">=</span> <span class="o">?</span>
 
 <span class="n">check_answer</span><span class="p">(</span><span class="s2">"1.12"</span><span class="p">,</span> <span class="n">answ</span><span class="p">)</span>
 </pre></div>

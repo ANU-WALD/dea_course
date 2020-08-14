@@ -4,9 +4,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary" /><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Introduction to Matplotlib | DEA for Geospatial Analysts</title>
+<title>Introduction to Matplotlib for image data | DEA for Geospatial Analysts</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Introduction to Matplotlib" />
+<meta property="og:title" content="Introduction to Matplotlib for image data" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="This second part introduces matplotlib, a Python library for plotting numpy arrays as images." />
 <meta property="og:description" content="This second part introduces matplotlib, a Python library for plotting numpy arrays as images." />
@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-08-10T00:00:00-05:00" />
 <script type="application/ld+json">
-{"headline":"Introduction to Matplotlib","description":"This second part introduces matplotlib, a Python library for plotting numpy arrays as images.","datePublished":"2020-08-10T00:00:00-05:00","dateModified":"2020-08-10T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://anu-wald.github.io/dea_course/numpy/2020/08/10/intro-to-matplotlib.html"},"url":"https://anu-wald.github.io/dea_course/numpy/2020/08/10/intro-to-matplotlib.html","@context":"https://schema.org"}</script>
+{"headline":"Introduction to Matplotlib for image data","description":"This second part introduces matplotlib, a Python library for plotting numpy arrays as images.","datePublished":"2020-08-10T00:00:00-05:00","dateModified":"2020-08-10T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://anu-wald.github.io/dea_course/numpy/2020/08/10/intro-to-matplotlib.html"},"url":"https://anu-wald.github.io/dea_course/numpy/2020/08/10/intro-to-matplotlib.html","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/dea_course/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anu-wald.github.io/dea_course/feed.xml" title="DEA for Geospatial Analysts" /><link rel="shortcut icon" type="image/x-icon" href="/dea_course/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Introduction to Matplotlib | DEA for Geospatial Analysts</title>
+<title>Introduction to Matplotlib for image data | DEA for Geospatial Analysts</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Introduction to Matplotlib" />
+<meta property="og:title" content="Introduction to Matplotlib for image data" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="This second part introduces matplotlib, a Python library for plotting numpy arrays as images." />
 <meta property="og:description" content="This second part introduces matplotlib, a Python library for plotting numpy arrays as images." />
@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-08-10T00:00:00-05:00" />
 <script type="application/ld+json">
-{"headline":"Introduction to Matplotlib","description":"This second part introduces matplotlib, a Python library for plotting numpy arrays as images.","datePublished":"2020-08-10T00:00:00-05:00","dateModified":"2020-08-10T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://anu-wald.github.io/dea_course/numpy/2020/08/10/intro-to-matplotlib.html"},"url":"https://anu-wald.github.io/dea_course/numpy/2020/08/10/intro-to-matplotlib.html","@context":"https://schema.org"}</script>
+{"headline":"Introduction to Matplotlib for image data","description":"This second part introduces matplotlib, a Python library for plotting numpy arrays as images.","datePublished":"2020-08-10T00:00:00-05:00","dateModified":"2020-08-10T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://anu-wald.github.io/dea_course/numpy/2020/08/10/intro-to-matplotlib.html"},"url":"https://anu-wald.github.io/dea_course/numpy/2020/08/10/intro-to-matplotlib.html","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -87,13 +87,13 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Introduction to Matplotlib</h1><p class="page-description">This second part introduces matplotlib, a Python library for plotting numpy arrays as images.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-08-10T00:00:00-05:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">Introduction to Matplotlib for image data</h1><p class="page-description">This second part introduces matplotlib, a Python library for plotting numpy arrays as images.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-08-10T00:00:00-05:00" itemprop="datePublished">
         Aug 10, 2020
       </time>
        • <span class="read-time" title="Estimated read time">
     
     
-      2 min read
+      3 min read
     
 </span></p>
 
@@ -171,7 +171,7 @@ window.onload = wrap_img;
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="An-image-can-be-seen-as-a-2-dimensional-array.-To-visualise-the-contents-of-a-numpy-array:">An image can be seen as a 2-dimensional array. To visualise the contents of a numpy array:<a class="anchor-link" href="#An-image-can-be-seen-as-a-2-dimensional-array.-To-visualise-the-contents-of-a-numpy-array:"> </a></h4>
+<h4 id="Images-are-2-dimensional-arrays-containing-pixels.-We-can-use-2-dimensional-arrays-to-represent-image-data-and-visualise-with-matplotlib:">Images are 2-dimensional arrays containing pixels. We can use 2-dimensional arrays to represent image data and visualise with matplotlib:<a class="anchor-link" href="#Images-are-2-dimensional-arrays-containing-pixels.-We-can-use-2-dimensional-arrays-to-represent-image-data-and-visualise-with-matplotlib:"> </a></h4>
 </div>
 </div>
 </div>
@@ -198,13 +198,7 @@ window.onload = wrap_img;
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Can-you-create-a-similar-image-with-an-array-with-shape-(50,50)?">Can you create a similar image with an array with shape (50,50)?<a class="anchor-link" href="#Can-you-create-a-similar-image-with-an-array-with-shape-(50,50)?"> </a></h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="We-can-use-the-Pyplot-library-to-load-an-image-using-the-function-imread">We can use the Pyplot library to load an image using the function <code>imread</code><a class="anchor-link" href="#We-can-use-the-Pyplot-library-to-load-an-image-using-the-function-imread"> </a></h4>
+<h4 id="Exercise-2.1:-Can-you-create-a-similar-image-but-with-shape-(50,50)?">Exercise 2.1: Can you create a similar image but with shape (50,50)?<a class="anchor-link" href="#Exercise-2.1:-Can-you-create-a-similar-image-but-with-shape-(50,50)?"> </a></h4>
 </div>
 </div>
 </div>
@@ -215,7 +209,13 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;data/black_mountain_fire.jpg&#39;</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">check_answer</span> <span class="kn">import</span> <span class="n">check_answer</span>
+
+<span class="n">answ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="err">?</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="err">?</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">answ</span><span class="p">)</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">&quot;2.1&quot;</span><span class="p">,</span> <span class="n">answ</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 </pre></div>
 
     </div>
@@ -227,10 +227,142 @@ window.onload = wrap_img;
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="This-image-is-a-3-dimensional-numpy-array.-By-convention-the-first-dimension-corresponds-to-the-vertical-axis,-the-second-to-the-horizontal-axis-and-the-third-are-the-Red,-Green-and-Blue-channels-of-the-image.-What-are-the-dimensions-of-the-im-array?-__Hint:-Use-the-.shape-property-of-the-im-variable.">This image is a 3-dimensional numpy array. By convention the first dimension corresponds to the vertical axis, the second to the horizontal axis and the third are the Red, Green and Blue channels of the image. What are the dimensions of the <code>im</code> array? __Hint: Use the <code>.shape</code> property of the im variable.<a class="anchor-link" href="#This-image-is-a-3-dimensional-numpy-array.-By-convention-the-first-dimension-corresponds-to-the-vertical-axis,-the-second-to-the-horizontal-axis-and-the-third-are-the-Red,-Green-and-Blue-channels-of-the-image.-What-are-the-dimensions-of-the-im-array?-__Hint:-Use-the-.shape-property-of-the-im-variable."> </a></h4>
+<h4 id="If-you-remember-from-the-last-tutorial-we-were-able-to-address-regions-of-a-numpy-array-using-the-[-]-index-notation.-For-multidimensional-arrays-we-can-user-,-to-designate-the-different-axis.-For-example-we-can-update-the-values-on-the-left-part-of-this-array-to-be-equal-to-1.">If you remember from the last tutorial we were able to address regions of a numpy array using the [ ] index notation. For multidimensional arrays we can user <code>,</code> to designate the different axis. For example we can update the values on the left part of this array to be equal to <code>1</code>.<a class="anchor-link" href="#If-you-remember-from-the-last-tutorial-we-were-able-to-address-regions-of-a-numpy-array-using-the-[-]-index-notation.-For-multidimensional-arrays-we-can-user-,-to-designate-the-different-axis.-For-example-we-can-update-the-values-on-the-left-part-of-this-array-to-be-equal-to-1."> </a></h4>
 </div>
 </div>
 </div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">arr</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Notice-that-we-have-selected-all-the-values-:-in-the-first-axis-(vertical)-and-the-first-5-values-:5-on-the-second-axis-(horizontal)">Notice that we have selected all the values <code>:</code> in the first axis (vertical) and the first 5 values <code>:5</code> on the second axis (horizontal)<a class="anchor-link" href="#Notice-that-we-have-selected-all-the-values-:-in-the-first-axis-(vertical)-and-the-first-5-values-:5-on-the-second-axis-(horizontal)"> </a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise-2.2:-Can-you-do-something-similar-updating-all-the-values-in-the-top-left-half-corner-to-1">Exercise 2.2: Can you do something similar updating all the values in the top-left half corner to <code>1</code><a class="anchor-link" href="#Exercise-2.2:-Can-you-do-something-similar-updating-all-the-values-in-the-top-left-half-corner-to-1"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">answ</span><span class="p">[</span><span class="err">?</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">answ</span><span class="p">)</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">&quot;2.2&quot;</span><span class="p">,</span> <span class="n">answ</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise-2.3:-Remember-how-we-used-boolean-arrays-in-the-previous-tutorial-to-select-parts-of-an-array?-How-would-you-create-a-boolean-array-indicating-the-values-that-are-greater-than-49?">Exercise 2.3: Remember how we used boolean arrays in the previous tutorial to select parts of an array? How would you create a boolean array indicating the values that are greater than <code>49</code>?<a class="anchor-link" href="#Exercise-2.3:-Remember-how-we-used-boolean-arrays-in-the-previous-tutorial-to-select-parts-of-an-array?-How-would-you-create-a-boolean-array-indicating-the-values-that-are-greater-than-49?"> </a></h4><h4 id="Hint:-Your-new-array-should-be-a-boolean-array-with-the-same-shape-as-the-initial-array.">Hint: <em>Your new array should be a boolean array with the same shape as the initial array.</em><a class="anchor-link" href="#Hint:-Your-new-array-should-be-a-boolean-array-with-the-same-shape-as-the-initial-array."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">answ</span> <span class="o">=</span> <span class="o">?</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">answ</span><span class="p">)</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">&quot;2.3&quot;</span><span class="p">,</span> <span class="n">answ</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="We-can-use-the-Pyplot-library-to-load-an-image-using-the-matplotlib-function-imread.-The-image-that-we-get-is-a-3-dimensional-numpy-array.-By-convention-the-first-dimension-corresponds-to-the-vertical-axis,-the-second-to-the-horizontal-axis-and-the-third-are-the-Red,-Green-and-Blue-channels-of-the-image.">We can use the Pyplot library to load an image using the matplotlib function <code>imread</code>. The image that we get is a 3-dimensional numpy array. By convention the first dimension corresponds to the vertical axis, the second to the horizontal axis and the third are the Red, Green and Blue channels of the image.<a class="anchor-link" href="#We-can-use-the-Pyplot-library-to-load-an-image-using-the-matplotlib-function-imread.-The-image-that-we-get-is-a-3-dimensional-numpy-array.-By-convention-the-first-dimension-corresponds-to-the-vertical-axis,-the-second-to-the-horizontal-axis-and-the-third-are-the-Red,-Green-and-Blue-channels-of-the-image."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;data/black_mountain_fire.jpg&#39;</span><span class="p">))</span>
+
+<span class="n">im</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise-2.4:-Can-you-find-the-data-type-of-the-previous-im-array?-Remeber-the-suffix-we-used-in-the-previous-tutorial-to-find-out-the-type-of-an-array">Exercise 2.4: Can you find the data type of the previous <code>im</code> array? Remeber the suffix we used in the previous tutorial to find out the type of an array<a class="anchor-link" href="#Exercise-2.4:-Can-you-find-the-data-type-of-the-previous-im-array?-Remeber-the-suffix-we-used-in-the-previous-tutorial-to-find-out-the-type-of-an-array"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answ</span> <span class="o">=</span> im.<span class="o">?</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">&quot;2.4&quot;</span><span class="p">,</span> <span class="n">answ</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Let's-display-this-image-using-the-imshow-function.">Let's display this image using the <code>imshow</code> function.<a class="anchor-link" href="#Let's-display-this-image-using-the-imshow-function."> </a></h4>
@@ -256,19 +388,13 @@ window.onload = wrap_img;
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="This-is-a-photo-of-Black-Mountain-taken-during-prescribed-burns-in-2014.-A-colour-image-is-normally-composed-of-three-layers-containing-the-values-of-the-red,-green-and-blue-pixels.-When-we-display-an-image-we-see-all-three-colours-combined.">This is a photo of Black Mountain taken during prescribed burns in 2014. A colour image is normally composed of three layers containing the values of the red, green and blue pixels. When we display an image we see all three colours combined.<a class="anchor-link" href="#This-is-a-photo-of-Black-Mountain-taken-during-prescribed-burns-in-2014.-A-colour-image-is-normally-composed-of-three-layers-containing-the-values-of-the-red,-green-and-blue-pixels.-When-we-display-an-image-we-see-all-three-colours-combined."> </a></h4>
+<h4 id="This-is-a-photo-of-Black-Mountain-(ACT)-taken-during-some-prescribed-burns-in-2014.-A-colour-image-is-normally-composed-of-three-layers-containing-the-values-of-the-red,-green-and-blue-pixels.-When-we-display-an-image-we-see-all-three-colours-combined.">This is a photo of Black Mountain (ACT) taken during some prescribed burns in 2014. A colour image is normally composed of three layers containing the values of the red, green and blue pixels. When we display an image we see all three colours combined.<a class="anchor-link" href="#This-is-a-photo-of-Black-Mountain-(ACT)-taken-during-some-prescribed-burns-in-2014.-A-colour-image-is-normally-composed-of-three-layers-containing-the-values-of-the-red,-green-and-blue-pixels.-When-we-display-an-image-we-see-all-three-colours-combined."> </a></h4>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Knowing-the-extents-of-the-image-given-by-its-shape,-can-you-display-the-values-of-one-of-the-pixels-in-the-sky?-You-need-to-provide-one-index-for-each-x-and-y-dimensions-and-get-all-three-channels.-Make-sure-the-values-represent-a-mostly-blue-pixel.">Knowing the extents of the image given by its shape, can you display the values of one of the pixels in the sky? You need to provide one index for each x and y dimensions and get all three channels. Make sure the values represent a mostly blue pixel.<a class="anchor-link" href="#Knowing-the-extents-of-the-image-given-by-its-shape,-can-you-display-the-values-of-one-of-the-pixels-in-the-sky?-You-need-to-provide-one-index-for-each-x-and-y-dimensions-and-get-all-three-channels.-Make-sure-the-values-represent-a-mostly-blue-pixel."> </a></h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Let's-use-the-indexing-functionality-of-numpy-to-select-a-slice-of-this-image.-For-example-to-select-the-top-right-corner:">Let's use the indexing functionality of numpy to select a slice of this image. For example to select the top right corner:<a class="anchor-link" href="#Let's-use-the-indexing-functionality-of-numpy-to-select-a-slice-of-this-image.-For-example-to-select-the-top-right-corner:"> </a></h4>
+<h4 id="Exersise-2.5:-Let's-use-the-indexing-functionality-of-numpy-to-select-a-portion-of-this-image.-Would-you-be-able-to-select-the-top-right-corner-of-this-image-with-shape-(800,800)?-Remember-there-are-three-axes-in-this-image.">Exersise 2.5: Let's use the indexing functionality of numpy to select a portion of this image. Would you be able to select the top-right corner of this image with shape (800,800)? Remember there are three axes in this image.<a class="anchor-link" href="#Exersise-2.5:-Let's-use-the-indexing-functionality-of-numpy-to-select-a-portion-of-this-image.-Would-you-be-able-to-select-the-top-right-corner-of-this-image-with-shape-(800,800)?-Remember-there-are-three-axes-in-this-image."> </a></h4>
 </div>
 </div>
 </div>
@@ -279,7 +405,11 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">[:</span><span class="mi">800</span><span class="p">,</span><span class="o">-</span><span class="mi">800</span><span class="p">:,:])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answ</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="err">?</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">answ</span><span class="p">)</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">&quot;2.5&quot;</span><span class="p">,</span> <span class="n">answ</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 </pre></div>
 
     </div>
@@ -291,13 +421,7 @@ window.onload = wrap_img;
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Let's-practice-your-indexing-skills!-Can-you-create-a-cropped-image-around-Black-Mountain's-tower?-Remember:-first-dimension-is-the-vertical-coordinates,-second-dimension-is-the-horizontal-coordinates-and-the-third-are-the-RGB-channels-of-the-image.">Let's practice your indexing skills! Can you create a cropped image around Black Mountain's tower? Remember: first dimension is the vertical coordinates, second dimension is the horizontal coordinates and the third are the RGB channels of the image.<a class="anchor-link" href="#Let's-practice-your-indexing-skills!-Can-you-create-a-cropped-image-around-Black-Mountain's-tower?-Remember:-first-dimension-is-the-vertical-coordinates,-second-dimension-is-the-horizontal-coordinates-and-the-third-are-the-RGB-channels-of-the-image."> </a></h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Let's-play-around-with-this-a-little-bit.-For-example,-let's-replace-all-the-values-in-the-'red'-layer-with-the-value-255,-this-is-the-highest-red-value-possible-and-it-will-make-your-whole-image-redish.-The-following-command-will-replace-all-the-values-in-the-red-channel-(axis-3)-with-the-value-255,-and-see-what-happens">Let's play around with this a little bit. For example, let's replace all the values in the 'red' layer with the value 255, this is the highest red value possible and it will make your whole image redish. The following command will replace all the values in the red channel (axis 3) with the value 255, and see what happens<a class="anchor-link" href="#Let's-play-around-with-this-a-little-bit.-For-example,-let's-replace-all-the-values-in-the-'red'-layer-with-the-value-255,-this-is-the-highest-red-value-possible-and-it-will-make-your-whole-image-redish.-The-following-command-will-replace-all-the-values-in-the-red-channel-(axis-3)-with-the-value-255,-and-see-what-happens"> </a></h4>
+<h4 id="Exercise-2.6:-Let's-get-some-more-practice-to-improve-your-indexing-skills!-Can-you-create-a-cropped-image-around-Black-Mountain's-tower?-Remember:-first-dimension-is-the-vertical-coordinates,-second-dimension-is-the-horizontal-coordinates-and-the-third-are-the-RGB-channels-of-the-image.">Exercise 2.6: Let's get some more practice to improve your indexing skills! Can you create a cropped image around Black Mountain's tower? Remember: first dimension is the vertical coordinates, second dimension is the horizontal coordinates and the third are the RGB channels of the image.<a class="anchor-link" href="#Exercise-2.6:-Let's-get-some-more-practice-to-improve-your-indexing-skills!-Can-you-create-a-cropped-image-around-Black-Mountain's-tower?-Remember:-first-dimension-is-the-vertical-coordinates,-second-dimension-is-the-horizontal-coordinates-and-the-third-are-the-RGB-channels-of-the-image."> </a></h4>
 </div>
 </div>
 </div>
@@ -308,8 +432,89 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">im</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answ</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="err">?</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">answ</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Let's-have-a-look-at-one-of-the-pixels-in-this-image.-We-choose-the-top-left-corner-with-position-(0,0)-and-show-the-values-of-its-RGB-channels.">Let's have a look at one of the pixels in this image. We choose the top-left corner with position (0,0) and show the values of its RGB channels.<a class="anchor-link" href="#Let's-have-a-look-at-one-of-the-pixels-in-this-image.-We-choose-the-top-left-corner-with-position-(0,0)-and-show-the-values-of-its-RGB-channels."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-first-value-corresponds-to-the-red-component,-the-second-to-the-green-and-the-third-to-the-blue.-uint8-can-contain-values-in-the-range-[0-255]-so-the-pixel-is-mostly-blue,-which-makes-sense-for-a-pixel-representing-the-sky.">The first value corresponds to the red component, the second to the green and the third to the blue. <code>uint8</code> can contain values in the range <code>[0-255]</code> so the pixel is mostly blue, which makes sense for a pixel representing the sky.<a class="anchor-link" href="#The-first-value-corresponds-to-the-red-component,-the-second-to-the-green-and-the-third-to-the-blue.-uint8-can-contain-values-in-the-range-[0-255]-so-the-pixel-is-mostly-blue,-which-makes-sense-for-a-pixel-representing-the-sky."> </a></h4><h4 id="Now-let's-modify-the-image.-What-happens-if-we-set-all-the-values-representing-the-green-channel-to-the-maximum-value?">Now let's modify the image. What happens if we set all the values representing the green channel to the maximum value?<a class="anchor-link" href="#Now-let's-modify-the-image.-What-happens-if-we-set-all-the-values-representing-the-green-channel-to-the-maximum-value?"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># We first make a copy to avoid modifying the original image.</span>
+<span class="n">im2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+
+<span class="n">im2</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise-2.7:-Could-you-create-an-artistic-representation-of-the-previous-image-saturating-different-parts-of-the-image-with-different-colours?-We-want-the-top-left-quadrant-with-the-red-channel-saturated,-the-top-right-with-the-green-channel-satured,-the-bottom-left-with-the-blue-channel-saturated-and-the-bottom-right-as-it-is.">Exercise 2.7: Could you create an artistic representation of the previous image saturating different parts of the image with different colours? We want the top-left quadrant with the red channel saturated, the top-right with the green channel satured, the bottom-left with the blue channel saturated and the bottom-right as it is.<a class="anchor-link" href="#Exercise-2.7:-Could-you-create-an-artistic-representation-of-the-previous-image-saturating-different-parts-of-the-image-with-different-colours?-We-want-the-top-left-quadrant-with-the-red-channel-saturated,-the-top-right-with-the-green-channel-satured,-the-bottom-left-with-the-blue-channel-saturated-and-the-bottom-right-as-it-is."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">im2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+
+<span class="n">im2</span><span class="p">[</span><span class="err">?</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+<span class="n">im2</span><span class="p">[</span><span class="err">?</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+<span class="n">im2</span><span class="p">[</span><span class="err">?</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im2</span><span class="p">)</span>
 </pre></div>
 
     </div>
