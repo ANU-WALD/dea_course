@@ -73,7 +73,7 @@ include:
 default_badges:
   github: true
   binder: true
-  colab: true
+  colab: false
 
 # Escape HTML in post descriptions
 html_escape:
