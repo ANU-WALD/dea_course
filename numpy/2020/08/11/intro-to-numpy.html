@@ -99,7 +99,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      4 min read
+      10 min read
     
 </span></p>
 
@@ -128,11 +128,7 @@ window.onload = wrap_img;
     </a>
 </div>
 
-          <div class="px-2">
-    <a href="https://colab.research.google.com/github/ANU-WALD/dea_course/blob/master/_notebooks/2020-08-11-intro-to-numpy.ipynb" target="_blank">
-        <img class="notebook-badge-image" src="/dea_course/assets/badges/colab.svg" alt="Open In Colab">
-    </a>
-</div>
+          
         </div>
       </header>
 
@@ -264,7 +260,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="The-contents-of-this-variable-can-be-displayed-at-any-moment-by-typing-the-variable-name-in-a-new-cell:">The contents of this variable can be displayed at any moment by typing the variable name in a new cell:<a class="anchor-link" href="#The-contents-of-this-variable-can-be-displayed-at-any-moment-by-typing-the-variable-name-in-a-new-cell:"> </a>
+<h4 id="We-have-just-declared-a-variable-a-that-holds-the-result-of-the-function.-We-cannow-use-of-display-this-variable,-at-any-point-of-this-notebook.-For-example-we-can-show-its-contents-by-typing-the-variable-name-in-a-new-cell:">We have just declared a variable <code>a</code> that holds the result of the function. We cannow use of display this variable, at any point of this notebook. For example we can show its contents by typing the variable name in a new cell:<a class="anchor-link" href="#We-have-just-declared-a-variable-a-that-holds-the-result-of-the-function.-We-cannow-use-of-display-this-variable,-at-any-point-of-this-notebook.-For-example-we-can-show-its-contents-by-typing-the-variable-name-in-a-new-cell:"> </a>
 </h4>
 </div>
 </div>
@@ -289,7 +285,37 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="The-core-concept-in-numpy-is-the-array-which-is-equivalent-to-lists-of-numbers-but-can-be-multidimensional.-To-declare-a-numpy-array-we-do:">The core concept in numpy is the <code>array</code> which is equivalent to lists of numbers but can be multidimensional. To declare a numpy array we do:<a class="anchor-link" href="#The-core-concept-in-numpy-is-the-array-which-is-equivalent-to-lists-of-numbers-but-can-be-multidimensional.-To-declare-a-numpy-array-we-do:"> </a>
+<h4 id="Exercise-1.1:-Can-you-use-the-previous-numpy-function-to-add-the-values-34-and-29">Exercise 1.1: Can you use the previous numpy function to add the values <code>34</code> and <code>29</code><a class="anchor-link" href="#Exercise-1.1:-Can-you-use-the-previous-numpy-function-to-add-the-values-34-and-29"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">check_answer</span> <span class="kn">import</span> <span class="n">check_answer</span>
+
+<span class="c1"># Substitute the ? symbols by the correct expressions and values</span>
+<span class="n">answ</span> <span class="o">=</span> <span class="o">?</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">"1.1"</span><span class="p">,</span> <span class="n">answ</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="One-of-numpy's-core-concepts-is-the-array,-which-is-equivalent-to-numpy-lists,-but-can-be-multidimensional-and-with-much-more-functionality.-To-declare-a-numpy-array-explicity-we-do:">One of numpy's core concepts is the <code>array</code>, which is equivalent to numpy lists, but can be multidimensional and with much more functionality. To declare a numpy array explicity we do:<a class="anchor-link" href="#One-of-numpy's-core-concepts-is-the-array,-which-is-equivalent-to-numpy-lists,-but-can-be-multidimensional-and-with-much-more-functionality.-To-declare-a-numpy-array-explicity-we-do:"> </a>
 </h4>
 </div>
 </div>
@@ -314,7 +340,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Most-of-the-functions-and-operations-defined-in-numpy-can-be-applied-to-arrays.-For-example,-with-the-previous-operation:">Most of the functions and operations defined in numpy can be applied to arrays. For example, with the previous operation:<a class="anchor-link" href="#Most-of-the-functions-and-operations-defined-in-numpy-can-be-applied-to-arrays.-For-example,-with-the-previous-operation:"> </a>
+<h4 id="Most-of-the-functions-and-operations-defined-in-numpy-can-be-applied-to-arrays.-For-example,-with-the-previous-add-operation:">Most of the functions and operations defined in numpy can be applied to arrays. For example, with the previous <code>add</code> operation:<a class="anchor-link" href="#Most-of-the-functions-and-operations-defined-in-numpy-can-be-applied-to-arrays.-For-example,-with-the-previous-add-operation:"> </a>
 </h4>
 </div>
 </div>
@@ -343,6 +369,8 @@ window.onload = wrap_img;
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="But-a-more-simple-and-convenient-notation-can-also-be-used:">But a more simple and convenient notation can also be used:<a class="anchor-link" href="#But-a-more-simple-and-convenient-notation-can-also-be-used:"> </a>
+</h4>
+<h4 id="Note:-This-operation-detects-that-numpy-arrays-are-being-added-and-calls-the-previous-function-for-efficient-execution.-Think-that-these-arrays-can-contain-large-amounts-of-values.">Note: <em>This operation detects that numpy arrays are being added and calls the previous function for efficient execution. Think that these arrays can contain large amounts of values.</em><a class="anchor-link" href="#Note:-This-operation-detects-that-numpy-arrays-are-being-added-and-calls-the-previous-function-for-efficient-execution.-Think-that-these-arrays-can-contain-large-amounts-of-values."> </a>
 </h4>
 </div>
 </div>
@@ -405,7 +433,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Indexes-can-also-be-negative,-meaning-that-you-start-counting-by-the-end.-For-example,-to-select-the-last-2-elements-in-an-array-we-can-do:">Indexes can also be negative, meaning that you start counting by the end. For example, to select the last 2 elements in an array we can do:<a class="anchor-link" href="#Indexes-can-also-be-negative,-meaning-that-you-start-counting-by-the-end.-For-example,-to-select-the-last-2-elements-in-an-array-we-can-do:"> </a>
+<h4 id="Exercise-1.2:-Can-you-declare-a-new-array-with-contents-[5,4,3,2,1]-and-slice-it-to-select-the-last-3-items?">Exercise 1.2: Can you declare a new array with contents [5,4,3,2,1] and slice it to select the last 3 items?<a class="anchor-link" href="#Exercise-1.2:-Can-you-declare-a-new-array-with-contents-%5B5,4,3,2,1%5D-and-slice-it-to-select-the-last-3-items?"> </a>
 </h4>
 </div>
 </div>
@@ -417,7 +445,11 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Substitute the ? symbols by the correct expressions and values</span>
+<span class="n">arr</span> <span class="o">=</span> <span class="o">?</span>
+<span class="n">answ</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="err">?</span><span class="p">:</span><span class="err">?</span><span class="p">]</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">"1.2"</span><span class="p">,</span> <span class="n">answ</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -430,25 +462,95 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Can-you-figure-out-how-to-select-all-the-elements-in-the-previous-array-excluding-the-last-one,-[15]?">Can you figure out how to select all the elements in the previous array excluding the last one, [15]?<a class="anchor-link" href="#Can-you-figure-out-how-to-select-all-the-elements-in-the-previous-array-excluding-the-last-one,-%5B15%5D?"> </a>
+<h4 id="Indexes-can-also-be-negative,-meaning-that-you-start-counting-by-the-end.-For-example,-to-select-the-last-2-elements-in-an-array-we-can-do:">Indexes can also be negative, meaning that you start counting by the end. For example, to select the last 2 elements in an array we can do:<a class="anchor-link" href="#Indexes-can-also-be-negative,-meaning-that-you-start-counting-by-the-end.-For-example,-to-select-the-last-2-elements-in-an-array-we-can-do:"> </a>
 </h4>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="What-about-doing-the-same-but-now-every-3rd-element?">What about doing the same but now every 3rd element?<a class="anchor-link" href="#What-about-doing-the-same-but-now-every-3rd-element?"> </a>
-</h4>
-<p>Hint: Result should be ?<code>[0,3,6,9,12]</code></p>
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">15</span><span class="p">])</span>
+
+<span class="n">arr</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 </div>
-</div>
-</div>
+    
+
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Numpy-arrays-can-have-multiple-dimensions.-For-example,-we-define-a-2-dimensional-(1,9)-array-using-nested-square-bracket:">Numpy arrays can have multiple dimensions. For example, we define a 2-dimensional <code>(1,9)</code> array using nested square bracket:<a class="anchor-link" href="#Numpy-arrays-can-have-multiple-dimensions.-For-example,-we-define-a-2-dimensional-(1,9)-array-using-nested-square-bracket:"> </a>
+<h4 id="Exercise-1.3:-Can-you-figure-out-how-to-select-all-the-elements-in-the-previous-array-excluding-the-last-one,-[15]?">Exercise 1.3: Can you figure out how to select all the elements in the previous array excluding the last one, [15]?<a class="anchor-link" href="#Exercise-1.3:-Can-you-figure-out-how-to-select-all-the-elements-in-the-previous-array-excluding-the-last-one,-%5B15%5D?"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Substitute the ? symbols by the correct expressions and values</span>
+<span class="n">answ</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">"1.3"</span><span class="p">,</span> <span class="n">answ</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise-1.4:-What-about-doing-excluding-the-last-element-from-the-list-but-selecting-every-3rd-element-this-time?-Remember-the-third-index-indicates-strides-if-used">Exercise 1.4: What about doing excluding the last element from the list but selecting every 3rd element this time? Remember the third index indicates strides if used<a class="anchor-link" href="#Exercise-1.4:-What-about-doing-excluding-the-last-element-from-the-list-but-selecting-every-3rd-element-this-time?-Remember-the-third-index-indicates-strides-if-used"> </a>
+</h4>
+<h4 id="Hint:-Result-should-be-?[0,3,6,9,12]">Hint: <em>Result should be ?<code>[0,3,6,9,12]</code></em><a class="anchor-link" href="#Hint:-Result-should-be-?%5B0,3,6,9,12%5D"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answ</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="err">?</span><span class="p">:</span><span class="err">?</span><span class="p">:</span><span class="err">?</span><span class="p">]</span>
+
+<span class="c1">#check_answer("1.4", answ)</span>
+
+<span class="c1">#TODO </span>
+
+<span class="n">answ</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Numpy-arrays-can-have-multiple-dimensions.-For-example,-we-define-a-2-dimensional-(1,9)-array-using-nested-square-brackets-[-].-The-convention-in-numpy-is-that-the-outer-[-]-represent-the-first-dimension-and-the-inner-[-]-contains-the-last-dimension.">Numpy arrays can have multiple dimensions. For example, we define a 2-dimensional <code>(1,9)</code> array using nested square brackets [ ]. The convention in numpy is that the outer [ ] represent the first dimension and the inner [ ] contains the last dimension.<a class="anchor-link" href="#Numpy-arrays-can-have-multiple-dimensions.-For-example,-we-define-a-2-dimensional-(1,9)-array-using-nested-square-brackets-%5B-%5D.-The-convention-in-numpy-is-that-the-outer-%5B-%5D-represent-the-first-dimension-and-the-inner-%5B-%5D-contains-the-last-dimension."> </a>
 </h4>
 <p><figure>
   
@@ -458,6 +560,14 @@ window.onload = wrap_img;
 </figure>
 </p>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="For-example-the-following-cell-declares-a-2-dimensional-array-with-shape-(1,-9)">For example the following cell declares a 2-dimensional array with shape (1, 9)<a class="anchor-link" href="#For-example-the-following-cell-declares-a-2-dimensional-array-with-shape-(1,-9)"> </a>
+</h4>
 </div>
 </div>
 </div>
@@ -481,7 +591,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="To-visualise-the-shape-or-dimensions-of-a-numpy-array-we-can-add-the-suffix-.shape">To visualise the shape or dimensions of a numpy array we can add the suffix <code>.shape</code><a class="anchor-link" href="#To-visualise-the-shape-or-dimensions-of-a-numpy-array-we-can-add-the-suffix-.shape"> </a>
+<h4 id="To-visualise-the-shape-(dimensions)-of-a-numpy-array-we-can-add-the-suffix-.shape-to-an-array-expression-or-variable-containing-a-numpy-array.">To visualise the shape (dimensions) of a numpy array we can add the suffix <code>.shape</code> to an array expression or variable containing a numpy array.<a class="anchor-link" href="#To-visualise-the-shape-(dimensions)-of-a-numpy-array-we-can-add-the-suffix-.shape-to-an-array-expression-or-variable-containing-a-numpy-array."> </a>
 </h4>
 </div>
 </div>
@@ -493,9 +603,11 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">],[</span><span class="mi">5</span><span class="p">],[</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">],[</span><span class="mi">8</span><span class="p">],[</span><span class="mi">9</span><span class="p">]])</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
+<span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
+<span class="n">arr3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">],[</span><span class="mi">5</span><span class="p">],[</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">],[</span><span class="mi">8</span><span class="p">],[</span><span class="mi">9</span><span class="p">]])</span>
+
+<span class="n">arr1</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">arr2</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">arr3</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 
     </div>
@@ -508,7 +620,9 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Any-array-can-be-reshaped-into-different-shapes-using-the-function-reshape:">Any array can be reshaped into different shapes using the function <code>reshape</code>:<a class="anchor-link" href="#Any-array-can-be-reshaped-into-different-shapes-using-the-function-reshape:"> </a>
+<h4 id="Arrays-can-be-reshaped-into-different-shapes-using-the-function-reshape:">Arrays can be reshaped into different shapes using the function <code>reshape</code>:<a class="anchor-link" href="#Arrays-can-be-reshaped-into-different-shapes-using-the-function-reshape:"> </a>
+</h4>
+<h4 id="Note:-The-total-number-of-elements-has-to-be-the-same-before-and-after-the-reshape-operation,-otherwise-numpy-will-throw-and-error.">Note: <em>The total number of elements has to be the same before and after the reshape operation, otherwise numpy will throw and error.</em><a class="anchor-link" href="#Note:-The-total-number-of-elements-has-to-be-the-same-before-and-after-the-reshape-operation,-otherwise-numpy-will-throw-and-error."> </a>
 </h4>
 </div>
 </div>
@@ -533,7 +647,9 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="If-you-are-concerned-about-having-to-type-so-many-squared-brackets,-there-are-more-simple-and-convenient-ways-of-doing-the-same:">If you are concerned about having to type so many squared brackets, there are more simple and convenient ways of doing the same:<a class="anchor-link" href="#If-you-are-concerned-about-having-to-type-so-many-squared-brackets,-there-are-more-simple-and-convenient-ways-of-doing-the-same:"> </a>
+<h4 id="See-the-following-example-how-a-9-element-array-can-be-reshaped-into-two-dimensional-arrays-with-different-shapes.">See the following example how a 9-element array can be reshaped into two dimensional arrays with different shapes.<a class="anchor-link" href="#See-the-following-example-how-a-9-element-array-can-be-reshaped-into-two-dimensional-arrays-with-different-shapes."> </a>
+</h4>
+<h4 id="Note:-We-are-declaring-the-array-and-reshaping-all-in-one-line.-This-is-called-'chaining'-and-allows-us-to-conveniently-perform-multiple-operations.-The-expressions-are-evaluated-from-left-to-right,-so-in-this-case-first-we-create-and-array-and-then-apply-the-reshape-operation-to-the-resulting-array.">Note: <em>We are declaring the array and reshaping all in one line. This is called 'chaining' and allows us to conveniently perform multiple operations. The expressions are evaluated from left to right, so in this case first we create and array and then apply the reshape operation to the resulting array.</em><a class="anchor-link" href="#Note:-We-are-declaring-the-array-and-reshaping-all-in-one-line.-This-is-called-'chaining'-and-allows-us-to-conveniently-perform-multiple-operations.-The-expressions-are-evaluated-from-left-to-right,-so-in-this-case-first-we-create-and-array-and-then-apply-the-reshape-operation-to-the-resulting-array."> </a>
 </h4>
 </div>
 </div>
@@ -545,9 +661,11 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">arr3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">arr1</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">arr2</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">arr3</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 
     </div>
@@ -560,7 +678,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Also-there-are-shortcuts-for-declaring-common-arrays-without-having-to-type-all-their-elements:">Also there are shortcuts for declaring common arrays without having to type all their elements:<a class="anchor-link" href="#Also-there-are-shortcuts-for-declaring-common-arrays-without-having-to-type-all-their-elements:"> </a>
+<h4 id="Exercise-1.5:-Can-you-declare-a-1-dimensional-array-with-6-elements-and-then-reshape-it-into-a-2-dimensional-array-with-shape-(2,3)?-You-can-try-to-do-this-in-one-or-two-lines.">Exercise 1.5: Can you declare a 1-dimensional array with 6 elements and then reshape it into a 2-dimensional array with shape (2,3)? You can try to do this in one or two lines.<a class="anchor-link" href="#Exercise-1.5:-Can-you-declare-a-1-dimensional-array-with-6-elements-and-then-reshape-it-into-a-2-dimensional-array-with-shape-(2,3)?-You-can-try-to-do-this-in-one-or-two-lines."> </a>
 </h4>
 </div>
 </div>
@@ -572,9 +690,11 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># variable answ should contain your 2-dimensional array with shape (2,3)</span>
+<span class="n">answ</span> <span class="o">=</span> <span class="o">?</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">"1.5"</span><span class="p">,</span> <span class="n">answ</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="c1">#TODO [2,3]</span>
 </pre></div>
 
     </div>
@@ -587,7 +707,69 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Can-you-try-to-declare-a-3-dimensional-array-of-shape-(5,3,3)?-Assign-it-to-a-variable">Can you try to declare a 3-dimensional array of shape (5,3,3)? Assign it to a variable<a class="anchor-link" href="#Can-you-try-to-declare-a-3-dimensional-array-of-shape-(5,3,3)?-Assign-it-to-a-variable"> </a>
+<h4 id="There-are-convenient-functions-in-numpy-for-declaring-common-arrays-without-having-to-type-all-their-elements:">There are convenient functions in numpy for declaring common arrays without having to type all their elements:<a class="anchor-link" href="#There-are-convenient-functions-in-numpy-for-declaring-common-arrays-without-having-to-type-all-their-elements:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">arr3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+                
+<span class="nb">print</span><span class="p">(</span><span class="n">arr1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr3</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise-1.6:-Can-you-declare-a-3-dimensional-array-with-shape-(5,3,3)?--The-contents-of-the-array-don't-matter-for-this-exercise-so-you-can-use-any-of-the-previously-introduced-functions.">Exercise 1.6: Can you declare a 3-dimensional array with shape (5,3,3)?  The contents of the array don't matter for this exercise so you can use any of the previously introduced functions.<a class="anchor-link" href="#Exercise-1.6:-Can-you-declare-a-3-dimensional-array-with-shape-(5,3,3)?--The-contents-of-the-array-don't-matter-for-this-exercise-so-you-can-use-any-of-the-previously-introduced-functions."> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># variable answ should contain your 3-dimensional array with shape (5,3,3)</span>
+<span class="n">answ</span> <span class="o">=</span> <span class="o">?</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">"1.6"</span><span class="p">,</span> <span class="n">answ</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="c1">#TODO [5,3,3]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise-1.7:-Create-another-one-with-the-same-shape-and-use-the-numpy-function-to-add-both-arrays:">Exercise 1.7: Create another one with the same shape and use the numpy function to add both arrays:<a class="anchor-link" href="#Exercise-1.7:-Create-another-one-with-the-same-shape-and-use-the-numpy-function-to-add-both-arrays:"> </a>
 </h4>
 </div>
 </div>
@@ -595,15 +777,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Create-another-one-with-the-same-shape-and-use-the-numpy-function-to-add-both-arrays:">Create another one with the same shape and use the numpy function to add both arrays:<a class="anchor-link" href="#Create-another-one-with-the-same-shape-and-use-the-numpy-function-to-add-both-arrays:"> </a>
-</h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Some-useful-functions-in-Numpy-for-calculating-the-mean,-standard-deviation-and-sum-of-the-elements-of-an-array.-These-operation-can-be-performed-only-in-certain-axis.">Some useful functions in Numpy for calculating the mean, standard deviation and sum of the elements of an array. These operation can be performed only in certain axis.<a class="anchor-link" href="#Some-useful-functions-in-Numpy-for-calculating-the-mean,-standard-deviation-and-sum-of-the-elements-of-an-array.-These-operation-can-be-performed-only-in-certain-axis."> </a>
+<h4 id="Numpy-has-useful-functions-for-calculating-the-mean,-standard-deviation-and-sum-of-the-elements-of-an-array.">Numpy has useful functions for calculating the mean, standard deviation and sum of the elements of an array.<a class="anchor-link" href="#Numpy-has-useful-functions-for-calculating-the-mean,-standard-deviation-and-sum-of-the-elements-of-an-array."> </a>
 </h4>
 </div>
 </div>
@@ -618,14 +792,10 @@ window.onload = wrap_img;
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Mean:"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Std Dev:"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sum:"</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -638,8 +808,65 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Numpy-data-types">Numpy data types<a class="anchor-link" href="#Numpy-data-types"> </a>
-</h3>
+<h4 id="These-operation-can-be-performed-along-specific-axis.">These operation can be performed along specific axis.<a class="anchor-link" href="#These-operation-can-be-performed-along-specific-axis."> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sum along the vertical axis:"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sum along the horizontal axis:"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise-1.8:-Declare-a-2-dimensional-array-with-shape-(20,10)-all-filled-with-ones.-Then-calculate-the-sum-of-its-values-along-the-first-dimension-(axis=0).-The-result-has-to-be-a-1-dimensional-array-with-shape-(10,)">Exercise 1.8: Declare a 2-dimensional array with shape (20,10) all filled with ones. Then calculate the sum of its values along the first dimension (axis=0). The result has to be a 1-dimensional array with shape (10,)<a class="anchor-link" href="#Exercise-1.8:-Declare-a-2-dimensional-array-with-shape-(20,10)-all-filled-with-ones.-Then-calculate-the-sum-of-its-values-along-the-first-dimension-(axis=0).-The-result-has-to-be-a-1-dimensional-array-with-shape-(10,)"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># variable answ should contain your 3-dimensional array with shape (5,3,3)</span>
+<span class="n">answ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">"1.8"</span><span class="p">,</span> <span class="n">answ</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Numpy-arrays-can-contain-numerical-values-of-different-types.-These-types-can-be-divided-in-these-groups:">Numpy arrays can contain numerical values of different types. These types can be divided in these groups:<a class="anchor-link" href="#Numpy-arrays-can-contain-numerical-values-of-different-types.-These-types-can-be-divided-in-these-groups:"> </a>
 </h4>
 <ul>
@@ -678,7 +905,34 @@ window.onload = wrap_img;
 </ul>
 </li>
 </ul>
-<h4 id="We-can-specify-the-type-of-an-array-when-we-declare-it-or-change-the-type-of-an-existing-one-with-the-following-expressions:">We can specify the type of an array when we declare it or change the type of an existing one with the following expressions:<a class="anchor-link" href="#We-can-specify-the-type-of-an-array-when-we-declare-it-or-change-the-type-of-an-existing-one-with-the-following-expressions:"> </a>
+<h4 id="We-can-look-up-the-type-of-an-array-by-using-the-.dtype-suffix.">We can look up the type of an array by using the <code>.dtype</code> suffix.<a class="anchor-link" href="#We-can-look-up-the-type-of-an-array-by-using-the-.dtype-suffix."> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="n">arr</span><span class="o">.</span><span class="n">dtype</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="To-specify-the-type-of-an-array,-we-can-add-the-dtype--parameter-to-the-declaration-expression.">To specify the type of an array, we can add the <code>dtype</code>  parameter to the declaration expression.<a class="anchor-link" href="#To-specify-the-type-of-an-array,-we-can-add-the-dtype--parameter-to-the-declaration-expression."> </a>
 </h4>
 </div>
 </div>
@@ -692,14 +946,7 @@ window.onload = wrap_img;
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
 
-<span class="n">arr</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
-
-<span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
-
-<span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">arr</span><span class="o">.</span><span class="n">dtype</span>
 </pre></div>
 
     </div>
@@ -712,9 +959,67 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Broadcasting">Broadcasting<a class="anchor-link" href="#Broadcasting"> </a>
-</h3>
-<h4 id="Numpy-is-set-up-internally-in-a-way-that-arrays-involved-in-operations-are-replicated-or-promoted-to-match-shapes">Numpy is set up internally in a way that arrays involved in operations are replicated or promoted to match shapes<a class="anchor-link" href="#Numpy-is-set-up-internally-in-a-way-that-arrays-involved-in-operations-are-replicated-or-promoted-to-match-shapes"> </a>
+<h4 id="We-can-also-change-the-type-of-an-existing-array-using-the-.astype-function.">We can also change the type of an existing array using the <code>.astype</code> function.<a class="anchor-link" href="#We-can-also-change-the-type-of-an-existing-array-using-the-.astype-function."> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="c1"># Or all in one line</span>
+<span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="n">arr</span><span class="o">.</span><span class="n">dtype</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise-1.9:-Change-the-type-of-the-following-array-to-int16">Exercise 1.9: Change the type of the following array to <code>int16</code><a class="anchor-link" href="#Exercise-1.9:-Change-the-type-of-the-following-array-to-int16"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">answ</span> <span class="o">=</span> <span class="n">answ</span><span class="c1">#Your code goes here</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">"1.9"</span><span class="p">,</span> <span class="n">answ</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Broadcasting:-numpy-is-set-up-internally-in-a-way-that-allows-performing-array-operations-efficiently.-Sometimes-it-is-not-entirely-obvious-what-is-going-on.-For-example:">Broadcasting: numpy is set up internally in a way that allows performing array operations efficiently. Sometimes it is not entirely obvious what is going on. For example:<a class="anchor-link" href="#Broadcasting:-numpy-is-set-up-internally-in-a-way-that-allows-performing-array-operations-efficiently.-Sometimes-it-is-not-entirely-obvious-what-is-going-on.-For-example:"> </a>
 </h4>
 </div>
 </div>
@@ -728,7 +1033,7 @@ window.onload = wrap_img;
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 
-<span class="n">a</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
 
 <span class="n">a</span>
 </pre></div>
@@ -740,6 +1045,14 @@ window.onload = wrap_img;
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-previous-operation-declares-a-10x10-array,-assigns-that-to-a-variable-a-and-then-we-add-1-to-this-variable.-However,-1-is-a-single-value-and-is-not-even-an-array-so-it-is-not-entirely-clear-what-is-going-on.-Broadcasting-is-the-ability-in-numpy-to-arrays-to-replicate-or-promoted-arrays-involved-in-operations-to-match-their-shapes.">The previous operation declares a 10x10 array, assigns that to a variable <code>a</code> and then we add <code>1</code> to this variable. However, <code>1</code> is a single value and is not even an array so it is not entirely clear what is going on. Broadcasting is the ability in numpy to arrays to replicate or promoted arrays involved in operations to match their shapes.<a class="anchor-link" href="#The-previous-operation-declares-a-10x10-array,-assigns-that-to-a-variable-a-and-then-we-add-1-to-this-variable.-However,-1-is-a-single-value-and-is-not-even-an-array-so-it-is-not-entirely-clear-what-is-going-on.-Broadcasting-is-the-ability-in-numpy-to-arrays-to-replicate-or-promoted-arrays-involved-in-operations-to-match-their-shapes."> </a>
+</h4>
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -764,13 +1077,173 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Booleans">Booleans<a class="anchor-link" href="#Booleans"> </a>
-</h3>
-<h4 id="There-is-a-binary-type-in-numpy-called-boolean-which-encodes-True-and-False-values.-For-example:">There is a binary type in numpy called boolean which encodes <code>True</code> and <code>False</code> values. For example:<a class="anchor-link" href="#There-is-a-binary-type-in-numpy-called-boolean-which-encodes-True-and-False-values.-For-example:"> </a>
+<h4 id="Exercise-1.10:-Can-you-declare-a-new-1-dimensional-array-with-shape-(10,)-all-filled-with-2-values?">Exercise 1.10: Can you declare a new 1-dimensional array with shape (10,) all filled with <code>2</code> values?<a class="anchor-link" href="#Exercise-1.10:-Can-you-declare-a-new-1-dimensional-array-with-shape-(10,)-all-filled-with-2-values?"> </a>
+</h4>
+<h4 id="Hint:-We-have-just-seen-an-example-of-broadcasting-by-adding-a-single-value-to-an-array.-Broadcasting-also-works-with-other-operations,-such-as-multiplication-or-division,-so-you-can-complete-this-exercise-declaring-an-initial-array-containing-all-zeros-or-ones-and-then-using-one-operation-to-modify-all-its-values.">Hint: <em>We have just seen an example of broadcasting by adding a single value to an array. Broadcasting also works with other operations, such as multiplication or division, so you can complete this exercise declaring an initial array containing all zeros or ones and then using one operation to modify all its values.</em><a class="anchor-link" href="#Hint:-We-have-just-seen-an-example-of-broadcasting-by-adding-a-single-value-to-an-array.-Broadcasting-also-works-with-other-operations,-such-as-multiplication-or-division,-so-you-can-complete-this-exercise-declaring-an-initial-array-containing-all-zeros-or-ones-and-then-using-one-operation-to-modify-all-its-values."> </a>
 </h4>
 </div>
 </div>
 </div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answ</span> <span class="o">=</span> <span class="o">?</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">"1.10"</span><span class="p">,</span> <span class="n">answ</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Boolean-values:-Numpy-arrays-normally-store-numeric-values-but-they-can-also-contain-boolean-values.-Booleans-is-a-data-type-that-can-have-two-possible-values:-[True,-False].-For-example:">Boolean values: Numpy arrays normally store numeric values but they can also contain boolean values. Booleans is a data type that can have two possible values: [<code>True</code>, <code>False</code>]. For example:<a class="anchor-link" href="#Boolean-values:-Numpy-arrays-normally-store-numeric-values-but-they-can-also-contain-boolean-values.-Booleans-is-a-data-type-that-can-have-two-possible-values:-%5BTrue,-False%5D.-For-example:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">])</span>
+
+<span class="n">arr</span><span class="p">,</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">arr</span><span class="o">.</span><span class="n">dtype</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="We-can-operate-with-boolean-arrays-using-the-numpy-functions-for-performing-logical-operations-such-as-and,-or-and-others.">We can operate with boolean arrays using the numpy functions for performing logical operations such as <code>and</code>, <code>or</code> and others.<a class="anchor-link" href="#We-can-operate-with-boolean-arrays-using-the-numpy-functions-for-performing-logical-operations-such-as-and,-or-and-others."> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
+<span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="These-operations-are-conveniently-offered-by-numpy-with-the-*-and-+.">These operations are conveniently offered by numpy with the <code>*</code> and <code>+</code>.<a class="anchor-link" href="#These-operations-are-conveniently-offered-by-numpy-with-the-*-and-+."> </a>
+</h4>
+<h4 id="Note:-Here-the-*-and-+-symbols-are-not-performing-multiplication-and-addition-as-with-numerical-arrays.-Numpy-detects-the-type-of-the-arrays-involved-in-the-operation-and-changes-the-behaviour-of-these-operators.-This-ability-to-change-the-behaviour-of-operators-depending-on-the-situation-is-called-'operator-overloading'-in-programming-languages.">Note: <em>Here the <code>*</code> and <code>+</code> symbols are not performing multiplication and addition as with numerical arrays. Numpy detects the type of the arrays involved in the operation and changes the behaviour of these operators. This ability to change the behaviour of operators depending on the situation is called 'operator overloading' in programming languages.</em><a class="anchor-link" href="#Note:-Here-the-*-and-+-symbols-are-not-performing-multiplication-and-addition-as-with-numerical-arrays.-Numpy-detects-the-type-of-the-arrays-involved-in-the-operation-and-changes-the-behaviour-of-these-operators.-This-ability-to-change-the-behaviour-of-operators-depending-on-the-situation-is-called-'operator-overloading'-in-programming-languages."> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">arr1</span> <span class="o">*</span> <span class="n">arr2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr1</span> <span class="o">+</span> <span class="n">arr2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Boolean-arrays-are-often-the-result-of-comparing-a-numerical-arrays-with-certain-values.-This-is-sometimes-useful-to-detect-values-that-are-equal,-below-or-above-a-number-in-a-numpy-array.-For-example,-is-we-want-to-know-which-values-in-an-array-are-equal-to-1-and-the-values-that-are-greater-than-2-we-can-do:">Boolean arrays are often the result of comparing a numerical arrays with certain values. This is sometimes useful to detect values that are equal, below or above a number in a numpy array. For example, is we want to know which values in an array are equal to 1 and the values that are greater than 2 we can do:<a class="anchor-link" href="#Boolean-arrays-are-often-the-result-of-comparing-a-numerical-arrays-with-certain-values.-This-is-sometimes-useful-to-detect-values-that-are-equal,-below-or-above-a-number-in-a-numpy-array.-For-example,-is-we-want-to-know-which-values-in-an-array-are-equal-to-1-and-the-values-that-are-greater-than-2-we-can-do:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise-1.11:-For-this-exercise-you'll-need-to-combine-array-comparisons-and-logical-operators-to-find-out-the-values-in-the-following-array-that-are-greater-than-3-and-less-than-7.">Exercise 1.11: For this exercise you'll need to combine array comparisons and logical operators to find out the values in the following array that are greater than <code>3</code> and less than <code>7</code>.<a class="anchor-link" href="#Exercise-1.11:-For-this-exercise-you'll-need-to-combine-array-comparisons-and-logical-operators-to-find-out-the-values-in-the-following-array-that-are-greater-than-3-and-less-than-7."> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="n">answ</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">arr</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">)</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">"1.11"</span><span class="p">,</span> <span class="n">answ</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -807,11 +1280,39 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">arr</span><span class="p">[:,:,</span><span class="mi">4</span><span class="p">]))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">])</span>
 
-<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
-<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
-<span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">arr</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise-1.12:-Based-on-the-previous-example-how-would-you-select-the-values-in-the-array-that-are-greater-than-3-and-less-than-7.-In-this-case-you-want-a-new-smaller-array-containing-just-the-values-that-are-within-that-range.">Exercise 1.12: Based on the previous example how would you select the values in the array that are greater than <code>3</code> and less than <code>7</code>. In this case you want a new smaller array containing just the values that are within that range.<a class="anchor-link" href="#Exercise-1.12:-Based-on-the-previous-example-how-would-you-select-the-values-in-the-array-that-are-greater-than-3-and-less-than-7.-In-this-case-you-want-a-new-smaller-array-containing-just-the-values-that-are-within-that-range."> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="n">answ</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[(</span><span class="n">arr</span><span class="o">&gt;</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">arr</span><span class="o">&lt;</span><span class="mi">7</span><span class="p">)]</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">"1.12"</span><span class="p">,</span> <span class="n">answ</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -858,11 +1359,37 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Both-arrays-have-been-modified.-This-is-in-fact-because-a-and-b-are-references-to-the-same-array.-If-you-want-to-have-variables-with-independent-arrays-you'll-have-to-use-the-b-=-np.copy(a)-function.">Both arrays have been modified. This is in fact because a and b are references to the same array. If you want to have variables with independent arrays you'll have to use the <code>b = np.copy(a)</code> function.<a class="anchor-link" href="#Both-arrays-have-been-modified.-This-is-in-fact-because-a-and-b-are-references-to-the-same-array.-If-you-want-to-have-variables-with-independent-arrays-you'll-have-to-use-the-b-=-np.copy(a)-function."> </a>
+<h4 id="Both-arrays-have-been-modified.-This-is-in-fact-because-a-and-b-are-references-to-the-same-underlying-array.-If-you-want-to-have-variables-with-independent-arrays-you'll-have-to-use-the-b-=-np.copy(a)-function-to-explicitly-make-a-copy-of-the-array.">Both arrays have been modified. This is in fact because a and b are references to the same underlying array. If you want to have variables with independent arrays you'll have to use the <code>b = np.copy(a)</code> function to explicitly make a copy of the array.<a class="anchor-link" href="#Both-arrays-have-been-modified.-This-is-in-fact-because-a-and-b-are-references-to-the-same-underlying-array.-If-you-want-to-have-variables-with-independent-arrays-you'll-have-to-use-the-b-=-np.copy(a)-function-to-explicitly-make-a-copy-of-the-array."> </a>
 </h4>
 </div>
 </div>
 </div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># We explicitly make a copy of array a with name b</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="c1"># We modify the first element of b</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
 </div>
 
 
