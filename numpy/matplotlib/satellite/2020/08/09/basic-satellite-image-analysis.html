@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Basics of Satellite Image Processing | DEA for Geospatial Analysts</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Basics of Satellite Image Processing" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This tutorial expands the previous numpy and matplotlib functionality applied to real satellite data." />
+<meta property="og:description" content="This tutorial expands the previous numpy and matplotlib functionality applied to real satellite data." />
+<link rel="canonical" href="https://anu-wald.github.io/dea_course/numpy/matplotlib/satellite/2020/08/09/basic-satellite-image-analysis.html" />
+<meta property="og:url" content="https://anu-wald.github.io/dea_course/numpy/matplotlib/satellite/2020/08/09/basic-satellite-image-analysis.html" />
+<meta property="og:site_name" content="DEA for Geospatial Analysts" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-09T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"Basics of Satellite Image Processing","description":"This tutorial expands the previous numpy and matplotlib functionality applied to real satellite data.","datePublished":"2020-08-09T00:00:00-05:00","dateModified":"2020-08-09T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://anu-wald.github.io/dea_course/numpy/matplotlib/satellite/2020/08/09/basic-satellite-image-analysis.html"},"url":"https://anu-wald.github.io/dea_course/numpy/matplotlib/satellite/2020/08/09/basic-satellite-image-analysis.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/dea_course/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anu-wald.github.io/dea_course/feed.xml" title="DEA for Geospatial Analysts" /><link rel="shortcut icon" type="image/x-icon" href="/dea_course/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Basics of Satellite Image Processing | DEA for Geospatial Analysts</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Basics of Satellite Image Processing" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This tutorial expands the previous numpy and matplotlib functionality applied to real satellite data." />
+<meta property="og:description" content="This tutorial expands the previous numpy and matplotlib functionality applied to real satellite data." />
+<link rel="canonical" href="https://anu-wald.github.io/dea_course/numpy/matplotlib/satellite/2020/08/09/basic-satellite-image-analysis.html" />
+<meta property="og:url" content="https://anu-wald.github.io/dea_course/numpy/matplotlib/satellite/2020/08/09/basic-satellite-image-analysis.html" />
+<meta property="og:site_name" content="DEA for Geospatial Analysts" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-09T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"Basics of Satellite Image Processing","description":"This tutorial expands the previous numpy and matplotlib functionality applied to real satellite data.","datePublished":"2020-08-09T00:00:00-05:00","dateModified":"2020-08-09T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://anu-wald.github.io/dea_course/numpy/matplotlib/satellite/2020/08/09/basic-satellite-image-analysis.html"},"url":"https://anu-wald.github.io/dea_course/numpy/matplotlib/satellite/2020/08/09/basic-satellite-image-analysis.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://anu-wald.github.io/dea_course/feed.xml" title="DEA for Geospatial Analysts" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/dea_course/">DEA for Geospatial Analysts</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/dea_course/about/">About Me</a><a class="page-link" href="/dea_course/search/">Search</a><a class="page-link" href="/dea_course/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Basics of Satellite Image Processing</h1><p class="page-description">This tutorial expands the previous numpy and matplotlib functionality applied to real satellite data.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-08-09T00:00:00-05:00" itemprop="datePublished">
+        Aug 9, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      11 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/dea_course/categories/#numpy">numpy</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/dea_course/categories/#matplotlib">matplotlib</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/dea_course/categories/#satellite">satellite</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ANU-WALD/dea_course/tree/master/_notebooks/2020-08-09-basic-satellite-image-analysis.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/dea_course/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ANU-WALD/dea_course/master?filepath=_notebooks%2F2020-08-09-basic-satellite-image-analysis.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/dea_course/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-08-09-basic-satellite-image-analysis.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">check_answer</span> <span class="kn">import</span> <span class="n">check_answer</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Satellite-images-are-normally-stored-in-formats-such-as-GeoTIFF-or-NetCDF-but-here,-to-avoid-importing-extra-libraries,-we-have-saved-a-Modis-satellite-image-locally-using-a-numpy-specific-format-.npz.-We-can-load-this-file-into-a-numpy-array-by-doing:">Satellite images are normally stored in formats such as GeoTIFF or NetCDF but here, to avoid importing extra libraries, we have saved a Modis satellite image locally using a numpy specific format <code>.npz</code>. We can load this file into a numpy array by doing:<a class="anchor-link" href="#Satellite-images-are-normally-stored-in-formats-such-as-GeoTIFF-or-NetCDF-but-here,-to-avoid-importing-extra-libraries,-we-have-saved-a-Modis-satellite-image-locally-using-a-numpy-specific-format-.npz.-We-can-load-this-file-into-a-numpy-array-by-doing:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr_modis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;data/modis_cube.npz&quot;</span><span class="p">)[</span><span class="s2">&quot;nadir&quot;</span><span class="p">]</span>
+
+<span class="n">arr_modis</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="This-file-contains-a-composite-image-taken-by-the-MODIS-Terra-and-Acqua-satellites-over-an-8-day-period.-The-image-correspond-to-the-area-of-southwest-France-and-north-of-Spain-around-mid-July-2018.-Each-pixel-has-a-resolution-of-500-meters-and-there-are-7-spectral-bands:-[red,-near-infra-red-(nir),-blue,-green,-short-wave-infra-red-(swir)-1,-swir2,-swir3]">This file contains a composite image taken by the MODIS Terra and Acqua satellites over an 8-day period. The image correspond to the area of southwest France and north of Spain around mid July 2018. Each pixel has a resolution of 500 meters and there are 7 spectral bands: <code>[red, near infra-red (nir), blue, green, short-wave infra-red (swir) 1, swir2, swir3]</code><a class="anchor-link" href="#This-file-contains-a-composite-image-taken-by-the-MODIS-Terra-and-Acqua-satellites-over-an-8-day-period.-The-image-correspond-to-the-area-of-southwest-France-and-north-of-Spain-around-mid-July-2018.-Each-pixel-has-a-resolution-of-500-meters-and-there-are-7-spectral-bands:-[red,-near-infra-red-(nir),-blue,-green,-short-wave-infra-red-(swir)-1,-swir2,-swir3]"> </a></h4><h4 id="Let's-plot-one-band-(0--&gt;-red)-to-have-quick-look-at-the-region:">Let's plot one band (0 -&gt; red) to have quick look at the region:<a class="anchor-link" href="#Let's-plot-one-band-(0--&gt;-red)-to-have-quick-look-at-the-region:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">arr_modis</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-MODIS-data-represents-reflectance-values-(reflected/incident-proportion)-for-each-spectral-band.-Reflectance-is-a-measure-that-indicates-the-proportion-of-the-energy-at-each-part-of-the-spectrum-that-is-reflected-by-the-Earth-at-each-spectral-band.-The-values-are-therefore-in-the-range-[0-1].-0-represent-pixel-with-no-reflection-(all-energy-is-being-absorbed)-and-1-represents-all-energy-is-reflected.">The MODIS data represents reflectance values (reflected/incident proportion) for each spectral band. Reflectance is a measure that indicates the proportion of the energy at each part of the spectrum that is reflected by the Earth at each spectral band. The values are therefore in the range [0-1]. 0 represent pixel with no reflection (all energy is being absorbed) and 1 represents all energy is reflected.<a class="anchor-link" href="#The-MODIS-data-represents-reflectance-values-(reflected/incident-proportion)-for-each-spectral-band.-Reflectance-is-a-measure-that-indicates-the-proportion-of-the-energy-at-each-part-of-the-spectrum-that-is-reflected-by-the-Earth-at-each-spectral-band.-The-values-are-therefore-in-the-range-[0-1].-0-represent-pixel-with-no-reflection-(all-energy-is-being-absorbed)-and-1-represents-all-energy-is-reflected."> </a></h4><h4 id="These-values-need-to-be-stored-as-floating-point-numbers-but-to-save-space-is-a-common-practice-to-use-2-bytes-integers-(int16-vs-float32)-and-then-rescale-dividing-by-a-large-number.">These values need to be stored as floating point numbers but to save space is a common practice to use 2-bytes integers (int16 vs float32) and then rescale dividing by a large number.<a class="anchor-link" href="#These-values-need-to-be-stored-as-floating-point-numbers-but-to-save-space-is-a-common-practice-to-use-2-bytes-integers-(int16-vs-float32)-and-then-rescale-dividing-by-a-large-number."> </a></h4><h4 id="Before-we-can-interpret-these-images-we-need-to-convert-the-stored-values-into-reflectance-values-[0-1.0].---To-do-this-conversion-for-Modis-data-we-use-a-conversion-factor-of-10,000.-(In-Python-you-can-use-scientific-notation-in-which-1e4-==-1*10^4-==-10,000)">Before we can interpret these images we need to convert the stored values into reflectance values [0-1.0].   To do this conversion for Modis data we use a conversion factor of 10,000. (In Python you can use scientific notation in which 1e4 == 1*10^4 == 10,000)<a class="anchor-link" href="#Before-we-can-interpret-these-images-we-need-to-convert-the-stored-values-into-reflectance-values-[0-1.0].---To-do-this-conversion-for-Modis-data-we-use-a-conversion-factor-of-10,000.-(In-Python-you-can-use-scientific-notation-in-which-1e4-==-1*10^4-==-10,000)"> </a></h4><h4 id="To-scale-the-values-into-reflectance-values-we-can-perform-this-operation-which-applies-the-division-along-the-whole-array-element-wise-(remember-broadcasting):">To scale the values into reflectance values we can perform this operation which applies the division along the whole array element-wise (remember broadcasting):<a class="anchor-link" href="#To-scale-the-values-into-reflectance-values-we-can-perform-this-operation-which-applies-the-division-along-the-whole-array-element-wise-(remember-broadcasting):"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">refl_modis</span> <span class="o">=</span> <span class="n">arr_modis</span> <span class="o">/</span> <span class="mf">1e4</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Min:&quot;</span><span class="p">,</span> <span class="n">arr_modis</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="s2">&quot;Max:&quot;</span><span class="p">,</span> <span class="n">arr_modis</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data type:&quot;</span><span class="p">,</span> <span class="n">arr_modis</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------------&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Min:&quot;</span><span class="p">,</span> <span class="n">refl_modis</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="s2">&quot;Max:&quot;</span><span class="p">,</span> <span class="n">refl_modis</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data type:&quot;</span><span class="p">,</span> <span class="n">refl_modis</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="As-we-can-see,-numpy-automatically-converts-the-values-in-the-array-from-integers-into-floats-to-performs-the-division.">As we can see, numpy automatically converts the values in the array from integers into floats to performs the division.<a class="anchor-link" href="#As-we-can-see,-numpy-automatically-converts-the-values-in-the-array-from-integers-into-floats-to-performs-the-division."> </a></h4><h4 id="Now-we-are-going-to-create-a-true-colour-composite,-creating-an-image-by-selecting-the-red,-green-and-blue-components-of-the-multispectral-image.">Now we are going to create a true colour composite, creating an image by selecting the red, green and blue components of the multispectral image.<a class="anchor-link" href="#Now-we-are-going-to-create-a-true-colour-composite,-creating-an-image-by-selecting-the-red,-green-and-blue-components-of-the-multispectral-image."> </a></h4><h4 id="Exercise-3.1:-This-list-contains-the-names-of-the-Modis-bands-in-order-as-stored-in-our-7-bands-cube:">Exercise 3.1: This list contains the names of the Modis bands in order as stored in our 7 bands cube:<a class="anchor-link" href="#Exercise-3.1:-This-list-contains-the-names-of-the-Modis-bands-in-order-as-stored-in-our-7-bands-cube:"> </a></h4><p><code>[red, near infra-red (nir), blue, green, short-wave infra-red (swir) 1, swir2, swir3]</code></p>
+<h4 id="What-are-the-indices-corresponding-to-the-red,-green-and-blue-values-in-the-previous-array?-Remember-Python-starts-counting-at-0.">What are the indices corresponding to the red, green and blue values in the previous array? Remember Python starts counting at <code>0</code>.<a class="anchor-link" href="#What-are-the-indices-corresponding-to-the-red,-green-and-blue-values-in-the-previous-array?-Remember-Python-starts-counting-at-0."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Substitute the ? symbols by the correct values</span>
+<span class="n">answ</span> <span class="o">=</span> <span class="p">[</span><span class="err">?</span><span class="p">,</span><span class="err">?</span><span class="p">,</span><span class="err">?</span><span class="p">]</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">&quot;3.1&quot;</span><span class="p">,</span> <span class="n">answ</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="So-far-we-have-seen-two-different-ways-of-selecting-(indexing)-values-in-a-numpy-array.-(1)-we-can-slice/dice-an-array-using-the-:-notation-to-specify-the-start-and-end-index-along-axes.-(2)-we-can-use-arrays-of-boolean-values-to-select-certain-positions.">So far we have seen two different ways of selecting (indexing) values in a numpy array. (1) we can slice/dice an array using the <code>:</code> notation to specify the start and end index along axes. (2) we can use arrays of boolean values to select certain positions.<a class="anchor-link" href="#So-far-we-have-seen-two-different-ways-of-selecting-(indexing)-values-in-a-numpy-array.-(1)-we-can-slice/dice-an-array-using-the-:-notation-to-specify-the-start-and-end-index-along-axes.-(2)-we-can-use-arrays-of-boolean-values-to-select-certain-positions."> </a></h4><h4 id="There-is-a-third-way-of-selecting-values-in-a-numpy-array-in-which-specific-specific-positions-using-a-list-of-numbers.-For-example-in-the-following-array:">There is a third way of selecting values in a numpy array in which specific specific positions using a list of numbers. For example in the following array:<a class="anchor-link" href="#There-is-a-third-way-of-selecting-values-in-a-numpy-array-in-which-specific-specific-positions-using-a-list-of-numbers.-For-example-in-the-following-array:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+
+<span class="n">arr</span><span class="p">[[</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="This-mode-of-selecting-specific-positions-of-an-array-is-called-&quot;fancy-indexing&quot;.-As-oppossed-to-boolean-selection-fancy-indexing-does-not-require-the-list-of-numbers-to-have-the-same-size-as-the-applied-array.-Also-we-can-change-the-order-of-the-values-in-the-resulting-array-compared-to-the-initial-array.">This mode of selecting specific positions of an array is called "fancy indexing". As oppossed to boolean selection fancy indexing does not require the list of numbers to have the same size as the applied array. Also we can change the order of the values in the resulting array compared to the initial array.<a class="anchor-link" href="#This-mode-of-selecting-specific-positions-of-an-array-is-called-&quot;fancy-indexing&quot;.-As-oppossed-to-boolean-selection-fancy-indexing-does-not-require-the-list-of-numbers-to-have-the-same-size-as-the-applied-array.-Also-we-can-change-the-order-of-the-values-in-the-resulting-array-compared-to-the-initial-array."> </a></h4><h4 id="Exercise-3.2:-Use-fancy-indexing-to-select-the-red,-green-and-blue-(in-this-order)-channels-from-the-modis-reflectance-array.-Use-the-result-of-the-previous-exercise.">Exercise 3.2: Use fancy indexing to select the red, green and blue (in this order) channels from the modis reflectance array. Use the result of the previous exercise.<a class="anchor-link" href="#Exercise-3.2:-Use-fancy-indexing-to-select-the-red,-green-and-blue-(in-this-order)-channels-from-the-modis-reflectance-array.-Use-the-result-of-the-previous-exercise."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answ</span> <span class="o">=</span> <span class="n">refl_modis</span><span class="p">[:,:,</span><span class="err">?</span><span class="p">]</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">&quot;3.2&quot;</span><span class="p">,</span> <span class="n">answ</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-proportion-of-light-reflected-by-the-Earth's-surface-is-normally-low.-We-can-have-a-look-at-the-RGB-values-in-the-reflectance-array-to-find-out-the-maximum-and-minimum-values.">The proportion of light reflected by the Earth's surface is normally low. We can have a look at the RGB values in the reflectance array to find out the maximum and minimum values.<a class="anchor-link" href="#The-proportion-of-light-reflected-by-the-Earth's-surface-is-normally-low.-We-can-have-a-look-at-the-RGB-values-in-the-reflectance-array-to-find-out-the-maximum-and-minimum-values."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rgb_modis</span> <span class="o">=</span> <span class="n">refl_modis</span><span class="p">[:,:,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
+
+<span class="n">rgb_modis</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">rgb_modis</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Only-~4%-of-the-incident-light-gets-reflected-in-this-image.-So-we-are-going-to-rescale-this-image-and-make-its-dynamic-range-span-the-[0,1]-interval.">Only ~4% of the incident light gets reflected in this image. So we are going to rescale this image and make its dynamic range span the [0,1] interval.<a class="anchor-link" href="#Only-~4%-of-the-incident-light-gets-reflected-in-this-image.-So-we-are-going-to-rescale-this-image-and-make-its-dynamic-range-span-the-[0,1]-interval."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rgb_modis</span> <span class="o">=</span> <span class="n">rgb_modis</span> <span class="o">/</span> <span class="n">rgb_modis</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="n">rgb_modis</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">rgb_modis</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rgb_modis</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Now-lets-plot-the-RGB-image-using-matplotlib's-imshow-function.">Now lets plot the RGB image using matplotlib's <code>imshow</code> function.<a class="anchor-link" href="#Now-lets-plot-the-RGB-image-using-matplotlib's-imshow-function."> </a></h4><h4 id="Note:-The-imshow-function-can-display-3-dimensional-arrays-as-RGB-images-using-the-following-conventions:-(1)-The-axis-containing-the-channels-needs-to-be-the-last.-(2)-If-data-is-stored-as-uint8-its-values-need-to-span-the-whole-[0-255]-range.-(3)-If-data-is-stored-as-float,-its-values-need-to-span-the-[0,1]-range.">Note: <em>The <code>imshow</code> function can display 3-dimensional arrays as RGB images using the following conventions: (1) The axis containing the channels needs to be the last. (2) If data is stored as <code>uint8</code> its values need to span the whole <code>[0-255]</code> range. (3) If data is stored as <code>float</code>, its values need to span the [0,1] range.</em><a class="anchor-link" href="#Note:-The-imshow-function-can-display-3-dimensional-arrays-as-RGB-images-using-the-following-conventions:-(1)-The-axis-containing-the-channels-needs-to-be-the-last.-(2)-If-data-is-stored-as-uint8-its-values-need-to-span-the-whole-[0-255]-range.-(3)-If-data-is-stored-as-float,-its-values-need-to-span-the-[0,1]-range."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rgb_modis</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-previous-image-is-a-bit-dark-and-it's-hard-to-see-the-details-in-it.-To-improve-its-contrast-we-are-going-to-expand-the-dynamic-range-of-the-lower-values-in-the-image-by-multiplying-the-array-by-3.-By-doing-this,-we-will-lose,-or-clip,-that-larger-values-in-the-image-but-will-get-an-improved-representation-of-the-lower-values-to-visually-assess-the-image.">The previous image is a bit dark and it's hard to see the details in it. To improve its contrast we are going to expand the dynamic range of the lower values in the image by multiplying the array by 3. By doing this, we will lose, or clip, that larger values in the image but will get an improved representation of the lower values to visually assess the image.<a class="anchor-link" href="#The-previous-image-is-a-bit-dark-and-it's-hard-to-see-the-details-in-it.-To-improve-its-contrast-we-are-going-to-expand-the-dynamic-range-of-the-lower-values-in-the-image-by-multiplying-the-array-by-3.-By-doing-this,-we-will-lose,-or-clip,-that-larger-values-in-the-image-but-will-get-an-improved-representation-of-the-lower-values-to-visually-assess-the-image."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rgb_modis</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-previous-image-is-called-natural-colour-because-it-maps-the-RGB-channels-of-the-image-to-the-red,-green-and-blue.-Chainging-the-order-of-the-bands-we-can-map-bands-of-the-satellite-to-the-RGB-channels-differently,-also-including-other-bands-outside-the-visible.-The-images-resulting-from-alternative-mapping-between-RGB-and-spectral-channels-are-commonly-known-as-'false-coulour'.">The previous image is called natural colour because it maps the RGB channels of the image to the red, green and blue. Chainging the order of the bands we can map bands of the satellite to the RGB channels differently, also including other bands outside the visible. The images resulting from alternative mapping between RGB and spectral channels are commonly known as 'false coulour'.<a class="anchor-link" href="#The-previous-image-is-called-natural-colour-because-it-maps-the-RGB-channels-of-the-image-to-the-red,-green-and-blue.-Chainging-the-order-of-the-bands-we-can-map-bands-of-the-satellite-to-the-RGB-channels-differently,-also-including-other-bands-outside-the-visible.-The-images-resulting-from-alternative-mapping-between-RGB-and-spectral-channels-are-commonly-known-as-'false-coulour'."> </a></h4><h4 id="Exercise-3.3:-Similarly-to-the-previous-image,-can-you-generate-a-false-colour-image-mapping-MODIS-near-infrared-band-into-the-images'-red-channel?">Exercise 3.3: Similarly to the previous image, can you generate a false colour image mapping MODIS near-infrared band into the images' red channel?<a class="anchor-link" href="#Exercise-3.3:-Similarly-to-the-previous-image,-can-you-generate-a-false-colour-image-mapping-MODIS-near-infrared-band-into-the-images'-red-channel?"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answ</span> <span class="o">=</span> <span class="n">refl_modis</span><span class="p">[:,:,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">answ</span><span class="o">*</span><span class="mi">30</span><span class="p">)</span> <span class="c1"># *30 is the previous normalisation and scaling, all in one step (approx.)</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">&quot;3.3&quot;</span><span class="p">,</span> <span class="n">answ</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,:])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Mapping-the-near-infrared-(nir)-channel-to-the-red-colour-we-produces-an-image-showing-bright-red-in-regions-with-more-vegetation.-Different-combinations-of-reflectance-bands-are-used-to-look-at-different-properties-of-the-land-surface.">Mapping the near infrared (nir) channel to the red colour we produces an image showing bright red in regions with more vegetation. Different combinations of reflectance bands are used to look at different properties of the land surface.<a class="anchor-link" href="#Mapping-the-near-infrared-(nir)-channel-to-the-red-colour-we-produces-an-image-showing-bright-red-in-regions-with-more-vegetation.-Different-combinations-of-reflectance-bands-are-used-to-look-at-different-properties-of-the-land-surface."> </a></h4><h4 id="Exercise-3.4:-Try-different-mappings-between-MODIS'-spectral-bands-and-the-RGB-channels-in-the-following-cell.">Exercise 3.4: Try different mappings between MODIS' spectral bands and the RGB channels in the following cell.<a class="anchor-link" href="#Exercise-3.4:-Try-different-mappings-between-MODIS'-spectral-bands-and-the-RGB-channels-in-the-following-cell."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answ</span> <span class="o">=</span> <span class="n">refl_modis</span><span class="p">[:,:,[</span><span class="err">?</span><span class="p">,</span><span class="err">?</span><span class="p">,</span><span class="err">?</span><span class="p">]]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">answ</span><span class="o">*</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="These-images-using-colour-composites-offer-useful-visual-representations-of-remote-sensing-data.-Another-common-way-to-represent-and-analyse-these-images-is-through-the-use-of-normalised-indices.-These-indices-are-normally-computed-using-two-or-more-spectral-bands-into-a-normalised-[-1,1]-range.-There-are-multiple-well-known-normalising-algorithms-used-to-detect-fire-scars,-water-but-probably-the-most-famous-one-is-the-Normalised-Difference-Vegetation-Index-(NDVI)-which-shows-live-vegetation.">These images using colour composites offer useful visual representations of remote sensing data. Another common way to represent and analyse these images is through the use of normalised indices. These indices are normally computed using two or more spectral bands into a normalised <code>[-1,1]</code> range. There are multiple well-known normalising algorithms used to detect fire scars, water but probably the most famous one is the Normalised Difference Vegetation Index (NDVI) which shows live vegetation.<a class="anchor-link" href="#These-images-using-colour-composites-offer-useful-visual-representations-of-remote-sensing-data.-Another-common-way-to-represent-and-analyse-these-images-is-through-the-use-of-normalised-indices.-These-indices-are-normally-computed-using-two-or-more-spectral-bands-into-a-normalised-[-1,1]-range.-There-are-multiple-well-known-normalising-algorithms-used-to-detect-fire-scars,-water-but-probably-the-most-famous-one-is-the-Normalised-Difference-Vegetation-Index-(NDVI)-which-shows-live-vegetation."> </a></h4><h3 id="NDVI=(NIR-Red)/(NIR+Red)">NDVI=(NIR-Red)/(NIR+Red)<a class="anchor-link" href="#NDVI=(NIR-Red)/(NIR+Red)"> </a></h3><h4 id="This-operation-can-be-performed-in-numpy-using-a-very-similar-notation-using-arrays:">This operation can be performed in numpy using a very similar notation using arrays:<a class="anchor-link" href="#This-operation-can-be-performed-in-numpy-using-a-very-similar-notation-using-arrays:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ndvi_modis</span> <span class="o">=</span> <span class="p">(</span><span class="n">refl_modis</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">refl_modis</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">refl_modis</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">refl_modis</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="s2">&quot;Shape:&quot;</span><span class="p">,</span> <span class="n">ndvi_modis</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">&quot;Max:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">ndvi_modis</span><span class="p">),</span> <span class="s2">&quot;Min:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">ndvi_modis</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="As-opposed-to-the-previous-false/true-colour-images,-normalised-indices-contain-just-one-band.-To-represent-the-values-in-the-array-we'll-need-to-use-a-predefined-colour-palette-to-map-the-values-into-different-colours.">As opposed to the previous false/true colour images, normalised indices contain just one band. To represent the values in the array we'll need to use a predefined colour palette to map the values into different colours.<a class="anchor-link" href="#As-opposed-to-the-previous-false/true-colour-images,-normalised-indices-contain-just-one-band.-To-represent-the-values-in-the-array-we'll-need-to-use-a-predefined-colour-palette-to-map-the-values-into-different-colours."> </a></h4><h4 id="We-can-pass-the-imshow-function-a-parameter-to-specify-the-color-map-to-use-for-our-NDVI-index.-We-use-summer_r,-which-goes-from-yellow-to-green,-to-represent-vegetation-in-the-image.-Here-you-can-find-a-list-of-the-colour-maps-available.">We can pass the <code>imshow</code> function a parameter to specify the color map to use for our NDVI index. We use <code>summer_r</code>, which goes from yellow to green, to represent vegetation in the image. <a href="https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html">Here</a> you can find a list of the colour maps available.<a class="anchor-link" href="#We-can-pass-the-imshow-function-a-parameter-to-specify-the-color-map-to-use-for-our-NDVI-index.-We-use-summer_r,-which-goes-from-yellow-to-green,-to-represent-vegetation-in-the-image.-Here-you-can-find-a-list-of-the-colour-maps-available."> </a></h4><h4 id="Note:-imshow-can-create-images-either-from-2-d-arrays-and-3-d-arrays-with-dimension-3-in-the-last-axis.-In-the-case-of-2-d-arrays-we'd-need-to-specify-the-colormap-we-want-to-use-(or-display-with-the-default-one).-Also-2-d-images-don't-need-to-be-scaled-or-normalised-into-a-given-range,-the-colour-palette-in-applied-dynamically-using-the-min-and-max-values-in-the-array.-For-images-with-three-channels-the-colouring-is-driven-using-the-proportion-of-each-colour-specified-in-the-channels.-3-d-arrays-need-to-be-normalised-[0-255]-for-uint8-arrays-or-[0-1]-for-float-arrays.">Note: <em><code>imshow</code> can create images either from 2-d arrays and 3-d arrays with dimension 3 in the last axis. In the case of 2-d arrays we'd need to specify the colormap we want to use (or display with the default one). Also 2-d images don't need to be scaled or normalised into a given range, the colour palette in applied dynamically using the min and max values in the array. For images with three channels the colouring is driven using the proportion of each colour specified in the channels. 3-d arrays need to be normalised [0-255] for uint8 arrays or [0-1] for float arrays.</em><a class="anchor-link" href="#Note:-imshow-can-create-images-either-from-2-d-arrays-and-3-d-arrays-with-dimension-3-in-the-last-axis.-In-the-case-of-2-d-arrays-we'd-need-to-specify-the-colormap-we-want-to-use-(or-display-with-the-default-one).-Also-2-d-images-don't-need-to-be-scaled-or-normalised-into-a-given-range,-the-colour-palette-in-applied-dynamically-using-the-min-and-max-values-in-the-array.-For-images-with-three-channels-the-colouring-is-driven-using-the-proportion-of-each-colour-specified-in-the-channels.-3-d-arrays-need-to-be-normalised-[0-255]-for-uint8-arrays-or-[0-1]-for-float-arrays."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#To make vegetation look green in the image we apply a colour palette that goes from yellow to green.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">ndvi_modis</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;summer_r&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="We-can-adjust-how-the-values-are-mapped-into-the-colours-in-the-palette-by-providing-the-maximum-and-minimum-values-to-the-imshow-function.-This-is-useful-to-plot-certain-ranges-and-enhance-where-vegetation-is-in-an-image.-For-example:">We can adjust how the values are mapped into the colours in the palette by providing the maximum and minimum values to the <code>imshow</code> function. This is useful to plot certain ranges and enhance where vegetation is in an image. For example:<a class="anchor-link" href="#We-can-adjust-how-the-values-are-mapped-into-the-colours-in-the-palette-by-providing-the-maximum-and-minimum-values-to-the-imshow-function.-This-is-useful-to-plot-certain-ranges-and-enhance-where-vegetation-is-in-an-image.-For-example:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">ndvi_modis</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=.</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=.</span><span class="mi">8</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;summer_r&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Another-normalised-index-is-used-to-monitor-changes-related-to-water-content-in-water-bodies,-using-green-and-NIR-wavelengths,-defined-by-McFeeters-(1996):">Another normalised index is used to monitor changes related to water content in water bodies, using green and NIR wavelengths, defined by McFeeters (1996):<a class="anchor-link" href="#Another-normalised-index-is-used-to-monitor-changes-related-to-water-content-in-water-bodies,-using-green-and-NIR-wavelengths,-defined-by-McFeeters-(1996):"> </a></h4><h3 id="NDWI=(Green-NIR)/(Green+NIR)">NDWI=(Green-NIR)/(Green+NIR)<a class="anchor-link" href="#NDWI=(Green-NIR)/(Green+NIR)"> </a></h3><h4 id="Exercise-3.5:-Can-you-calculate-the-NDWI-array-for-the-previous-image?">Exercise 3.5: Can you calculate the NDWI array for the previous image?<a class="anchor-link" href="#Exercise-3.5:-Can-you-calculate-the-NDWI-array-for-the-previous-image?"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Modis spectral bands:</span>
+<span class="c1"># [red, near infra-red (nir), blue, green, short-wave infra-red (swir) 1, swir2, swir3]</span>
+
+<span class="n">answ</span> <span class="o">=</span> <span class="o">?</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">answ</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;winter_r&#39;</span><span class="p">)</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">&quot;3.5&quot;</span><span class="p">,</span> <span class="n">answ</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise-3.6:-Can-you-use-slice-indexing-[:,-:]-to-select-and-region-and-plot-a-zoomed-in-area-of-the-previous-image?">Exercise 3.6: Can you use slice indexing <code>[:, :]</code> to select and region and plot a zoomed-in area of the previous image?<a class="anchor-link" href="#Exercise-3.6:-Can-you-use-slice-indexing-[:,-:]-to-select-and-region-and-plot-a-zoomed-in-area-of-the-previous-image?"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">answ</span><span class="p">[</span><span class="err">?</span><span class="p">:</span><span class="err">?</span><span class="p">,</span><span class="err">?</span><span class="p">:</span><span class="err">?</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;winter_r&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="MODIS-generates-multi-spectral-images.-When-the-number-of-spectral-bands-is-large,-we-call-those-images-hyperspectral.-The-following-dataset-contains-hyperspectral-images-collected-from-an-airplane-in-February-2014-as-it-passed-over-the-Australian-National-University.">MODIS generates multi-spectral images. When the number of spectral bands is large, we call those images hyperspectral. The following dataset contains hyperspectral images collected from an airplane in February 2014 as it passed over the Australian National University.<a class="anchor-link" href="#MODIS-generates-multi-spectral-images.-When-the-number-of-spectral-bands-is-large,-we-call-those-images-hyperspectral.-The-following-dataset-contains-hyperspectral-images-collected-from-an-airplane-in-February-2014-as-it-passed-over-the-Australian-National-University."> </a></h4><h4 id="High-resolution-hyper-spectral-data-tends-to-make-very-large-files.-To-make-processing-in-this-tutorial-easier,-we-have-packed-a-numpy-array-with-the-just-the-[red,-nir,-green,-blue]-bands.--This-array-is-3-dimensional-with-the-third-dimension-corresponding-to-the-spectral-bands,-just-like-the-MODIS-data.-Let's-start-by-loading-the-data:">High-resolution hyper-spectral data tends to make very large files. To make processing in this tutorial easier, we have packed a numpy array with the just the <code>[red, nir, green, blue]</code> bands.  This array is 3-dimensional with the third dimension corresponding to the spectral bands, just like the MODIS data. Let's start by loading the data:<a class="anchor-link" href="#High-resolution-hyper-spectral-data-tends-to-make-very-large-files.-To-make-processing-in-this-tutorial-easier,-we-have-packed-a-numpy-array-with-the-just-the-[red,-nir,-green,-blue]-bands.--This-array-is-3-dimensional-with-the-third-dimension-corresponding-to-the-spectral-bands,-just-like-the-MODIS-data.-Let's-start-by-loading-the-data:"> </a></h4><h4 id="Note:-This-array-also-needs-to-be-converted-first-to-reflectance-values-dividing-it-by-1e4.">Note: <em>This array also needs to be converted first to reflectance values dividing it by 1e4.</em><a class="anchor-link" href="#Note:-This-array-also-needs-to-be-converted-first-to-reflectance-values-dividing-it-by-1e4."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr_anu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;data/anu_cube.npz&quot;</span><span class="p">)[</span><span class="s2">&quot;array&quot;</span><span class="p">]</span>
+<span class="n">refl_anu</span> <span class="o">=</span> <span class="n">arr_anu</span><span class="o">/</span><span class="mf">1e4</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">refl_anu</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="s2">&quot;Shape:&quot;</span><span class="p">,</span> <span class="n">refl_anu</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise-3.7:-Can-you-calculate-the-NDVI-index-for-this-image-following-similar-steps-to-the-previous-MODIS-example?">Exercise 3.7: Can you calculate the NDVI index for this image following similar steps to the previous MODIS example?<a class="anchor-link" href="#Exercise-3.7:-Can-you-calculate-the-NDVI-index-for-this-image-following-similar-steps-to-the-previous-MODIS-example?"> </a></h4><h4 id="Note:-We-save-this-variable-with-name-ndvi_anu-as-it-will-be-used-later-on.">Note: We save this variable with name <code>ndvi_anu</code> as it will be used later on.<a class="anchor-link" href="#Note:-We-save-this-variable-with-name-ndvi_anu-as-it-will-be-used-later-on."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answ</span> <span class="o">=</span> <span class="o">?</span>
+<span class="n">ndvi_anu</span> <span class="o">=</span> <span class="n">answ</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">answ</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;summer_r&#39;</span><span class="p">)</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">&quot;3.7&quot;</span><span class="p">,</span> <span class="n">answ</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Similar-to-NDVI,-there-is-another-index-called-Green-Colour-Coordinate-(GCC),-which-is-an-alternative-method-to-NDVI-for-looking-at-how-green-vegetation-is.-This-one-does-not-use-the-near-infrared-band,-which-is-serves-as-a-convenient-alternative-for-sensors-that-only-generate-red,-green-and-blue.">Similar to NDVI, there is another index called Green Colour Coordinate (GCC), which is an alternative method to NDVI for looking at how green vegetation is. This one does not use the near-infrared band, which is serves as a convenient alternative for sensors that only generate red, green and blue.<a class="anchor-link" href="#Similar-to-NDVI,-there-is-another-index-called-Green-Colour-Coordinate-(GCC),-which-is-an-alternative-method-to-NDVI-for-looking-at-how-green-vegetation-is.-This-one-does-not-use-the-near-infrared-band,-which-is-serves-as-a-convenient-alternative-for-sensors-that-only-generate-red,-green-and-blue."> </a></h4><h3 id="GCC-=-Green-/-(Red+Green+Blue)">GCC = Green / (Red+Green+Blue)<a class="anchor-link" href="#GCC-=-Green-/-(Red+Green+Blue)"> </a></h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gcc_anu</span> <span class="o">=</span> <span class="n">refl_anu</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">refl_anu</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">refl_anu</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">refl_anu</span><span class="p">[:,:,</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">gcc_anu</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;summer_r&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Let's-do-some-classification-generating-a-series-of-boolean-arrays-for-different-ranges-of-these-vegetation-indices.-We-define-the-following-three-categories.">Let's do some classification generating a series of boolean arrays for different ranges of these vegetation indices. We define the following three categories.<a class="anchor-link" href="#Let's-do-some-classification-generating-a-series-of-boolean-arrays-for-different-ranges-of-these-vegetation-indices.-We-define-the-following-three-categories."> </a></h4><ul>
+<li>Class 1: NDVI equal or greater than 0.5 and GCC greater than 0.4 indicates green, vegetated surfaces.</li>
+<li>Class 2: NDVI less than 0.5 and GCC greater than 0.4 indicates surfaces that look green but are not vegetated.</li>
+<li>Class 3: NDVI more than 0.5 and GCC less or equal than 0.4 indicates vegetated surfaces that don't look green.</li>
+</ul>
+<h4 id="Note:-_Remember-that-*-corresponds-to-the-'AND'-logical-operation-for-boolean-arrays.">Note: _Remember that <code>*</code> corresponds to the 'AND' logical operation for boolean arrays.<a class="anchor-link" href="#Note:-_Remember-that-*-corresponds-to-the-'AND'-logical-operation-for-boolean-arrays."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">ndvi_anu</span><span class="o">&gt;=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">gcc_anu</span><span class="o">&gt;</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">ndvi_anu</span><span class="o">&lt;</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">gcc_anu</span><span class="o">&gt;</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">c3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">ndvi_anu</span><span class="o">&gt;=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">gcc_anu</span><span class="o">&lt;=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="imshow-can-also-create-binary-representations-of-boolean-arrays."><code>imshow</code> can also create binary representations of boolean arrays.<a class="anchor-link" href="#imshow-can-also-create-binary-representations-of-boolean-arrays."> </a></h4><h4 id="Now-we-want-to-stack-these-three-categorical-or-boolean-arrays-into-a-3-dimensional-array-to-be-able-to-plot-a-RGB-composite-image.-Numpy's-dstack-function-stacks-2-dimensional-arrays-along-the-third-axis,-referred-as-'depth'-so-the-prefix-'d'-in-the-name.">Now we want to stack these three categorical or boolean arrays into a 3-dimensional array to be able to plot a RGB composite image. Numpy's <code>dstack</code> function stacks 2-dimensional arrays along the third axis, referred as 'depth' so the prefix 'd' in the name.<a class="anchor-link" href="#Now-we-want-to-stack-these-three-categorical-or-boolean-arrays-into-a-3-dimensional-array-to-be-able-to-plot-a-RGB-composite-image.-Numpy's-dstack-function-stacks-2-dimensional-arrays-along-the-third-axis,-referred-as-'depth'-so-the-prefix-'d'-in-the-name."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">class_comp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">((</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="n">c3</span><span class="p">))</span>
+
+<span class="n">class_comp</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">class_comp</span><span class="o">.</span><span class="n">dtype</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Now,-to-be-able-to-generate-the-RGB-image-from-this-image-we-need-to-convert-it-into-either-uint8-with-range-[0-255]-or-into-float32-with-range-[0-1].">Now, to be able to generate the RGB image from this image we need to convert it into either <code>uint8</code> with range <code>[0-255]</code> or into <code>float32</code> with range <code>[0-1]</code>.<a class="anchor-link" href="#Now,-to-be-able-to-generate-the-RGB-image-from-this-image-we-need-to-convert-it-into-either-uint8-with-range-[0-255]-or-into-float32-with-range-[0-1]."> </a></h4><h4 id="Exercise-3.8:-Can-you-convert-the-type-of-the-class_comp-array-into-float32?">Exercise 3.8: Can you convert the type of the <code>class_comp</code> array into <code>float32</code>?<a class="anchor-link" href="#Exercise-3.8:-Can-you-convert-the-type-of-the-class_comp-array-into-float32?"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">class_comp</span> <span class="o">=</span> class_comp.<span class="o">?</span>
+
+<span class="n">answ</span> <span class="o">=</span> <span class="n">class_comp</span>
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">&quot;3.8&quot;</span><span class="p">,</span> <span class="n">answ</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Now-we-can-use-imshow-to-plot-the-RGB-representation-of-these-three-classes.-Remeber-C1-is-mapped-to-red,-C2,-into-green-and-C3-to-blue.">Now we can use <code>imshow</code> to plot the RGB representation of these three classes. Remeber C1 is mapped to red, C2, into green and C3 to blue.<a class="anchor-link" href="#Now-we-can-use-imshow-to-plot-the-RGB-representation-of-these-three-classes.-Remeber-C1-is-mapped-to-red,-C2,-into-green-and-C3-to-blue."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">class_comp</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="You-will-see-this-leaves-a-fourth-class-in-the-image,-of-pixels-that-fall-in-none-of-the-three-classes.-They-show-up-in-black.-There-are-two-surfaces-that-show-up-'green'-and-one-area-that-shows-mixed--black-and-blue-bits.-What-are-they?">You will see this leaves a fourth class in the image, of pixels that fall in none of the three classes. They show up in black. There are two surfaces that show up 'green' and one area that shows mixed  black and blue bits. What are they?<a class="anchor-link" href="#You-will-see-this-leaves-a-fourth-class-in-the-image,-of-pixels-that-fall-in-none-of-the-three-classes.-They-show-up-in-black.-There-are-two-surfaces-that-show-up-'green'-and-one-area-that-shows-mixed--black-and-blue-bits.-What-are-they?"> </a></h4><h4 id="This-simple-classification-uses-index-thresholds,-which-is-a-crude-but--sometimes-useful-way-of-classifying-images.-In-this-case,-it-helps-to-finding-unvegetated-green-surfaces,-such-as-tennis-courts-and-artificial-grass.-It-is-also-clear-that-greenish-water-confounds-the-classification,-however.">This simple classification uses index thresholds, which is a crude but  sometimes useful way of classifying images. In this case, it helps to finding unvegetated green surfaces, such as tennis courts and artificial grass. It is also clear that greenish water confounds the classification, however.<a class="anchor-link" href="#This-simple-classification-uses-index-thresholds,-which-is-a-crude-but--sometimes-useful-way-of-classifying-images.-In-this-case,-it-helps-to-finding-unvegetated-green-surfaces,-such-as-tennis-courts-and-artificial-grass.-It-is-also-clear-that-greenish-water-confounds-the-classification,-however."> </a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise-3.9:-Can-you-try-to-compute-a-similar-classification-image-using-the-previous-Modis-image?">Exercise 3.9: Can you try to compute a similar classification image using the previous Modis image?<a class="anchor-link" href="#Exercise-3.9:-Can-you-try-to-compute-a-similar-classification-image-using-the-previous-Modis-image?"> </a></h4>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ANU-WALD/dea_course"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/dea_course/numpy/matplotlib/satellite/2020/08/09/basic-satellite-image-analysis.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/dea_course/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/dea_course/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/dea_course/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Course training materials.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/dea_course/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/dea_course/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
