@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Advanced Numpy concepts | DEA for Geospatial Analysts</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Advanced Numpy concepts" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This tutorial explores further concepts in Numpy such as, categorical data, advanced indexing and dealing with Not-a-Number (NaN) data." />
+<meta property="og:description" content="This tutorial explores further concepts in Numpy such as, categorical data, advanced indexing and dealing with Not-a-Number (NaN) data." />
+<link rel="canonical" href="https://anu-wald.github.io/dea_course/numpy/2020/08/08/advanced_numpy.html" />
+<meta property="og:url" content="https://anu-wald.github.io/dea_course/numpy/2020/08/08/advanced_numpy.html" />
+<meta property="og:site_name" content="DEA for Geospatial Analysts" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-08T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"Advanced Numpy concepts","description":"This tutorial explores further concepts in Numpy such as, categorical data, advanced indexing and dealing with Not-a-Number (NaN) data.","datePublished":"2020-08-08T00:00:00-05:00","dateModified":"2020-08-08T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://anu-wald.github.io/dea_course/numpy/2020/08/08/advanced_numpy.html"},"url":"https://anu-wald.github.io/dea_course/numpy/2020/08/08/advanced_numpy.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/dea_course/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anu-wald.github.io/dea_course/feed.xml" title="DEA for Geospatial Analysts" /><link rel="shortcut icon" type="image/x-icon" href="/dea_course/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Advanced Numpy concepts | DEA for Geospatial Analysts</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Advanced Numpy concepts" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This tutorial explores further concepts in Numpy such as, categorical data, advanced indexing and dealing with Not-a-Number (NaN) data." />
+<meta property="og:description" content="This tutorial explores further concepts in Numpy such as, categorical data, advanced indexing and dealing with Not-a-Number (NaN) data." />
+<link rel="canonical" href="https://anu-wald.github.io/dea_course/numpy/2020/08/08/advanced_numpy.html" />
+<meta property="og:url" content="https://anu-wald.github.io/dea_course/numpy/2020/08/08/advanced_numpy.html" />
+<meta property="og:site_name" content="DEA for Geospatial Analysts" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-08T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"Advanced Numpy concepts","description":"This tutorial explores further concepts in Numpy such as, categorical data, advanced indexing and dealing with Not-a-Number (NaN) data.","datePublished":"2020-08-08T00:00:00-05:00","dateModified":"2020-08-08T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://anu-wald.github.io/dea_course/numpy/2020/08/08/advanced_numpy.html"},"url":"https://anu-wald.github.io/dea_course/numpy/2020/08/08/advanced_numpy.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://anu-wald.github.io/dea_course/feed.xml" title="DEA for Geospatial Analysts" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/dea_course/">DEA for Geospatial Analysts</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/dea_course/about/">About Me</a><a class="page-link" href="/dea_course/search/">Search</a><a class="page-link" href="/dea_course/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Advanced Numpy concepts</h1><p class="page-description">This tutorial explores further concepts in Numpy such as, categorical data, advanced indexing and dealing with Not-a-Number (NaN) data.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-08-08T00:00:00-05:00" itemprop="datePublished">
+        Aug 8, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      7 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/dea_course/categories/#numpy">numpy</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ANU-WALD/dea_course/tree/master/_notebooks/2020-08-08-advanced_numpy.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/dea_course/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ANU-WALD/dea_course/master?filepath=_notebooks%2F2020-08-08-advanced_numpy.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/dea_course/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-08-08-advanced_numpy.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Before-we-start-with-this-tutorial,-let's-have-a-quick-look-at-a-data-structure-in-Python-called-dictionary.-This-will-help-us-understand-some-of-the-materials-in-the-tutorial-and-also-will-help-to-introduce-XArray-later-on.">Before we start with this tutorial, let's have a quick look at a data structure in Python called dictionary. This will help us understand some of the materials in the tutorial and also will help to introduce XArray later on.<a class="anchor-link" href="#Before-we-start-with-this-tutorial,-let's-have-a-quick-look-at-a-data-structure-in-Python-called-dictionary.-This-will-help-us-understand-some-of-the-materials-in-the-tutorial-and-also-will-help-to-introduce-XArray-later-on."> </a></h4><h4 id="A-dictionary-represents-a-mapping-between-keys-and-values.-The-keys-and-values-are-Python-objects-of-any-type.-We-declare-a-dictionary-using-curly-braces.-Inside-we-can-specify-the-keys-and-values-using-:-as-a-separator-and-and-commas-to-separate-elements-in-the-dictionary.-For-example:">A dictionary represents a mapping between keys and values. The keys and values are Python objects of any type. We declare a dictionary using curly braces. Inside we can specify the keys and values using <code>:</code> as a separator and and commas to separate elements in the dictionary. For example:<a class="anchor-link" href="#A-dictionary-represents-a-mapping-between-keys-and-values.-The-keys-and-values-are-Python-objects-of-any-type.-We-declare-a-dictionary-using-curly-braces.-Inside-we-can-specify-the-keys-and-values-using-:-as-a-separator-and-and-commas-to-separate-elements-in-the-dictionary.-For-example:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> 
+     <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> 
+     <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;tree&#39;</span><span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Then-we-can-address-or-lookup-elements-in-a-dictionary-using-the-[-key_name-]-to-address-the-value-stored-under-a-key.-For-example:">Then we can address or lookup elements in a dictionary using the <code>[ key_name ]</code> to address the value stored under a key. For example:<a class="anchor-link" href="#Then-we-can-address-or-lookup-elements-in-a-dictionary-using-the-[-key_name-]-to-address-the-value-stored-under-a-key.-For-example:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot; + &quot;</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot; = &quot;</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Elements-in-a-dictionary-can-be-modified-or-new-elements-added-by-doing:">Elements in a dictionary can be modified or new elements added by doing:<a class="anchor-link" href="#Elements-in-a-dictionary-can-be-modified-or-new-elements-added-by-doing:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;three&#39;</span>
+<span class="n">d</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;four&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot; + &quot;</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot; = &quot;</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="We-start-now-this-tutorial-by-importing-some-libraries:">We start now this tutorial by importing some libraries:<a class="anchor-link" href="#We-start-now-this-tutorial-by-importing-some-libraries:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">colors</span>
+<span class="kn">from</span> <span class="nn">check_answer</span> <span class="kn">import</span> <span class="n">check_answer</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Categorical-data:-sometimes-remote-sensing-is-used-to-create-classification-products.-These-products-do-not-contain-continuous-values.-They-use-discrete-values-to-represent-the-different-classes-individual-pixels-can-belong-to.">Categorical data: sometimes remote sensing is used to create classification products. These products do not contain continuous values. They use discrete values to represent the different classes individual pixels can belong to.<a class="anchor-link" href="#Categorical-data:-sometimes-remote-sensing-is-used-to-create-classification-products.-These-products-do-not-contain-continuous-values.-They-use-discrete-values-to-represent-the-different-classes-individual-pixels-can-belong-to."> </a></h4><h4 id="As-an-example,-the-following-cell-simulates-a-very-simple-image-containing-three-different-land-cover-types.-Value-1-represents-area-covered-with-grass,-2-croplands-and-3-city.">As an example, the following cell simulates a very simple image containing three different land cover types. Value <code>1</code> represents area covered with grass, <code>2</code> croplands and <code>3</code> city.<a class="anchor-link" href="#As-an-example,-the-following-cell-simulates-a-very-simple-image-containing-three-different-land-cover-types.-Value-1-represents-area-covered-with-grass,-2-croplands-and-3-city."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># grass = 1</span>
+<span class="n">area</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span>
+
+<span class="c1"># crops = 2</span>
+<span class="n">area</span><span class="p">[</span><span class="mi">10</span><span class="p">:</span><span class="mi">60</span><span class="p">,</span><span class="mi">20</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># city = 3</span>
+<span class="n">area</span><span class="p">[</span><span class="mi">70</span><span class="p">:</span><span class="mi">90</span><span class="p">,</span><span class="mi">60</span><span class="p">:</span><span class="mi">80</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">area</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">area</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="To-visualise-the-previous-array-as-an-image,-we-are-going-to-define-our-own-colour-map-using-a-dictionary-in-which-we-can-map-values-to-colours:">To visualise the previous array as an image, we are going to define our own colour map using a dictionary in which we can map values to colours:<a class="anchor-link" href="#To-visualise-the-previous-array-as-an-image,-we-are-going-to-define-our-own-colour-map-using-a-dictionary-in-which-we-can-map-values-to-colours:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># We map the values to colours</span>
+<span class="n">index</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;grey&#39;</span><span class="p">}</span>
+
+<span class="c1"># Create a discrete colour map</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">ListedColormap</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise-4.1:-The-harvesting-season-has-arrived-and-our-cropping-lands-have-changed-colour-to-brown.-Can-you:">Exercise 4.1: The harvesting season has arrived and our cropping lands have changed colour to brown. Can you:<a class="anchor-link" href="#Exercise-4.1:-The-harvesting-season-has-arrived-and-our-cropping-lands-have-changed-colour-to-brown.-Can-you:"> </a></h4><ol>
+<li>Modify the yellow area to contain the new value <code>4</code>?</li>
+<li>Add a new entry to the <code>index</code> dictionary mapping number <code>4</code> to the value <code>brown</code></li>
+</ol>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">area</span><span class="err">?</span> <span class="o">=</span> <span class="o">?</span>
+
+<span class="n">index</span><span class="err">?</span> <span class="o">=</span> <span class="o">?</span>
+
+<span class="c1"># Regenerate discrete colour map</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">ListedColormap</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">&quot;4.1.1&quot;</span><span class="p">,</span> <span class="n">area</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">]),</span> <span class="n">check_answer</span><span class="p">(</span><span class="s2">&quot;4.1.2&quot;</span><span class="p">,</span> <span class="n">index</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Masking-out-regions-is-a-very-common-practice-in-remote-sensing-analysis.-For-example,-the-following-image-reprensents-a-fake-remote-sensing-image-containing-a-few-typical-features.">Masking out regions is a very common practice in remote sensing analysis. For example, the following image reprensents a fake remote sensing image containing a few typical features.<a class="anchor-link" href="#Masking-out-regions-is-a-very-common-practice-in-remote-sensing-analysis.-For-example,-the-following-image-reprensents-a-fake-remote-sensing-image-containing-a-few-typical-features."> </a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><figure>
+  
+    <img class="docimage" src="/dea_course/images/copied_from_nb/data/land_mask.png" alt="drawing" style="max-width: 220px" />
+    
+    
+</figure>
+</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="We-start-by-loading-the-previous-image-into-a-numpy-array:">We start by loading the previous image into a numpy array:<a class="anchor-link" href="#We-start-by-loading-the-previous-image-into-a-numpy-array:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">imageio</span>
+
+<span class="n">im</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;data/land_mask.png&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="In-remote-sensing-analysis-it's-common-to-be-interested-in-analysing-certain-features-from-the-Earth-surface-such-as-vegetation.-Clouds,-cloud-shadows-and-even-water-bodies-need-to-be-normally-removed-or-'masked'-in-order-to-process-the-data.">In remote sensing analysis it's common to be interested in analysing certain features from the Earth surface such as vegetation. Clouds, cloud shadows and even water bodies need to be normally removed or 'masked' in order to process the data.<a class="anchor-link" href="#In-remote-sensing-analysis-it's-common-to-be-interested-in-analysing-certain-features-from-the-Earth-surface-such-as-vegetation.-Clouds,-cloud-shadows-and-even-water-bodies-need-to-be-normally-removed-or-'masked'-in-order-to-process-the-data."> </a></h4><h4 id="For-this-example,-we-have-three-files-containing-numpy-arrays-.npy-which-represent-the-masks-to-filter-clouds,-shadows-and-water-from-our-image.">For this example, we have three files containing numpy arrays <code>.npy</code> which represent the masks to filter clouds, shadows and water from our image.<a class="anchor-link" href="#For-this-example,-we-have-three-files-containing-numpy-arrays-.npy-which-represent-the-masks-to-filter-clouds,-shadows-and-water-from-our-image."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">gridspec</span><span class="o">.</span><span class="n">GridSpec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># set up a 1 x 3 grid of images</span>
+
+<span class="n">ax1</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">water_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;data/water_mask.npy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">water_mask</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Water Mask&#39;</span><span class="p">)</span>
+
+<span class="n">ax2</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">cloud_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;data/cloud_mask.npy&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cloud_mask</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Cloud Mask&#39;</span><span class="p">)</span>
+
+<span class="n">ax3</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">shadow_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;data/shadow_mask.npy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">shadow_mask</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Shadow Mask&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="These-masks-are-stored-as-dtype=uint8-using-1-to-indicate-presence-and-0-for-absence-of-each-feature.">These masks are stored as <code>dtype=uint8</code> using <code>1</code> to indicate presence and <code>0</code> for absence of each feature.<a class="anchor-link" href="#These-masks-are-stored-as-dtype=uint8-using-1-to-indicate-presence-and-0-for-absence-of-each-feature."> </a></h4><h4 id="Exercise-4.2:-Can-you-use-the-water-mask-to-set-all-the-pixels-in-the-image-array-representing-water-to-0?">Exercise 4.2: Can you use the water mask to set all the pixels in the image array representing water to 0?<a class="anchor-link" href="#Exercise-4.2:-Can-you-use-the-water-mask-to-set-all-the-pixels-in-the-image-array-representing-water-to-0?"> </a></h4><h4 id="Tip:-Remember-that-boolean-arrays-can-be-used-to-index-and-select-regions-of-another-array.-To-complete-this-exercise-you-will-need-to-convert-the-previous-water-mask-array-into-boolean-types-before-you-can-use-it.">Tip: <em>Remember that boolean arrays can be used to index and select regions of another array. To complete this exercise you will need to convert the previous water mask array into boolean types before you can use it.</em><a class="anchor-link" href="#Tip:-Remember-that-boolean-arrays-can-be-used-to-index-and-select-regions-of-another-array.-To-complete-this-exercise-you-will-need-to-convert-the-previous-water-mask-array-into-boolean-types-before-you-can-use-it."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 1.- Load the image</span>
+<span class="n">answ</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;data/land_mask.png&#39;</span><span class="p">)</span>
+
+<span class="c1"># 2.- Create a boolean version of the water_mask array</span>
+<span class="n">bool_water_mask</span> <span class="o">=</span> <span class="o">?</span>
+
+<span class="c1"># 3.- Use the previous boolean array to set all pixels in the answ array to 0</span>
+answ<span class="o">?</span>
+
+<span class="c1"># You should see the region with water white</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">answ</span><span class="p">)</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">&quot;4.2&quot;</span><span class="p">,</span> <span class="n">answ</span><span class="p">[</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise-4.3:-Can-you-do-the-same-as-in-the-previous-exercise-but-now-setting-to-zero-the-areas-covered-by-clouds,-shadows-and-water?">Exercise 4.3: Can you do the same as in the previous exercise but now setting to zero the areas covered by clouds, shadows and water?<a class="anchor-link" href="#Exercise-4.3:-Can-you-do-the-same-as-in-the-previous-exercise-but-now-setting-to-zero-the-areas-covered-by-clouds,-shadows-and-water?"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 1.- Create a copy of the image</span>
+<span class="n">answ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+
+<span class="c1"># 2.- Create boolean versions of the masks</span>
+<span class="n">bool_water_mask</span> <span class="o">=</span> <span class="o">?</span>
+<span class="n">bool_cloud_mask</span> <span class="o">=</span> <span class="o">?</span>
+<span class="n">bool_shadow_mask</span> <span class="o">=</span> <span class="o">?</span>
+
+<span class="c1"># 3.- Use the previous boolean arrays to set all pixels in the answ array to 0 (You might need more than one line)</span>
+answ<span class="o">?</span>
+
+<span class="c1"># You should see just green and all the other regions white</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">answ</span><span class="p">)</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">&quot;4.3&quot;</span><span class="p">,</span> <span class="n">answ</span><span class="p">[</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">]</span><span class="o">+</span><span class="n">answ</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">]</span><span class="o">+</span><span class="n">answ</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">180</span><span class="p">]</span><span class="o">+</span><span class="n">answ</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-previous-example-demonstrates-how-categorical-data-can-be-used-to-describe-and-filter-remote-sensing-images.">The previous example demonstrates how categorical data can be used to describe and filter remote sensing images.<a class="anchor-link" href="#The-previous-example-demonstrates-how-categorical-data-can-be-used-to-describe-and-filter-remote-sensing-images."> </a></h4><h4 id="In-practice,-we-could-have-used-one-array-to-store-our-three-classes.-For-example,-we-could-have-used-the-value-1-to-designate-areas-with-water,-2-for-clouds-and-3-for-cloud-shadows:">In practice, we could have used one array to store our three classes. For example, we could have used the value <code>1</code> to designate areas with water, <code>2</code> for clouds and <code>3</code> for cloud shadows:<a class="anchor-link" href="#In-practice,-we-could-have-used-one-array-to-store-our-three-classes.-For-example,-we-could-have-used-the-value-1-to-designate-areas-with-water,-2-for-clouds-and-3-for-cloud-shadows:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mask</span> <span class="o">=</span> <span class="n">water_mask</span><span class="o">*</span><span class="mi">1</span> <span class="o">+</span> <span class="n">cloud_mask</span><span class="o">*</span><span class="mi">2</span> <span class="o">+</span> <span class="n">shadow_mask</span><span class="o">*</span><span class="mi">3</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="But-this-way-of-representing-categories-is-not-very-convenient-for-the-case-when-we-can-have-pixels-that-can-belong-to-two-or-more-categories-at-the-same-time.-For-example,-if-we-have-a-pixel-that-is-classified-as-a-cloud-shadow-and-water-at-the-same-time,-we-would-need-to-come-up-with-a-new-category-to-represent-this-case.">But this way of representing categories is not very convenient for the case when we can have pixels that can belong to two or more categories at the same time. For example, if we have a pixel that is classified as a cloud shadow and water at the same time, we would need to come up with a new category to represent this case.<a class="anchor-link" href="#But-this-way-of-representing-categories-is-not-very-convenient-for-the-case-when-we-can-have-pixels-that-can-belong-to-two-or-more-categories-at-the-same-time.-For-example,-if-we-have-a-pixel-that-is-classified-as-a-cloud-shadow-and-water-at-the-same-time,-we-would-need-to-come-up-with-a-new-category-to-represent-this-case."> </a></h4><h4 id="Instead,-it's-a-common-practice-to-use-bit-flags-to-create-these-masking-or-pixel-quality-products.-Bit-flags-use-the-binary-representation-of-a-number-(using-0s-and-1s)-to-encode-the-different-categories.-For-example-a-uint8-number-can-store-values-in-the-range-[0-255]-and-is-internally-represented-with-8-bits-which-can-be-either-0-or-1.">Instead, it's a common practice to use bit flags to create these masking or pixel quality products. Bit flags use the binary representation of a number (using 0s and 1s) to encode the different categories. For example a uint8 number can store values in the range [0-255] and is internally represented with 8 bits which can be either 0 or 1.<a class="anchor-link" href="#Instead,-it's-a-common-practice-to-use-bit-flags-to-create-these-masking-or-pixel-quality-products.-Bit-flags-use-the-binary-representation-of-a-number-(using-0s-and-1s)-to-encode-the-different-categories.-For-example-a-uint8-number-can-store-values-in-the-range-[0-255]-and-is-internally-represented-with-8-bits-which-can-be-either-0-or-1."> </a></h4><h4 id="In-our-previous-case-we-could-have-used-the-following-encoding:">In our previous case we could have used the following encoding:<a class="anchor-link" href="#In-our-previous-case-we-could-have-used-the-following-encoding:"> </a></h4><ul>
+<li>Bit 0: Water
+<code>00000001</code> -&gt; 1</li>
+<li>Bit 1: Cloud
+<code>00000010</code> -&gt; 2</li>
+<li>Bit 2: Shadow
+<code>00000100</code>-&gt; 4</li>
+</ul>
+<h4 id="So,-if-one-pixel-is-both-classified-as-shadow-and-water,-this-pixel-would-be-encoded-by-the-value-5:">So, if one pixel is both classified as shadow and water, this pixel would be encoded by the value <code>5</code>:<a class="anchor-link" href="#So,-if-one-pixel-is-both-classified-as-shadow-and-water,-this-pixel-would-be-encoded-by-the-value-5:"> </a></h4><ul>
+<li><code>00000101</code> -&gt; 5</li>
+</ul>
+<h4 id="Exercise-4.4:-How-would-you-represent-a-pixel-that-is-a-cloud-and-a-shadow-at-the-same-time?">Exercise 4.4: How would you represent a pixel that is a cloud and a shadow at the same time?<a class="anchor-link" href="#Exercise-4.4:-How-would-you-represent-a-pixel-that-is-a-cloud-and-a-shadow-at-the-same-time?"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answ</span> <span class="o">=</span> <span class="o">?</span>
+
+<span class="c1"># Print binary format of answ</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">answ</span><span class="si">:</span><span class="s2">08b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">&quot;4.4&quot;</span><span class="p">,</span> <span class="n">answ</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Some-remote-sensing-collections-contain-ancillary-data-describing-the-quality-of-each-pixel.--Below,-you-can-see-the-table-representing-how-to-interpret-the-bit-flags-for-the-Landsat-8-pixel-quality-product.-This-product-gives-information-about-the-quality-of-each-pixel-in-the-reflectance-product.">Some remote sensing collections contain ancillary data describing the quality of each pixel.  Below, you can see the table representing how to interpret the bit flags for the Landsat 8 pixel quality product. This product gives information about the quality of each pixel in the reflectance product.<a class="anchor-link" href="#Some-remote-sensing-collections-contain-ancillary-data-describing-the-quality-of-each-pixel.--Below,-you-can-see-the-table-representing-how-to-interpret-the-bit-flags-for-the-Landsat-8-pixel-quality-product.-This-product-gives-information-about-the-quality-of-each-pixel-in-the-reflectance-product."> </a></h4><p><figure>
+  
+    <img class="docimage" src="/dea_course/images/copied_from_nb/data/ls8_pq.png" alt="drawing" style="max-width: 220px" />
+    
+    
+</figure>
+</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="And-this-is-a-real-example-of-a-pixel-quality-Landsat-8-image-over-Margaret-River-encoded-using-the-previous-bit-flags.">And this is a real example of a pixel quality Landsat 8 image over Margaret River encoded using the previous bit flags.<a class="anchor-link" href="#And-this-is-a-real-example-of-a-pixel-quality-Landsat-8-image-over-Margaret-River-encoded-using-the-previous-bit-flags."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">rasterio</span>
+
+<span class="n">pq</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;data/LC08_L1TP_112084_20190820_20190902_01_T1_BQA.tiff&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()[</span><span class="mi">0</span><span class="p">,:,:]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">pq</span><span class="p">)</span>
+
+<span class="n">pq</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">pq</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">pq</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="For-the-value-2720-we-can-see-the-binary-representation-doing:">For the value <code>2720</code> we can see the binary representation doing:<a class="anchor-link" href="#For-the-value-2720-we-can-see-the-binary-representation-doing:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">&quot;</span><span class="si">{:016b}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">2720</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Starting-from-the-right,-we-find:">Starting from the right, we find:<a class="anchor-link" href="#Starting-from-the-right,-we-find:"> </a></h4><ul>
+<li>bit 5 = 1 -&gt; Cloud</li>
+<li>bits 6,7 = 10 -&gt; Medium confidence</li>
+<li>bits 8,9 = 10 -&gt; Cirrus medium confidence</li>
+<li>bit 11 = 1 -&gt; We don't know, not included in the table</li>
+</ul>
+<h4 id="Exercise-4.5:-Can-you-work-out-what-is-the-Cirrus-confidence-interpretation-for-the-2976-value-in-the-PQ-mask?">Exercise 4.5: Can you work out what is the Cirrus confidence interpretation for the <code>2976</code> value in the PQ mask?<a class="anchor-link" href="#Exercise-4.5:-Can-you-work-out-what-is-the-Cirrus-confidence-interpretation-for-the-2976-value-in-the-PQ-mask?"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:016b}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">2976</span><span class="p">))</span>
+
+<span class="n">answ</span> <span class="o">=</span> <span class="err">?</span><span class="c1"># Choose one of &quot;None&quot;, &quot;Low&quot;, &quot;Medium&quot;, &quot;High&quot;</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">&quot;4.4&quot;</span><span class="p">,</span> <span class="n">answ</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Analysing-data-with-NaNs.-NaN-is-a-special-value-of-float32-and-float64-arrays-used-to-designate-Not-a-Number-values.-For-example:">Analysing data with NaNs. NaN is a special value of <code>float32</code> and <code>float64</code> arrays used to designate Not-a-Number values. For example:<a class="anchor-link" href="#Analysing-data-with-NaNs.-NaN-is-a-special-value-of-float32-and-float64-arrays-used-to-designate-Not-a-Number-values.-For-example:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="n">arr</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="To-compute-statistics-on-arrays-containing-NaN-values,-Numpy-has-special-versions-of-common-functions-such-as-mean,-std-or-sum-that-ignore-the-NaN-values:">To compute statistics on arrays containing NaN values, Numpy has special versions of common functions such as <code>mean</code>, <code>std</code> or <code>sum</code> that ignore the NaN values:<a class="anchor-link" href="#To-compute-statistics-on-arrays-containing-NaN-values,-Numpy-has-special-versions-of-common-functions-such-as-mean,-std-or-sum-that-ignore-the-NaN-values:"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="We-have-been-previously-filtering-out-water-and-cloud-effects-from-images-by-setting-the-pixels-to-0.-However,-if-we-are-interested-in-performing-statistics-to-summarise-the-information-in-the-image,-this-could-be-problematic.-For-example,-consider-the-following-uint16-array-in-which-the-value-0-designates-no-data.-If-we-want-to-compute-the-mean-of-all-the-valid-values,-we-can-do-converting-the-array-to-float-type-and-then-assigning-the-value-0-to-NaN.">We have been previously filtering out water and cloud effects from images by setting the pixels to <code>0</code>. However, if we are interested in performing statistics to summarise the information in the image, this could be problematic. For example, consider the following uint16 array in which the value <code>0</code> designates no data. If we want to compute the mean of all the valid values, we can do converting the array to float type and then assigning the value <code>0</code> to NaN.<a class="anchor-link" href="#We-have-been-previously-filtering-out-water-and-cloud-effects-from-images-by-setting-the-pixels-to-0.-However,-if-we-are-interested-in-performing-statistics-to-summarise-the-information-in-the-image,-this-could-be-problematic.-For-example,-consider-the-following-uint16-array-in-which-the-value-0-designates-no-data.-If-we-want-to-compute-the-mean-of-all-the-valid-values,-we-can-do-converting-the-array-to-float-type-and-then-assigning-the-value-0-to-NaN."> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">234</span><span class="p">,</span><span class="mi">243</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">231</span><span class="p">,</span><span class="mi">219</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">228</span><span class="p">,</span><span class="mi">220</span><span class="p">,</span><span class="mi">237</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;0s mean:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+
+<span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">arr</span><span class="p">[</span><span class="n">arr</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NaNs mean:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise-4.6:-Can-you-calculate-the-mean-value-of-the-green-channel-for-just-the-area-covered-with-grass-in-the-following-image?">Exercise 4.6: Can you calculate the mean value of the green channel for just the area covered with grass in the following image?<a class="anchor-link" href="#Exercise-4.6:-Can-you-calculate-the-mean-value-of-the-green-channel-for-just-the-area-covered-with-grass-in-the-following-image?"> </a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><figure>
+  
+    <img class="docimage" src="/dea_course/images/copied_from_nb/data/land_mask.png" alt="drawing" style="max-width: 220px" />
+    
+    
+</figure>
+</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 1.- Load the image</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;data/land_mask.png&#39;</span><span class="p">)</span>
+
+<span class="c1"># 2.- Select green channel</span>
+im<span class="o">?</span>
+
+<span class="c1"># 3.- Change the type of im to float32</span>
+im<span class="o">?</span>
+
+<span class="c1"># 4.- Use the previous boolean array to set all pixels other than grass to NaN</span>
+im<span class="o">?</span>
+
+<span class="c1"># You should see the all NaN regions white</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+
+<span class="c1"># 5.- Calculate the mean value</span>
+
+<span class="n">answ</span> <span class="o">=</span> <span class="o">?</span>
+
+<span class="n">check_answer</span><span class="p">(</span><span class="s2">&quot;4.6&quot;</span><span class="p">,</span> <span class="n">answ</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ANU-WALD/dea_course"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/dea_course/numpy/2020/08/08/advanced_numpy.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/dea_course/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/dea_course/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/dea_course/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Course training materials.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/dea_course/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/dea_course/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
