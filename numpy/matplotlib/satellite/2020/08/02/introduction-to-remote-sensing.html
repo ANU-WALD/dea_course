@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Introduction to Remote Sensing | DEA for Geospatial Analysts</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Introduction to Remote Sensing" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This tutorial expands the previous numpy and matplotlib functionality applied to real remote sensing data." />
+<meta property="og:description" content="This tutorial expands the previous numpy and matplotlib functionality applied to real remote sensing data." />
+<link rel="canonical" href="https://anu-wald.github.io/dea_course/numpy/matplotlib/satellite/2020/08/02/introduction-to-remote-sensing.html" />
+<meta property="og:url" content="https://anu-wald.github.io/dea_course/numpy/matplotlib/satellite/2020/08/02/introduction-to-remote-sensing.html" />
+<meta property="og:site_name" content="DEA for Geospatial Analysts" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-02T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"This tutorial expands the previous numpy and matplotlib functionality applied to real remote sensing data.","@type":"BlogPosting","headline":"Introduction to Remote Sensing","dateModified":"2020-08-02T00:00:00-05:00","datePublished":"2020-08-02T00:00:00-05:00","url":"https://anu-wald.github.io/dea_course/numpy/matplotlib/satellite/2020/08/02/introduction-to-remote-sensing.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://anu-wald.github.io/dea_course/numpy/matplotlib/satellite/2020/08/02/introduction-to-remote-sensing.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/dea_course/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anu-wald.github.io/dea_course/feed.xml" title="DEA for Geospatial Analysts" /><link rel="shortcut icon" type="image/x-icon" href="/dea_course/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Introduction to Remote Sensing | DEA for Geospatial Analysts</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Introduction to Remote Sensing" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This tutorial expands the previous numpy and matplotlib functionality applied to real remote sensing data." />
+<meta property="og:description" content="This tutorial expands the previous numpy and matplotlib functionality applied to real remote sensing data." />
+<link rel="canonical" href="https://anu-wald.github.io/dea_course/numpy/matplotlib/satellite/2020/08/02/introduction-to-remote-sensing.html" />
+<meta property="og:url" content="https://anu-wald.github.io/dea_course/numpy/matplotlib/satellite/2020/08/02/introduction-to-remote-sensing.html" />
+<meta property="og:site_name" content="DEA for Geospatial Analysts" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-02T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"This tutorial expands the previous numpy and matplotlib functionality applied to real remote sensing data.","@type":"BlogPosting","headline":"Introduction to Remote Sensing","dateModified":"2020-08-02T00:00:00-05:00","datePublished":"2020-08-02T00:00:00-05:00","url":"https://anu-wald.github.io/dea_course/numpy/matplotlib/satellite/2020/08/02/introduction-to-remote-sensing.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://anu-wald.github.io/dea_course/numpy/matplotlib/satellite/2020/08/02/introduction-to-remote-sensing.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://anu-wald.github.io/dea_course/feed.xml" title="DEA for Geospatial Analysts" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/dea_course/">DEA for Geospatial Analysts</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/dea_course/about/">About Me</a><a class="page-link" href="/dea_course/search/">Search</a><a class="page-link" href="/dea_course/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Introduction to Remote Sensing</h1><p class="page-description">This tutorial expands the previous numpy and matplotlib functionality applied to real remote sensing data.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-08-02T00:00:00-05:00" itemprop="datePublished">
+        Aug 2, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      3 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/dea_course/categories/#numpy">numpy</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/dea_course/categories/#matplotlib">matplotlib</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/dea_course/categories/#satellite">satellite</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ANU-WALD/dea_course/tree/master/_notebooks/2020-08-02-introduction-to-remote-sensing.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/dea_course/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ANU-WALD/dea_course/master?filepath=_notebooks%2F2020-08-02-introduction-to-remote-sensing.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/dea_course/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-08-02-introduction-to-remote-sensing.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="We-often-associate-the-term-&quot;Remote-Sensing&quot;-to-satellites-but-this-field-has-a-long-history-that-started-in-the-XIX-century-mounting-cameras-on-hot-air-balloons.-The-field-really-took-off-as-a-discipline-during-the-mid-XX-century-with-the-development-of-the-space-technology.-The-first-image-from-a-satellite-dates-back-from-the-1960-when-the-US-satellite-weather-TIROS-I-was-able-to-capture-and-send-to-ground-receivers-images-of-the-Earth's-atmosphere.">We often associate the term "Remote Sensing" to satellites but this field has a long history that started in the XIX century mounting cameras on hot air balloons. The field really took off as a discipline during the mid XX century with the development of the space technology. The first image from a satellite dates back from the 1960 when the US satellite weather TIROS I was able to capture and send to ground receivers images of the Earth's atmosphere.<a class="anchor-link" href="#We-often-associate-the-term-&quot;Remote-Sensing&quot;-to-satellites-but-this-field-has-a-long-history-that-started-in-the-XIX-century-mounting-cameras-on-hot-air-balloons.-The-field-really-took-off-as-a-discipline-during-the-mid-XX-century-with-the-development-of-the-space-technology.-The-first-image-from-a-satellite-dates-back-from-the-1960-when-the-US-satellite-weather-TIROS-I-was-able-to-capture-and-send-to-ground-receivers-images-of-the-Earth's-atmosphere."> </a></h4><h4 id="Since-then,-remote-sensing-has-greatly-developed-with-an-increasing-number-of-satellites-and-types-of-sensors.-Nowadays-there-are-hundreds-of-satellites-which-send-us-a-constant-stream-of-information-about-our-planet.">Since then, remote sensing has greatly developed with an increasing number of satellites and types of sensors. Nowadays there are hundreds of satellites which send us a constant stream of information about our planet.<a class="anchor-link" href="#Since-then,-remote-sensing-has-greatly-developed-with-an-increasing-number-of-satellites-and-types-of-sensors.-Nowadays-there-are-hundreds-of-satellites-which-send-us-a-constant-stream-of-information-about-our-planet."> </a></h4><p><img src="/dea_course/images/copied_from_nb/data/history.png" alt="" title="Credit: Albert van Dijk -- Australian National University" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Satellites-can-be-classified-by-the-orbits-they-describe-around-the-Earth.-The-most-common-satellite-orbits-for-environmental-remote-sensing-satellites-are-geostationary-and-sun-synchronous-polar-orbits.-Geostationary-satellites-orbit-around-us-following-the-Earth's-rotation,-so-they-provide-images-for-a-fixed-area,-normally-a-half-sphere.-Polar-orbiting-satellites-circulate-our-planet-at-lower-altitudes-scanning-a-small-fraction-of-the-Earth-between-the-poles-in-each-pass.-The-following-figure-shows-the-consecutive-passes-and-area-covered-by-a-polar-satellite.-The-orbit-of-this-satellites-is-normally-synchronised-with-the-sun-so-they-follow-a-trajectory-that-coincides-with-the-solar-noon----this-is-referred-as-sun-synchronous-orbit.">Satellites can be classified by the orbits they describe around the Earth. The most common satellite orbits for environmental remote sensing satellites are geostationary and sun-synchronous polar orbits. Geostationary satellites orbit around us following the Earth's rotation, so they provide images for a fixed area, normally a half sphere. Polar orbiting satellites circulate our planet at lower altitudes scanning a small fraction of the Earth between the poles in each pass. The following figure shows the consecutive passes and area covered by a polar satellite. The orbit of this satellites is normally synchronised with the sun so they follow a trajectory that coincides with the solar noon -- this is referred as sun-synchronous orbit.<a class="anchor-link" href="#Satellites-can-be-classified-by-the-orbits-they-describe-around-the-Earth.-The-most-common-satellite-orbits-for-environmental-remote-sensing-satellites-are-geostationary-and-sun-synchronous-polar-orbits.-Geostationary-satellites-orbit-around-us-following-the-Earth's-rotation,-so-they-provide-images-for-a-fixed-area,-normally-a-half-sphere.-Polar-orbiting-satellites-circulate-our-planet-at-lower-altitudes-scanning-a-small-fraction-of-the-Earth-between-the-poles-in-each-pass.-The-following-figure-shows-the-consecutive-passes-and-area-covered-by-a-polar-satellite.-The-orbit-of-this-satellites-is-normally-synchronised-with-the-sun-so-they-follow-a-trajectory-that-coincides-with-the-solar-noon----this-is-referred-as-sun-synchronous-orbit."> </a></h4><p><img src="/dea_course/images/copied_from_nb/data/sun-synchronous.png" alt="" title="Credit: https://earthobservatory.nasa.gov/features/OrbitsCatalog" /></p>
+<h4 id="Due-to-their-increased-spatial-resolution-compared-to-geostationary-satellites,-polar-orbiting-satellites-are-often-preferred-for-environmental-applications-and-research.-DEA-provides-a-high-quality-collection-of-high-resolution-polar-orbiting-satellite-data-coming-from-two-missions:-Landsat-and-Sentinel.">Due to their increased spatial resolution compared to geostationary satellites, polar-orbiting satellites are often preferred for environmental applications and research. DEA provides a high quality collection of high resolution polar orbiting satellite data coming from two missions: Landsat and Sentinel.<a class="anchor-link" href="#Due-to-their-increased-spatial-resolution-compared-to-geostationary-satellites,-polar-orbiting-satellites-are-often-preferred-for-environmental-applications-and-research.-DEA-provides-a-high-quality-collection-of-high-resolution-polar-orbiting-satellite-data-coming-from-two-missions:-Landsat-and-Sentinel."> </a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-human-eye-can-only-capture-a-limited-proportion-of-the-electromagnetic-spectrum,-which-is-referred-as-the-visible-spectrum.-However,-the-sun-emits-radiation-with-a-much-broader-spectrum-than-the-visible-light.-Sensors-in-satellites-are-able-to-capture-the-proportion-of-the-Sun's-energy-that-gets-reflected-by-the-Earth-at-different-frequencies.-The-Earth-also-emits-radiation-at-lower-frequencies-than-the-Sun-at-what-is-called-the-thermal-infrarred-region.-The-following-figure-represents-from-top-to-bottom-a)-the-energy-spectrum-emitted-by-the-Sun-and-Earth's-determined-by-the-Plank's-law.-b)-The-absortion-spectrum-of-the-Earth's-atmosphere-which-absorbs-energy-differently-depending-on-the-region-of-the-spectrum.-c)-Representation-of-the-electromagnetic-spectrum-and-names-for-each-region.">The human eye can only capture a limited proportion of the electromagnetic spectrum, which is referred as the visible spectrum. However, the sun emits radiation with a much broader spectrum than the visible light. Sensors in satellites are able to capture the proportion of the Sun's energy that gets reflected by the Earth at different frequencies. The Earth also emits radiation at lower frequencies than the Sun at what is called the thermal infrarred region. The following figure represents from top to bottom a) the energy spectrum emitted by the Sun and Earth's determined by the Plank's law. b) The absortion spectrum of the Earth's atmosphere which absorbs energy differently depending on the region of the spectrum. c) Representation of the electromagnetic spectrum and names for each region.<a class="anchor-link" href="#The-human-eye-can-only-capture-a-limited-proportion-of-the-electromagnetic-spectrum,-which-is-referred-as-the-visible-spectrum.-However,-the-sun-emits-radiation-with-a-much-broader-spectrum-than-the-visible-light.-Sensors-in-satellites-are-able-to-capture-the-proportion-of-the-Sun's-energy-that-gets-reflected-by-the-Earth-at-different-frequencies.-The-Earth-also-emits-radiation-at-lower-frequencies-than-the-Sun-at-what-is-called-the-thermal-infrarred-region.-The-following-figure-represents-from-top-to-bottom-a)-the-energy-spectrum-emitted-by-the-Sun-and-Earth's-determined-by-the-Plank's-law.-b)-The-absortion-spectrum-of-the-Earth's-atmosphere-which-absorbs-energy-differently-depending-on-the-region-of-the-spectrum.-c)-Representation-of-the-electromagnetic-spectrum-and-names-for-each-region."> </a></h4><p><img src="/dea_course/images/copied_from_nb/data/Spektrum_eng_700.png" alt="" title="Credit: https://seos-project.eu/remotesensing/remotesensing-c01-p01.html" /></p>
+<h4 id="The-sensors-mounted-in-satellites-can-measure-the-energy-from-a-limited-number-of-regions-in-the-spectrum.-Multispectral-sensors-can-measure-reflected-and-radiated-energy-at-several-regions-of-the-spectrum.-The-following-figure-represents-the-sensing-'windows'-at-which-Sentinel-2-and-Landsat-7/8-sensors-can-capture-which-are-tipycally-designed-to-coincide-with-the-atmospheric-absortion-windows.">The sensors mounted in satellites can measure the energy from a limited number of regions in the spectrum. Multispectral sensors can measure reflected and radiated energy at several regions of the spectrum. The following figure represents the sensing 'windows' at which Sentinel 2 and Landsat 7/8 sensors can capture which are tipycally designed to coincide with the atmospheric absortion windows.<a class="anchor-link" href="#The-sensors-mounted-in-satellites-can-measure-the-energy-from-a-limited-number-of-regions-in-the-spectrum.-Multispectral-sensors-can-measure-reflected-and-radiated-energy-at-several-regions-of-the-spectrum.-The-following-figure-represents-the-sensing-'windows'-at-which-Sentinel-2-and-Landsat-7/8-sensors-can-capture-which-are-tipycally-designed-to-coincide-with-the-atmospheric-absortion-windows."> </a></h4><p><img src="/dea_course/images/copied_from_nb/data/dmidS2LS7Comparison.png" alt="" title="Credit: https://www.usgs.gov/media/images/comparison-landsat-7-and-8-bands-sentinel-2" /></p>
+<h4 id="The-reason-why-we-use-multispectral-images-to-study-the-Earth's-surface-is-because-different-materials-and-processes-reflect-energy-with-a-unique-footprint-that-help-us-identify-them.-For-example,-two-surfaces-with-very-similar-colour-in-the-visible-spectrum-might-reflect-energy-very-differently-at-other-regions-of-the-spectrum,-which-help-us-to-differentiate-them-using-remote-sensing-images.">The reason why we use multispectral images to study the Earth's surface is because different materials and processes reflect energy with a unique footprint that help us identify them. For example, two surfaces with very similar colour in the visible spectrum might reflect energy very differently at other regions of the spectrum, which help us to differentiate them using remote sensing images.<a class="anchor-link" href="#The-reason-why-we-use-multispectral-images-to-study-the-Earth's-surface-is-because-different-materials-and-processes-reflect-energy-with-a-unique-footprint-that-help-us-identify-them.-For-example,-two-surfaces-with-very-similar-colour-in-the-visible-spectrum-might-reflect-energy-very-differently-at-other-regions-of-the-spectrum,-which-help-us-to-differentiate-them-using-remote-sensing-images."> </a></h4><h4 id="To-understand-this-we-are-going-to-see-the-spectral-response-of-different-surfaces:">To understand this we are going to see the spectral response of different surfaces:<a class="anchor-link" href="#To-understand-this-we-are-going-to-see-the-spectral-response-of-different-surfaces:"> </a></h4><p><img src="/dea_course/images/copied_from_nb/data/spectral_response.png" alt="" title="Credit: https://www.intechopen.com/books/biomass-and-remote-sensing-of-biomass/introduction-to-remote-sensing-of-biomass" /></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ANU-WALD/dea_course"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/dea_course/numpy/matplotlib/satellite/2020/08/02/introduction-to-remote-sensing.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/dea_course/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/dea_course/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/dea_course/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Course training materials.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/dea_course/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/dea_course/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
