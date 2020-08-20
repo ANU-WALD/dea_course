@@ -1,13 +1,10 @@
 ---
 layout: page
-title: About Me
+title: About
 permalink: /about/
 ---
 
-This is where you put the contents of your *About* page. Like all your pages, it's in [Markdown](https://guides.github.com/features/mastering-markdown/) format.
+This course has been developed by the [WALD](http://wald.anu.edu.au/) group at the Australian National University under a contractual agreement with [Geoscience Australia](https://www.ga.gov.au/).
 
-This website is powered by **[fastpages](https://github.com/fastai/fastpages)** [^1].
+All the materials in this course have been made available under an Apache License 2.0 [here](https://github.com/ANU-WALD/dea_course).
 
-
-
-[^1]:a blogging platform that natively supports Jupyter notebooks in addition to other formats.
