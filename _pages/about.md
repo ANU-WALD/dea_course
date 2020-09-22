@@ -8,3 +8,4 @@ This course has been developed by the ANU Centre for Water and Landscape Dynamic
 
 All the materials in this course have been made available under an Apache License 2.0 [here](https://github.com/ANU-WALD/dea_course).
 
+![]({{site.baseurl}}/images/logo.png)
