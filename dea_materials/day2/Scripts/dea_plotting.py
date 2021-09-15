@@ -38,6 +38,7 @@ import matplotlib as mpl
 import matplotlib.patheffects as PathEffects
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+from matplotlib import colors as mcolours
 from datetime import datetime
 from pyproj import Proj, transform
 from IPython.display import display
