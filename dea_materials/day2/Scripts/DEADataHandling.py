@@ -21,7 +21,7 @@ Authors: Claire Krause, Robbi Bishop-Taylor, Bex Dunn, Chad Burton
 # Load modules
 from datacube.helpers import ga_pq_fuser
 from datacube.utils import masking
-import gdal
+from osgeo import gdal
 import numpy as np
 import xarray as xr
 import rasterio

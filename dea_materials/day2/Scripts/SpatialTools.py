@@ -19,7 +19,7 @@ Author: Robbi Bishop-Taylor
 
 """
 import osr
-import gdal
+from osgeo import gdal
 import affine
 import fiona
 import collections
